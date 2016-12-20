@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="gb2312">
+<title>15.10 文本框与datalist合二为一</title>
+</head>
+<body>
+文本框1：<input type="text" name="btcss" list="btcss" />
+文本框2：<input type="text" name="btcss" autocomplete="on" list="btcss" />
+<!-- 使用style="display:none;"将datalist元素设为不显示 -->
+<datalist id="btcss" style="display: none;">
+<option value="btcss1">内容1</option>
+<option value="btcss2">内容2</option>
+<option value="btcss3">内容3</option>
+</datalist>
+</body>
+</html>

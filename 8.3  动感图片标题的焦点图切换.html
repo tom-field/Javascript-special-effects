@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-cn" />
+<title>8.3  动感图片标题的焦点图切换</title>
+<style type="text/css">
+/* YUI reset */
+* {margin:0; padding:0;}
+/* body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0;padding:0;} */
+table {border-collapse:collapse;border-spacing:0;}
+fieldset,img { border:0;}
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal;}
+ol,ul,li {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;}
+q:before,q:after {content:'';}
+abbr,acronym { border:0;}
+
+/* my */
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix {zoom:1;}
+
+body {color:#333; font-size:12px; font-family:Verdana,Arial,Helvetica,sans-serif;}
+a {text-decoration:none; color:#333;}
+a:hover {text-decoration:underline;}
+
+.focus {width:600px; height:250px; background:#eee; margin:10px auto; position:relative; overflow:hidden;}
+.focus ul {}
+.focus li {width:550px; height:200px; padding:25px; position:absolute; left:600px; top:0;}
+.focus li h5, .focus li p, .focus li a.button {float:left; position:relative;}
+.focus li h5 {width:300px; font-size:22px; font-family:"Microsoft YaHei";}
+.focus li p {width:300px; line-height:22px; font-size:14px; margin:1em 0;}
+.focus li a.button {width:100px; height:30px; background:#333; cursor:pointer; display:none;}
+.focus li a.button:hover {background:#666;}
+.focus li div.imgBox {float:right; width:200px; height:200px; position:relative; background:#f00;}
+.focus li div.imgBox img {}
+
+.focus .btn {position:absolute; width:600px; height:6px; padding:10px; text-align:center; left:0; bottom:0;}
+.focus .btn span {display:inline-block; width:10px; height:6px; background:#999; margin:0 3px;}
+.focus .btn span.on {background:#000;}
+</style>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+ var len = $(".focus ul li").length;
+ var width = 600; 
+ var indent = 50; 
+ var index = 0;
+ var picTimer;
+ 
+ var btn = "<div class='btn'>";
+ for(var i = 0; i < len; i++) {
+  btn += "<span></span>";
+ }
+ btn += "</div>";
+ $(".focus").append(btn);
+ 
+ $(".focus .btn span").mouseenter(function() {
+  index = $(".focus .btn span").index($(this));
+  play(index);
+ }).eq(0).trigger("mouseenter");
+ 
+ $(".focus").hover(function() {
+  clearInterval(picTimer);
+ },function() {
+  picTimer = setInterval(function() {
+   play(index);
+   index++;
+   if(index == len) {index = 0;}
+  },5000);
+ }).trigger("mouseleave");
+
+ function play(index) {
+  var $now = $(".focus ul li.on");
+
+  if($now.length > 0) {
+   $now.find("h5").stop(true,true).animate({left:"-" + (width - indent) + "px"},400,function() {
+    $(this).animate({left:"-"+ (2*width) +"px"},400);
+   });
+   $now.find("a.button").stop(true,true).fadeTo(400,0);
+   
+   var hideDelay = setTimeout(function() {
+    $now.find("p").stop(true,true).animate({left:"-" + (width - indent) + "px"},400,function() {
+     $(this).animate({left:"-"+ (2*width) +"px"},400);
+     $now.find("div.imgBox").stop(true,true).animate({left:"-"+ (2*width) +"px"},400);
+    });
+   },200);
+   
+   var showDelayA = setTimeout(function() {
+    show(index);
+   },700);
+  } else {
+   show(index);
+  }
+ }
+ 
+ function show(index) {
+  var $next = $(".focus ul li").eq(index);
+  
+  $next.find("h5").css({left:"0px"});
+  $next.find("p").css({left:"0px"});
+  $next.find("a.button").css({left:"0px"});
+  $next.find("div.imgBox").css({left:"0px"});
+
+  $next.find("h5").stop(true,true).animate({left:"-"+ width +"px"},400);
+  var showDelayB = setTimeout(function() {
+   $next.find("div.imgBox").stop(true,true).animate({left:"-"+ width +"px"},300);
+   $next.find("p").stop(true,true).animate({left:"-"+ width +"px"},300,function() {
+    $next.find("a.button").stop(true,true).animate({left:"-"+ width +"px"},300,function() {$(this).fadeTo(400,1);});
+   });
+  },300);
+  
+  $(".focus .btn span").removeClass("on").eq(index).addClass("on");
+  $(".focus ul li").removeClass("on").eq(index).addClass("on");
+ }
+
+});
+</script>
+</head>
+<body>
+<div class="focus">
+<ul>
+ <li class="clearfix">
+  <div class="imgBox"><img src="8301.jpg" alt="js特效" /></div>
+  <h5>璀璨</h5>
+  <p>璀璨星光</p>
+  <a class="button">Download</a>
+ </li>
+ <li class="clearfix">
+  <div class="imgBox"><img src="8302.jpg" alt="000" /></div>
+  <h5>妩媚</h5>
+  <p>妩媚动人</p>
+  <a class="button">Download</a>
+ </li>
+ <li class="clearfix">
+  <div class="imgBox"><img src="8303.jpg" alt="000" /></div>
+  <h5>光芒</h5>
+  <p>光芒四射</p>
+  <a class="button">Download</a>
+ </li>
+</ul>
+</div>
+</body>
+</html>

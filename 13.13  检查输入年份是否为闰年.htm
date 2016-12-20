@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.13 检查输入年份是否为闰年</title>
+<script LANGUAGE="JavaScript">
+function checkYear(year) 
+{ 
+    return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? 1 : 0;
+}
+function Judge(form) 
+{
+    year = form.year.value;
+    var Check1 = parseFloat(year);
+    for (var i = 0; i < year.length; i++) {
+        var sLetterCheck1 = year.substring(i, i+1);
+        if (sLetterCheck1 < "0" || sLetterCheck1 > "9") {
+            alert("请输入一个有效的年份");
+            form.year.focus();
+            form.year.select();
+            return;
+       }
+    }       
+    if (year < 1582) {
+        form.result.value = "";
+        alert("对不起，你输入的年份必须大于1581.");
+        form.year.focus();
+        form.year.select();
+        return;
+    }
+    checkYear(year); 
+    if (!checkYear(year)) form.result.value = "不是闰年";
+    else form.result.value = "是闰年";
+}
+</script>
+</head>
+<body>
+ <form>
+          检查输入年份是否为闰年:<br>
+          年份: 
+          <input type=text name=year size=4>
+          <input type=button value="检查是否为闰年" onClick="Judge(this.form);" name="button">
+          <input type=text name=result size=15>
+</form>
+</body>
+</html>

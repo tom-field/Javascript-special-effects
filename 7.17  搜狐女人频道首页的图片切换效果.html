@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="gb2312"> 
+<head> 
+<title>7.17  搜狐女人频道首页的图片切换效果</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<meta name="generator" content="editplus" /> 
+<meta name="author" content="eLore" /> 
+<meta name="keywords" content="" /> 
+<meta name="description" content="" /> 
+<style type="text/css"> 
+* { margin:0; padding:0; } 
+body { 
+margin:0; 
+color:#88c; background:#333; 
+} 
+img { margin:0; padding:0; border:0; } 
+#js_F { 
+position:relative; 
+top:10px; left:10px; 
+overflow:hidden; 
+width:270px; height:185px; 
+background:#33c; 
+} 
+#js_F img{ 
+position:absolute; 
+top:0; left:0; 
+width:270px; height:185px; 
+} 
+</style> 
+</head> 
+<body> 
+<div id="js_F"></div> 
+<script type="text/javascript"> 
+<!--///*--><![CDATA[/*><!--*/ 
+var js_F = document.getElementById("js_F"); 
+var imgList = ["51501.jpg", "51502.jpg", "51503.jpg", "51504.jpg", "51505.jpg", "51506.jpg", ]; 
+var imgTemp = new Array(); 
+for (i=0; i<imgList.length; i++){ 
+imgTemp[i] = new Image(); 
+imgTemp[i].src = imgList[i]; 
+} 
+var imgs = new Array(); 
+var imgID = 0, nextImgID, proveImgID; 
+var tf = true; //图片移动方向标志 
+var speed1 = 10; speed2 = 3000; //速度 
+function imgInit(){ 
+var content = ''; 
+for (i=0; i<imgList.length; i++){ 
+content += '<img src="' + imgList[i] + '" style="left:0;" />\n'; 
+} 
+js_F.innerHTML = content; 
+imgs = js_F.getElementsByTagName('img'); 
+imgs[0].style.zIndex = 20; 
+imgs[1].style.zIndex = 15; 
+} 
+function imgChange(){ 
+if ((imgID+1)<imgList.length){ 
+nextImgID = imgID + 1; 
+} else if (imgID<imgList.length) { 
+nextImgID = 0; 
+} else { 
+imgID = 0; 
+nextImgID = imgID + 1; 
+} 
+imgs[imgID].style.zIndex = 20; 
+imgs[nextImgID].style.zIndex = 15; 
+setTimeout('imgShow()',speed2); 
+} 
+function imgShow(){ 
+if (tf){ //imgID向左边移动2/3，nextImgID向右边1/3 
+if (parseInt(imgs[imgID].style.left)>-180){ 
+imgs[imgID].style.left = (parseInt(imgs[imgID].style.left)-10) + 'px'; 
+imgs[nextImgID].style.left = (parseInt(imgs[nextImgID].style.left)+5) + 'px'; 
+setTimeout('imgShow()',speed1); 
+} else { 
+tf = !tf; 
+imgs[imgID].style.zIndex = 15; 
+imgs[nextImgID].style.zIndex = 20; 
+setTimeout('imgShow()',speed1); 
+} 
+} else { 
+if (parseInt(imgs[imgID].style.left)<0){ 
+imgs[imgID].style.left = (parseInt(imgs[imgID].style.left)+10) + 'px'; 
+imgs[nextImgID].style.left = (parseInt(imgs[nextImgID].style.left)-5) + 'px'; 
+setTimeout('imgShow()',speed1); 
+} else { 
+imgs[imgID].style.zIndex = 10; 
+tf = !tf; 
+imgID++; 
+imgChange(); 
+} 
+} 
+} 
+imgInit(); 
+imgChange(); 
+/*]]>*///--> 
+</script> 
+</body> 
+</html> 

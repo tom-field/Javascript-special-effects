@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>屏蔽关键字</title>
+<script language="javascript1.2">
+function test() {
+if((a.b.value.indexOf ("###") == 0)||(a.b.value.indexOf ("#####") == 0)){
+alert("请勿输入“###”和“#####”！");
+a.b.focus();
+return false;}
+}
+</script>
+</head>
+<body>
+<form name=a onsubmit="return test()">
+<input type=text name=b>
+<input type="submit" name="Submit" value="提交">
+</form>
+</body>
+</html>

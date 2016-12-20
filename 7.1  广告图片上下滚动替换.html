@@ -1,0 +1,81 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>广告图片上下滚动替换</title>
+<style type="text/css">
+body {text-align:center}
+td {font-size: 12px;text-align:center}
+</style>
+</head>
+<BODY>
+<div id=makewing style="height:416">
+        <table width="665"  border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="416" bgcolor="#66CCFF"><img src="51501.jpg"/></td>
+          </tr>
+          <tr>
+            <td height="416" bgcolor="#FFCC66"><img src="51502.jpg"/></td>
+          </tr>
+          <tr>
+            <td height="416" bgcolor="#99CC66"><img src="51503.jpg"/></td>
+          </tr>
+          <tr>
+            <td height="416" bgcolor="#66CCFF"><img src="51504.jpg"/></td>
+          </tr>
+          <tr>
+            <td height="416" bgcolor="#FFCC66"><img src="51505.jpg"/></td>
+          </tr>
+          <tr>
+            <td height="416" bgcolor="#99CC66"><img src="51506.jpg"/></td>
+          </tr>
+        </table>
+        <script language=JavaScript>
+		marqueesHeight=416;
+stopscroll=false;
+with(makewing){
+		style.width=0;
+		style.height=marqueesHeight;
+		style.overflowX="visible";
+		style.overflowY="hidden";
+		noWrap=true;
+		onmouseover=new Function("stopscroll=true");
+		onmouseout=new Function("stopscroll=false");
+	}
+	preTop=0; currentTop=marqueesHeight; stoptime=0;
+	makewing.innerHTML+=makewing.innerHTML;
+	
+
+function init_srolltext(){
+	makewing.scrollTop=0;
+	setInterval("scrollUp()",1);
+}init_srolltext();
+
+function scrollUp(){
+	if(stopscroll==true) return;
+	currentTop+=1;
+	if(currentTop==marqueesHeight+1)
+	{
+		stoptime+=1;
+		currentTop-=1;
+		if(stoptime==300)
+		{
+			currentTop=0;
+			stoptime=0;
+		}
+	}
+	else {
+		preTop=makewing.scrollTop;
+		makewing.scrollTop+=1;
+		if(preTop==makewing.scrollTop){
+			makewing.scrollTop=marqueesHeight;
+			makewing.scrollTop+=1;
+			
+		}
+	}
+
+}
+init_srolltext();
+</script>
+</div>
+</BODY>
+</HTML>

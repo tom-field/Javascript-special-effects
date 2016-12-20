@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+<html xmlns="http://www.w3.org/1999/xhtml">   
+<head>   
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />   
+<title>脚本之家 www.jb51.net 其它页面js变量调用方法代码</title>   
+<script type="text/javascript">   
+var theHelloStr = "Hello all.";   
+
+function sayHello()   
+{   
+    alert("hello, method");   
+}   
+
+function openBtnClicked()   
+{   
+    var newwin=window.open('1.18  保护页面内容不被复制.html',"test","toolbar=no,location=no,top=100,left=100,directories=no,status=yes,menubar=no,scrollbars=yes,location=no,resizable=yes,width=300,height=200");   
+    newwin.focus();   
+}   
+
+function sayHello2()   
+{   
+    window.sayHello();   
+}   
+</script>   
+</head>   
+
+<body>   
+<input type="button" name="openBtn" value="打开窗口" onclick="openBtnClicked()" />   
+</body>   
+</html>  

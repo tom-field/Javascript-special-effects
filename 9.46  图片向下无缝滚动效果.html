@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <title>9.46  图片向下无缝滚动效果</title>
+   </head>
+   <body>
+<div id="colee_bottom" style="overflow:hidden;height:100px;width:130px;">
+<div id="colee_bottom1">
+<p><img src="51504s.jpg"></p>
+<p><img src="51505s.jpg"></p>
+<p><img src="51506s.jpg"></p>
+</div>
+<div id="colee_bottom2"></div>
+</div>
+<script>
+var speed=30
+var colee_bottom2=document.getElementById("colee_bottom2");
+var colee_bottom1=document.getElementById("colee_bottom1");
+var colee_bottom=document.getElementById("colee_bottom");
+colee_bottom2.innerHTML=colee_bottom1.innerHTML
+colee_bottom.scrollTop=colee_bottom.scrollHeight
+function Marquee2(){
+if(colee_bottom1.offsetTop-colee_bottom.scrollTop>=0)
+colee_bottom.scrollTop+=colee_bottom2.offsetHeight
+else{
+colee_bottom.scrollTop--
+}
+}
+var MyMar2=setInterval(Marquee2,speed)
+colee_bottom.onmouseover=function() {clearInterval(MyMar2)}
+colee_bottom.onmouseout=function() {MyMar2=setInterval(Marquee2,speed)}
+</script>
+   </body>
+</html>

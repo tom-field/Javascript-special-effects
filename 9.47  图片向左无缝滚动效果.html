@@ -1,0 +1,41 @@
+<html>
+   <head>
+      <title>9.47  图片向左无缝滚动效果</title>
+   </head>
+   <body>
+<div id="colee_left" style="overflow:hidden;width:300px;">
+<table cellpadding="0" cellspacing="0" border="0">
+<tr><td id="colee_left1" valign="top" align="center">
+<table cellpadding="2" cellspacing="0" border="0">
+<tr align="center">
+<td><p><img src="51501s.jpg"></p></td>
+<td><p><img src="51502s.jpg"></p></td>
+<td><p><img src="51503s.jpg"></p></td>
+</tr>
+</table>
+</td>
+<td id="colee_left2" valign="top"></td>
+</tr>
+</table>
+</div>
+<script>
+//使用div时，请保证colee_left2与colee_left1是在同一行上.
+var speed=30//速度数值越大速度越慢
+var colee_left2=document.getElementById("colee_left2");
+var colee_left1=document.getElementById("colee_left1");
+var colee_left=document.getElementById("colee_left");
+colee_left2.innerHTML=colee_left1.innerHTML
+function Marquee3(){
+if(colee_left2.offsetWidth-colee_left.scrollLeft<=0)//offsetWidth 是对象的可见宽度
+colee_left.scrollLeft-=colee_left1.offsetWidth//scrollWidth 是对象的实际内容的宽，不包边线宽度
+else{
+colee_left.scrollLeft++
+}
+}
+var MyMar3=setInterval(Marquee3,speed)
+colee_left.onmouseover=function() {clearInterval(MyMar3)}
+colee_left.onmouseout=function() {MyMar3=setInterval(Marquee3,speed)}
+</script>
+
+   </body>
+</html>

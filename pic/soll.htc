@@ -1,0 +1,86 @@
+<PUBLIC:ATTACH EVENT="onmousedown" ONEVENT="hd_down()"/> 
+<PUBLIC:ATTACH EVENT="onmouseup" ONEVENT="hd_up()"/> 
+<PUBLIC:ATTACH EVENT="onmousemove" ONEVENT="hd_move()"/>
+
+<PUBLIC:ATTACH EVENT="ondragstart" ONEVENT="return false"/>
+<PUBLIC:ATTACH EVENT="onselectstart" ONEVENT="return false"/>
+
+<PUBLIC:METHOD NAME="mlength"/> 
+<PUBLIC:METHOD NAME="getposition"/> 
+<PUBLIC:METHOD NAME="setposition"/>
+
+<PUBLIC:PROPERTY name="stopgo"/>
+<PUBLIC:PROPERTY name="olling"/>	
+<PUBLIC:PROPERTY name="ollend"/>
+
+
+
+<script language="JavaScript">
+
+
+
+
+var Ofx;		
+var hobj = element.firstChild;			
+var hkb = (hobj.offsetWidth>>1)+1;  
+element.moing = false;		
+
+
+
+function getIE(e)		
+{ 
+  var t = e.offsetLeft; 
+  if(e=e.offsetParent)
+     t += getIE(e);
+  return t;
+} 
+
+
+function hd_down()
+{
+  if(eval(stopgo)) return;
+  if(element.moing) return;
+  Ofx = getIE(element)-window.document.body.scrollLeft+hkb;
+  element.setCapture(); 
+  element.moing = true;
+  hd_move();
+}
+
+function hd_up()
+{
+  if(!element.moing) return;
+  element.releaseCapture();
+  element.moing = false;
+  if(ollend!=null)
+    eval(ollend);
+}
+
+function hd_move()
+{
+  if(!element.moing) return;
+  setposition(event.clientX-Ofx);
+  if(olling!=null)
+    eval(olling);
+}
+
+
+
+function mlength()			
+{
+  return element.offsetWidth - hobj.offsetWidth;
+}
+
+function setposition(judger)		
+{
+  var mlt = mlength();
+  if(judger<0) judger = 0;
+  if(judger>mlt) judger = mlt;
+  hobj.style.left = judger;
+}
+
+function getposition()			
+{
+  return hobj.style.pixelLeft;
+}
+</script>
+

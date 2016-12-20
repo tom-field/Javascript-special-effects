@@ -1,0 +1,32 @@
+<html>
+	<body>
+		<form> 
+			<script language="JavaScript"> 
+				function change(form) 
+				{ 
+					/*未输入颜色编码，弹出提示框*/
+					if (form.text.value == "") 
+						alert("你喜欢的颜色是?");
+					
+					else 
+					{ 
+						/*按输入颜色编码，修改背景颜色*/
+						document.bgColor=(""+form.text.value+" "); 
+					} 
+				} 
+			</script>
+			<p align="left"><fontsize="2">请输入颜色编码：</font></td> 
+			<input type="text"name="text" size="20" style="border: 1 dotted#008000"> &nbsp;&nbsp;
+			<input type="button"name="button" value="修改颜色" onClick="change(this.form)"> </td>
+
+                        <!--对比颜色块-->         
+			<canvas id="myCanvas" width="1024" height="768" color="red"></canvas>
+			<script type="text/javascript">
+				var c=document.getElementById("myCanvas");
+				var cxt=c.getContext("2d");
+				cxt.fillStyle="#FF0000";
+				cxt.fillRect(0,0,150,75);
+			</script> 
+		</form> 
+	</body>
+<html>

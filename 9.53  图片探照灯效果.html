@@ -1,0 +1,32 @@
+<html>
+   <head>
+      <title>9.53  图片探照灯效果</title>
+   </head>
+<body bgcolor="#FFFFFF"> 
+<div id="oLight" style="height:0px;color:White;filter:light"> 
+<img src="51502.jpg"></img>
+<script language="JavaScript">
+<!--
+//输出19行19个"Light"
+//document.write(new Array(20).join(new Array(20).join("Light")+"<br>"))
+//->
+</script>
+</div> 
+<script language="JavaScript">
+<!--
+function window.onload(){
+//为滤镜添加强度10的白色环境光
+oLight.filters.light.addAmbient(255,255,255,10)
+//为滤镜添加强度90的白色锥形光
+oLight.filters.light.addCone(300,200,200,0,0,255,255,255,90,10)
+}
+
+function document.onmousemove(){
+//移动锥形光的焦点
+oLight.filters.light.moveLight(1,event.x,event.y,0,1)
+}   
+//->
+</script>
+
+   </body>
+</html>

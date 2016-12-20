@@ -1,0 +1,32 @@
+<HTML>     
+ <HEAD>     
+  <TITLE>按钮获取焦点实例</TITLE>     
+  <script language='javascript' type='text/javascript'>     
+     
+ 
+                function enterKeySubmit(evnt) 
+                 { 
+  var witch_key = (navigator.appname=="Nwtscape")?evnt.which:evnt.keyCode; 
+    if (witch_key == 13)//回车键默认是13 
+    { 
+     document.getElementById('imgbutton').focus(); 
+                       submitForm()； 
+    } 
+} 
+  function submitForm(){                                             document.myform.action="http://www.baidu.com"; 
+  } 
+      
+  </script>     
+ </HEAD>     
+     
+ <BODY >   
+<form name="myform">  
+<input type=image 
+                id="imgbutton" 
+       src="按钮1.gif" 
+       style="cursor: hand" 
+       onclick="submitForm()" 
+> 
+  </form> 
+ </BODY>     
+</HTML>    

@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>限定表单项输入值或长度</title>
+<script language="javascript">
+function contain(str,charset)
+{ 
+var i; 
+for(i=0;i<charset.length;i++) 
+if(str.indexOf(charset.charAt(i))>=0) 
+return true; 
+return false; 
+} 
+
+function CheckForm() 
+{ 
+if ((contain(a.b.value, "%\(\)><")) || (contain(a.c.value, "%\(\)><"))) 
+{ 
+alert("输入了非法字符"); 
+return false; 
+} 
+return true; 
+} 
+</script>
+</head>
+<body>
+<form name=a onsubmit="return CheckForm()">
+<input type=text name=b>
+<input type=text name=c>
+<input type="submit" name="Submit" value="提交">
+</form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ÍøÕ¾Ê×Ò³</title>
+<script type="text/javascript">
+<!--
+function MM_preloadImages() { //v3.0
+var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+//-->
+</script>
+</head>
+
+<body style=" margin:0px; padding:0px" onload="MM_preloadImages('Images/1.jpg','Images/2.jpg','Images/3.jpg','Images/4.jpg','Images/5.jpg','Images/6.jpg','Images/7.jpg','Images/8.jpg',
+'Images/9.jpg')">
+
+<script> 
+var n=0;
+var max=7;
+function Mea(value){
+n=value;
+plays(value);
+}
+function plays(value){
+with (fc){
+   filters[0].Apply();
+   for(i=0;i < max;i++){
+    i==value?children[i].style.display="block":children[i].style.display="none"; 
+   }
+   filters[0].play();   
+   } 
+}
+function clearAuto(){clearInterval(autoStart)}
+function setAuto(){autoStart=setInterval("auto(n)", 5000)}
+function auto(){
+n++;
+if(n>max-1)n=0;
+Mea(n);
+} 
+function sub(){
+n--;
+if(n<0)n=max-1;
+Mea(n);
+}
+setAuto();
+</script>
+<div id="fc" style="filter:progid:DXImagetransform.Microsoft.GradientWipe(duration=3,gradientSize=0.5,motion=forward ); WIDTH: 1000px; HEIGHT: 600px; margin:auto; margin-top:-10px">
+
+<div style="display:block"><img height=567 src="51501.jpg" width=1000 border=0></div>
+<div style="display:none"><img height=567 src="51502.jpg" width=1000 border=0></div>
+<div style="display:none"><img height=567 src="51503.jpg" width=1000 border=0></div>
+<div style="display:none"><img height=567 src="51504.jpg" width=1000 border=0></div>
+<div style="display:none"><img height=567 src="51505.jpg" width=1000 border=0></div>
+<div style="display:none"><img height=567 src="51506.jpg" width=1000 border=0></div>
+<div style="display:none"><img height=567 src="51507.jpg" width=1000 border=0></div>
+
+</div>
+</body>
+</html>

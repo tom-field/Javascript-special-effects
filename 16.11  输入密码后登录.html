@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>16.11 输入密码后登录</title>
+<script>
+function check()
+{
+if(document.f.fuser.value==""||document.f.fpwd.value=="")
+  {
+  alert("请输入用户名和密码！");
+  return false;
+  }
+else
+  {
+  return true;
+  }
+}
+</script>
+</head>
+<form name="f" method="post" onsubmit="return check()" action="login.html">
+用户名:<input type="text" name="fuser"><br>
+密&nbsp&nbsp码:<input type="password" name="fpwd"><br>
+<input type="submit" name="b1" value="提交">
+</html>

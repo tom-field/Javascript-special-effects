@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <title>会变化的鼠标指针</title>
+   </head>
+   <body>
+<SCRIPT LANGUAGE="JavaScript">
+var x, y, xold, yold, xdiff, ydiff;<!--定义变量-->
+var dir = Array();<!--数组用来存储-->
+dir[0] = "n-resize";<!--表示向北的方向-->
+dir[1]="ne-resize";<!--表示向东北的方向-->
+dir[2]="e-resize";<!--表示向东的方向-->
+dir[3]="se-resize";<!--表示向东南的方向-->
+dir[4] = "s-resize";<!--表示向南的方向-->
+dir[5]="sw-resize";<!--表示向西南的方向-->
+dir[6]="w-resize";<!--表示向西的方向-->
+dir[7]="nw-resize";<!--表示向西北的方向-->
+document.onmousemove = FindXY;<!--鼠标移动后，调用函数findxy-->
+
+function display(direction) {<!--显示鼠标形状-->
+document.body.style.cursor = dir[direction];<!--显示direction代表的鼠标的形状-->
+}
+
+function FindXY(loc) {
+x = (document.layers) ? loc.pageX : event.clientX;<!--获得当前鼠标的横坐标-->
+y = (document.layers) ? loc.pageY : event.clientY;<!--获得当前鼠标的纵坐标-->
+xdiff = x - xold;<!--获得横坐标的偏移量-->
+ydiff = y - yold<!--获得纵坐标的偏移量-->
+if ((xdiff < 2) && (ydiff < -2)) display(0);<!--如果x方向上的偏移小于2，y方向上的偏移大于－2，表示移动方向向北-->
+if ((xdiff < 2) && (ydiff > 2)) display(4);<!--如果x方向上的偏移小于2，y方向上的偏移大于2，表示移动方向向南-->
+if ((xdiff > 2) && (ydiff < 2)) display(2);<!--如果x方向上的偏移大于2，y方向上的偏移小于2，表示移动方向向东-->
+if ((xdiff < -2) && (ydiff < 2)) display(6);<!--如果x方向上的偏移小于－2，y方向上的偏移小于2，表示移动方向向西-->
+if ((xdiff > 2) && (ydiff > 2)) display(3);<!--如果x方向上的偏移大于2，y方向上的偏移大于2，表示移动方向向东南-->
+if ((xdiff > 2) && (ydiff < -2)) display(1);<!--如果x方向上的偏移大于2，y方向上的偏移小于－2，表示移动方向向东北-->
+if ((xdiff < -2) && (ydiff > 2)) display(5);<!--如果x方向上的偏移小于－2，y方向上的偏移大于2，表示移动方向向西南-->
+if ((xdiff < -2) && (ydiff < -2)) display(7);<!--如果x方向上的偏移小于-2，y方向上的偏移小于－2，表示移动方向向西北-->
+xold = x;<!--更新x的坐标-->
+yold = y;<!--更新y的坐标-->
+}
+</script>
+
+
+   </body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+   <head>
+      <title>9.45  图片向上无缝滚动效果</title>
+   </head>
+   <body>
+<div id="colee" style="overflow:hidden;height:100px;width:130px;">
+<div id="colee1">
+<p><img src="51501s.jpg"></p>
+<p><img src="51502s.jpg"></p>
+<p><img src="51503s.jpg"></p>
+</div>
+<div id="colee2"></div>
+</div>
+<script>
+var speed=30;
+var colee2=document.getElementById("colee2");
+var colee1=document.getElementById("colee1");
+var colee=document.getElementById("colee");
+//克隆colee1为colee2
+colee2.innerHTML=colee1.innerHTML; 
+function Marquee1(){
+//当滚动至colee1与colee2交界时
+if(colee2.offsetTop-colee.scrollTop<=0){
+colee.scrollTop-=colee1.offsetHeight; //colee跳到最顶端
+}else{
+colee.scrollTop++
+}
+}
+var MyMar1=setInterval(Marquee1,speed)//设置定时器
+//鼠标移上时清除定时器达到滚动停止的目的
+colee.onmouseover=function() {clearInterval(MyMar1)}
+//鼠标移开时重设定时器
+colee.onmouseout=function(){MyMar1=setInterval(Marquee1,speed)}
+</script>
+   </body>
+</html>

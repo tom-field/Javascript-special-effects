@@ -1,0 +1,106 @@
+<html>
+<head>
+</head>
+<body>
+
+<script language="JavaScript">
+<!--
+
+// Copyright (c) 1996-1997 Tomer Shiran. All rights reserved.
+// Permission given to use the script provided that this notice remains as is.
+// Additional scripts can be found at http://www.geocities.com/~yehuda/
+
+// create 6-element array
+var hex = new Array(6)
+
+// assign non-dithered descriptors
+hex[0] = "FF"
+hex[1] = "CC"
+hex[2] = "99"
+hex[3] = "66"
+hex[4] = "33"
+hex[5] = "00"
+
+// accept triplet string and display as background color
+function display(triplet) {
+    // set color as background color
+    document.bgColor = '#' + triplet
+
+    // display the color hexadecimal triplet
+    alert('现在的背景色是 #'+triplet)
+}
+
+// draw a single table cell based on all descriptors
+function drawCell(red, green, blue) {
+    // open cell with specified hexadecimal triplet background color
+    document.write('<TD BGCOLOR="#' + red + green + blue + '">')
+
+    // open a hypertext link with javascript: scheme to call display function
+    document.write('<A HREF="javascript:display(\'' + (red + green + blue) + '\')">')
+
+    // print transparent image (use any height and width)
+    document.write('<IMG SRC="place.gif" BORDER=0 HEIGHT=12 WIDTH=12>')
+
+    // close link tag
+    document.write('</A>')
+
+    // close table cell
+    document.write('</TD>')
+}
+
+// draw table row based on red and blue descriptors
+function drawRow(red, blue) {
+    // open table row
+    document.write('<TR>')
+
+    // loop through all non-dithered color descripters as green hex
+    for (var i = 0; i < 6; ++i) {
+        drawCell(red, hex[i], blue)
+    }
+
+    // close current table row
+    document.write('</TR>')
+}
+
+// draw table for one of six color cube panels
+function drawTable(blue) {
+    // open table (one of six cube panels)
+    document.write('<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>')
+
+    // loop through all non-dithered color descripters as red hex
+    for (var i = 0; i < 6; ++i) {
+        drawRow(hex[i], blue)
+    }
+
+    // close current table
+    document.write('</TABLE>')    
+}
+
+// draw all cube panels inside table cells
+function drawCube() {
+    // open table
+    document.write('<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=1><TR>')
+
+    // loop through all non-dithered color descripters as blue hex
+    for (var i = 0; i < 6; ++i) {
+        // open table cell with white background color
+        document.write('<TD BGCOLOR="#FFFFFF">')
+
+        // call function to create cube panel with hex[i] blue hex
+        drawTable(hex[i])
+
+        // close current table cell
+        document.write('</TD>')
+    }
+
+    // close table row and table
+    document.write('</TR></TABLE>')
+}
+
+// call function to begin execution
+drawCube()
+
+// -->
+</script>
+</body>
+</html>

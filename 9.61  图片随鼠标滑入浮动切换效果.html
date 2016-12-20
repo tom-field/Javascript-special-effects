@@ -1,0 +1,23 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>9.61  图片随鼠标滑入浮动切换效果</title>
+<script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+   var newImage = new Image();  //预载入图片
+   var oldImage = $('img').attr('src');
+   newImage.src = '51503.jpg';
+   $('img').hover(function(){ //鼠标滑过图片切换
+    $('img').attr('src',newImage.src);
+    },
+    function(){
+    $('img').attr('src',oldImage);
+    });
+});
+</script>
+</head>
+<body>
+<img src="51502.jpg" />
+</body>
+</html>

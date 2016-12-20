@@ -1,0 +1,213 @@
+<html>
+   <head>
+      <title>15.5  垂直展开的菜单</title> 
+   </head>
+   <body>
+<div class="menu" id="MenuContainer"> 
+<h4 nodeid="390">门户网站</h4> 
+<div style="display:none" id="submenu_390"> 
+<p><a href="#">百度</a></p> 
+<p><a href="#">搜狐</a></p> 
+<p><a href="#5">网易</a></p> 
+</div>
+
+<h4 nodeid="397">娱乐网站</h4> 
+<div style="display:none" id="submenu_397"> 
+<p><a href="#">猫扑</a></p> 
+<p><a href="#">八爪鱼</a></p> 
+<p><a href="#">大旗</a></p> 
+</div>
+
+<h4 nodeid="436">视频网站</h4> 
+<div style="display:none" id="submenu_436"> 
+<p><a href="#">乐视网</a></p> 
+<p><a href="#">酷六网</a></p> 
+<p><a href="#">土豆网</a></p> 
+<p><a href="#">百度视频</a></p> 
+</div>
+
+<h4 nodeid="506">国家机关网站</h4> 
+<div style="display:none" id="submenu_506"> 
+<p><a href="#">财政部</a></p> 
+<p><a href="#6">国资委</a></p> 
+</div>
+
+<h4 nodeid="515">百姓生活</h4> 
+<div style="display:none" id="submenu_515"> 
+<p><a href="#">北京市政府官方网站</a></p> 
+</div>
+
+<h4 nodeid="520">军事观察</h4> 
+<div style="display:none" id="submenu_520"> 
+<p><a href="#1">人民网</a></p> 
+<p><a href="#">解放军网</a></p> 
+</div>
+
+<h4 class="expand" nodeid="3936">健康知识</h4> 
+<div style="display:none" id="submenu_3936"> 
+<p><a href="#7">百姓健康</a></p> 
+</div>
+
+</div> 
+<script type="text/javascript">
+    var MENU_ID = "MenuContainer";
+    var MENU_LINK_PREFIX = "";
+    var SUB_ITEM_HEIGHT = 27;
+    function G(A) {
+        return document.getElementById(A)
+    }
+    var menuOnshow;
+    function initMenu() {
+        try {
+            if (window.ActiveXObject && !window.isopera) {
+                document.execCommand("BackgroundImageCache", false, true)
+            }
+        } catch(F) {}
+        var C = G(MENU_ID).getElementsByTagName("h4");
+        for (var D = 0,
+        B = C.length; D < B; D++) {
+            var E = C[D];
+            if (E.className != "current") {
+                E.onclick = menuClickHandler
+            }
+            if (E.className == "expand") {
+                var A = getMenuContainer(E);
+                if (A.getElementsByTagName("p").length > 0) {
+                    menuOnshow = E;
+                    A.style.display = ""
+                }
+            }
+        }
+    }
+    function getMenuContainer(B) {
+        var A = B.nextSibling;
+        while (A.nodeType != 1) {
+            A = A.nextSibling
+        }
+        return A
+    }
+    function menuClickHandler(I) {
+        if (isOnTweening) {
+            return
+        }
+        var D = getMenuContainer(this);
+        var C = D.getElementsByTagName("p").length;
+        if (C <= 0) {
+            top.location = MENU_LINK_PREFIX + this.getAttribute("nodeid");
+            return
+        }
+        if (this != menuOnshow) {
+            var B;
+            var E = G(MENU_ID).getElementsByTagName("h4");
+            for (var F = 0,
+            A = E.length; F < A; F++) {
+                var H = E[F];
+                if (H.className == "expand" && getMenuContainer(H).getElementsByTagName("p").length > 0) {
+                    B = H;
+                    break
+                }
+            }
+            menuOnshow = this;
+            if (B) {
+                Queue.add(showSubMenu, this)
+            } else {
+                Queue.add(showSubMenu, this)
+            }
+        } else {
+            Queue.add(hideSubMenu, this);
+            menuOnshow = null
+        }
+        Queue.trigRun()
+    }
+    function showSubMenu(C) {
+        var B = C.nextSibling;
+        while (B.nodeType != 1) {
+            B = B.nextSibling
+        }
+        if (B.style.display != "none") {
+            return
+        }
+        var A = B.getElementsByTagName("p").length;
+        var D = A * SUB_ITEM_HEIGHT;
+        C.className = "expand";
+        tween(B, 0, D)
+    }
+    function hideSubMenu(B) {
+        var A = B.nextSibling;
+        while (A.nodeType != 1) {
+            A = A.nextSibling
+        }
+        if (A.style.display == "none") {
+            return
+        }
+        var C = A.offsetHeight;
+        B.className = "";
+        tween(A, C, 0)
+    }
+    var Queue = {
+        list: [],
+        add: function(A, B) {
+            Queue.list.push({
+                fn: A,
+                tar: B
+            })
+        },
+        trigRun: function() {
+            var A = Queue.list.shift();
+            if (A) {
+                onTweenFinished = Queue.trigRun;
+                A.fn(A.tar)
+            }
+        }
+    };
+    var tweenCurrentStep, tweenEl, tweenBegin, tweenEnd, tweenOffset, tweenInterval;
+    var tweenStep = 5,
+    isOnTweening = 0;
+    var onTweenFinished;
+    function tween(C, B, A) {
+        if (isOnTweening) {
+            return
+        }
+        tweenEl = C;
+        tweenBegin = B;
+        tweenEnd = A;
+        tweenOffset = A - B;
+        tweenCurrentStep = 0;
+        tweenEl.style.display = "";
+        tweenEl.style.height = tweenBegin + "px";
+        isOnTweening = 1;
+        tweenInterval = setInterval(onTweenStep, 10)
+    }
+    function onTweenStep() {
+        tweenCurrentStep++;
+        if (tweenStep <= tweenCurrentStep) {
+            afterTween();
+            return
+        }
+        var A = Math.floor(tweenOffset * easeOut(tweenCurrentStep, tweenStep));
+        tweenEl.style.height = tweenBegin + A + "px"
+    }
+    function afterTween() {
+        tweenEl.style.height = "";
+        if (tweenEnd == 0) {
+            tweenEl.style.display = "none"
+        }
+        clearInterval(tweenInterval);
+        tweenInterval = null;
+        tweenEl = null;
+        isOnTweening = 0;
+        if (onTweenFinished) {
+            var A = onTweenFinished;
+            onTweenFinished = null;
+            A()
+        }
+    }
+    function easeOut(A, B) {
+        var C = A / B;
+        return - C * (C - 2)
+    }
+    initMenu();
+</script>
+
+   </body>
+</html>

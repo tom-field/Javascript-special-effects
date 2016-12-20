@@ -1,0 +1,19 @@
+<html> 
+<head> 
+<title>动态创建按钮</title> 
+<script language="javascript"> 
+var i=1 ; 
+function addInput()
+{ 
+var o = document.createElement("input");  //使用DOM的创建元素方法
+o.type = "button" ;                       //设置元素的类型
+o.value = "第" + (i++) +"个按钮";                  //设置元素的值
+o.attachEvent("onclick",addInput);        //为控件添加事件
+document.body.appendChild(o);             //添加控件到窗体中
+o = null;                                 //释放对象
+} 
+</script> 
+</head> 
+<body onload="addInput();"> 
+</body> 
+</html> 

@@ -1,0 +1,276 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<html>
+<head></head>
+<body>
+<STYLE>LI {
+ MARGIN-BOTTOM: 10px
+}
+OL {
+ MARGIN-TOP: 5px
+}
+.DragContainer {
+ BORDER-RIGHT: #669999 2px solid; PADDING-RIGHT: 5px; BORDER-TOP: #669999 2px solid; PADDING-LEFT: 5px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 3px; BORDER-LEFT: #669999 2px solid; WIDTH: 100px; PADDING-TOP: 5px; BORDER-BOTTOM: #669999 2px solid
+}
+.OverDragContainer {
+ BORDER-RIGHT: #669999 2px solid; PADDING-RIGHT: 5px; BORDER-TOP: #669999 2px solid; PADDING-LEFT: 5px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 3px; BORDER-LEFT: #669999 2px solid; WIDTH: 100px; PADDING-TOP: 5px; BORDER-BOTTOM: #669999 2px solid
+}
+.OverDragContainer {
+ BACKGROUND-COLOR: #eee
+}
+.DragBox {
+ BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 15px; MARGIN-BOTTOM: 5px; PADDING-BOTTOM: 2px; BORDER-LEFT: #000 1px solid; WIDTH: 94px; CURSOR: pointer; PADDING-TOP: 2px; BORDER-BOTTOM: #000 1px solid; FONT-FAMILY: verdana, tahoma, arial; BACKGROUND-COLOR: #eee
+}
+.OverDragBox {
+ BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 15px; MARGIN-BOTTOM: 5px; PADDING-BOTTOM: 2px; BORDER-LEFT: #000 1px solid; WIDTH: 94px; CURSOR: pointer; PADDING-TOP: 2px; BORDER-BOTTOM: #000 1px solid; FONT-FAMILY: verdana, tahoma, arial; BACKGROUND-COLOR: #eee
+}
+.DragDragBox {
+ BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 15px; MARGIN-BOTTOM: 5px; PADDING-BOTTOM: 2px; BORDER-LEFT: #000 1px solid; WIDTH: 94px; CURSOR: pointer; PADDING-TOP: 2px; BORDER-BOTTOM: #000 1px solid; FONT-FAMILY: verdana, tahoma, arial; BACKGROUND-COLOR: #eee
+}
+.miniDragBox {
+ BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 15px; MARGIN-BOTTOM: 5px; PADDING-BOTTOM: 2px; BORDER-LEFT: #000 1px solid; WIDTH: 94px; CURSOR: pointer; PADDING-TOP: 2px; BORDER-BOTTOM: #000 1px solid; FONT-FAMILY: verdana, tahoma, arial; BACKGROUND-COLOR: #eee
+}
+.OverDragBox {
+ BACKGROUND-COLOR: #ffff99
+}
+.DragDragBox {
+ BACKGROUND-COLOR: #ffff99
+}
+.DragDragBox {
+ FILTER: alpha(opacity=50); BACKGROUND-COLOR: #ff99cc
+}
+LEGEND {
+ FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #666699; FONT-FAMILY: verdana, tahoma, arial
+}
+FIELDSET {
+ PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px
+}
+.History {
+ FONT-SIZE: 15px; OVERFLOW: auto; WIDTH: 100%; FONT-FAMILY: verdana, tahoma, arial; HEIGHT: 82px
+}
+#DragContainer8 {
+ BORDER-RIGHT: #669999 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #669999 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; BORDER-LEFT: #669999 1px solid; WIDTH: 110px; PADDING-TOP: 5px; BORDER-BOTTOM: #669999 1px solid; HEIGHT: 110px
+}
+.miniDragBox {
+ FLOAT: left; MARGIN: 0px 5px 5px 0px; WIDTH: 20px; HEIGHT: 20px
+}
+pre{border:1 solid #CCC;background-color:#F8F8F0;padding:10px;}
+</STYLE>
+<script>
+
+var mouseOffset = null;
+var iMouseDown  = false;
+var lMouseState = false;
+var dragObject  = null;
+var DragDrops   = [];
+var curTarget   = null;
+var lastTarget  = null;
+var dragHelper  = null;
+var tempDiv     = null;
+var rootParent  = null;
+var rootSibling = null;
+Number.prototype.NaN0=function(){return isNaN(this)?0:this;}
+function CreateDragContainer(){
+ var cDrag        = DragDrops.length;
+ DragDrops[cDrag] = [];
+ for(var i=0; i<arguments.length; i++){
+  var cObj = arguments[i];
+  DragDrops[cDrag].push(cObj);
+  cObj.setAttribute('DropObj', cDrag);
+  for(var j=0; j<cObj.childNodes.length; j++){
+   if(cObj.childNodes[j].nodeName=='#text') continue;
+   cObj.childNodes[j].setAttribute('DragObj', cDrag);
+  }
+ }
+}
+function mouseCoords(ev){
+ if(ev.pageX || ev.pageY){
+  return {x:ev.pageX, y:ev.pageY};
+ }
+ return {
+  x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+  y:ev.clientY + document.body.scrollTop  - document.body.clientTop
+ };
+}
+function getMouseOffset(target, ev){
+ ev = ev || window.event;
+ var docPos    = getPosition(target);
+ var mousePos  = mouseCoords(ev);
+ return {x:mousePos.x - docPos.x, y:mousePos.y - docPos.y};
+}
+ 
+function getPosition(e){
+ var left = 0;
+ var top  = 0;
+ while (e.offsetParent){
+  left += e.offsetLeft + (e.currentStyle?(parseInt(e.currentStyle.borderLeftWidth)).NaN0():0);
+  top  += e.offsetTop  + (e.currentStyle?(parseInt(e.currentStyle.borderTopWidth)).NaN0():0);
+  e     = e.offsetParent;
+ }
+ left += e.offsetLeft + (e.currentStyle?(parseInt(e.currentStyle.borderLeftWidth)).NaN0():0);
+ top  += e.offsetTop  + (e.currentStyle?(parseInt(e.currentStyle.borderTopWidth)).NaN0():0);
+ return {x:left, y:top};
+}
+function mouseMove(ev){
+ ev         = ev || window.event;
+ var target   = ev.target || ev.srcElement;
+ var mousePos = mouseCoords(ev);
+ if(lastTarget && (target!==lastTarget)){
+  var origClass = lastTarget.getAttribute('origClass');
+  if(origClass) lastTarget.className = origClass;
+ }
+ var dragObj = target.getAttribute('DragObj');
+ if(dragObj!=null){
+  if(target!=lastTarget){
+   var oClass = target.getAttribute('overClass');
+   if(oClass){
+    target.setAttribute('origClass', target.className);
+    target.className = oClass;
+   }
+  }
+  if(iMouseDown && !lMouseState){
+   curTarget     = target;
+   rootParent    = curTarget.parentNode;
+   rootSibling   = curTarget.nextSibling;
+   mouseOffset   = getMouseOffset(target, ev);
+   for(var i=0; i<dragHelper.childNodes.length; i++) dragHelper.removeChild(dragHelper.childNodes[i]);
+   dragHelper.appendChild(curTarget.cloneNode(true));
+   dragHelper.style.display = 'block';
+   var dragClass = curTarget.getAttribute('dragClass');
+   if(dragClass){
+    dragHelper.firstChild.className = dragClass;
+   }
+   dragHelper.firstChild.removeAttribute('DragObj');
+   var dragConts = DragDrops[dragObj];
+   curTarget.setAttribute('startWidth',  parseInt(curTarget.offsetWidth));
+   curTarget.setAttribute('startHeight', parseInt(curTarget.offsetHeight));
+   curTarget.style.display  = 'none';
+   for(var i=0; i<dragConts.length; i++){
+    with(dragConts[i]){
+     var pos = getPosition(dragConts[i]);
+     setAttribute('startWidth',  parseInt(offsetWidth));
+     setAttribute('startHeight', parseInt(offsetHeight));
+     setAttribute('startLeft',   pos.x);
+     setAttribute('startTop',    pos.y);
+    }
+    for(var j=0; j<dragConts[i].childNodes.length; j++){
+     with(dragConts[i].childNodes[j]){
+      if((nodeName=='#text') || (dragConts[i].childNodes[j]==curTarget)) continue;
+      var pos = getPosition(dragConts[i].childNodes[j]);
+      setAttribute('startWidth',  parseInt(offsetWidth));
+      setAttribute('startHeight', parseInt(offsetHeight));
+      setAttribute('startLeft',   pos.x);
+      setAttribute('startTop',    pos.y);
+     }
+    }
+   }
+  }
+ }
+ if(curTarget){
+  dragHelper.style.top  = mousePos.y - mouseOffset.y;
+  dragHelper.style.left = mousePos.x - mouseOffset.x;
+  var dragConts  = DragDrops[curTarget.getAttribute('DragObj')];
+  var activeCont = null;
+  var xPos = mousePos.x - mouseOffset.x + (parseInt(curTarget.getAttribute('startWidth')) /2);
+  var yPos = mousePos.y - mouseOffset.y + (parseInt(curTarget.getAttribute('startHeight'))/2);
+  for(var i=0; i<dragConts.length; i++){
+   with(dragConts[i]){
+    if(((getAttribute('startLeft'))                               < xPos) &&
+     ((getAttribute('startTop'))                                < yPos) &&
+     ((getAttribute('startLeft') + getAttribute('startWidth'))  > xPos) &&
+     ((getAttribute('startTop')  + getAttribute('startHeight')) > yPos)){
+      activeCont = dragConts[i];
+      break;
+    }
+   }
+  }
+  if(activeCont){
+   var beforeNode = null;
+   for(var i=activeCont.childNodes.length-1; i>=0; i--){
+    with(activeCont.childNodes[i]){
+     if(nodeName=='#text') continue;
+     if(
+      curTarget != activeCont.childNodes[i]                              &&
+      ((getAttribute('startLeft') + getAttribute('startWidth'))  > xPos) &&
+      ((getAttribute('startTop')  + getAttribute('startHeight')) > yPos)){
+       beforeNode = activeCont.childNodes[i];
+     }
+    }
+   }
+   if(beforeNode){
+    if(beforeNode!=curTarget.nextSibling){
+     activeCont.insertBefore(curTarget, beforeNode);
+    }
+   } else {
+    if((curTarget.nextSibling) || (curTarget.parentNode!=activeCont)){
+     activeCont.appendChild(curTarget);
+    }
+   }
+   if(curTarget.style.display!=''){
+    curTarget.style.display  = '';
+   }
+  } else {
+   if(curTarget.style.display!='none'){
+    curTarget.style.display  = 'none';
+   }
+  }
+ }
+ lMouseState = iMouseDown;
+ lastTarget  = target;
+ lMouseState = iMouseDown;
+ return false;
+}
+function mouseUp(ev){
+ if(curTarget){
+  dragHelper.style.display = 'none';
+  if(curTarget.style.display == 'none'){
+   if(rootSibling){
+    rootParent.insertBefore(curTarget, rootSibling);
+   } else {
+    rootParent.appendChild(curTarget);
+   }
+  }
+  curTarget.style.display = '';
+ }
+ curTarget  = null;
+ iMouseDown = false;
+}
+function mouseDown(){
+ iMouseDown = true;
+ if(lastTarget){
+  return false;
+ }
+}
+document.onmousemove = mouseMove;
+document.onmousedown = mouseDown;
+document.onmouseup   = mouseUp;
+window.onload = function(){
+ dragHelper = document.createElement('DIV');
+ dragHelper.style.cssText = 'position:absolute;display:none;';
+  
+ CreateDragContainer(
+  document.getElementById('DragContainer1'),
+  document.getElementById('DragContainer2'),
+  document.getElementById('DragContainer3')
+ );
+ document.body.appendChild(dragHelper);
+}
+</script>
+<div class="DragContainer" id="DragContainer1">
+ <div class="DragBox" id="Item1"  overClass="OverDragBox" dragClass="DragDragBox">杨  良</div>
+ <div class="DragBox" id="Item2"  overClass="OverDragBox" dragClass="DragDragBox">李  平</div>
+ <div class="DragBox" id="Item3"  overClass="OverDragBox" dragClass="DragDragBox">王  恺</div>
+ <div class="DragBox" id="Item4"  overClass="OverDragBox" dragClass="DragDragBox">李  静</div>
+</div>
+<div class="DragContainer" id="DragContainer2">
+ <div class="DragBox" id="Item5"  overClass="OverDragBox" dragClass="DragDragBox">沈  炜</div>
+ <div class="DragBox" id="Item6"  overClass="OverDragBox" dragClass="DragDragBox">闫  刚</div>
+ <div class="DragBox" id="Item7"  overClass="OverDragBox" dragClass="DragDragBox">石  磊</div>
+ <div class="DragBox" id="Item8"  overClass="OverDragBox" dragClass="DragDragBox">曾  晶</div>
+</div>
+<div class="DragContainer" id="DragContainer3">
+ <div class="DragBox" id="Item9"  overClass="OverDragBox" dragClass="DragDragBox">辛小松</div>
+ <div class="DragBox" id="Item10" overClass="OverDragBox" dragClass="DragDragBox">许小林</div>
+ <div class="DragBox" id="Item11" overClass="OverDragBox" dragClass="DragDragBox">黄弘昭</div>
+ <div class="DragBox" id="Item12" overClass="OverDragBox" dragClass="DragDragBox">王大中</div>
+</body>
+</html>

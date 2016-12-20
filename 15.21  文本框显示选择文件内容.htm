@@ -1,0 +1,16 @@
+<HTML XMLNS:IE> 
+<head>
+<title>15.21  文本框显示选择文件内容</title>
+</head>
+<body>
+<SCRIPT> 
+function onDownloadDone(s) {  
+    content.value=s;
+} 
+</SCRIPT> 
+<textarea name="content" cols=30 rows=20></textarea> 
+<div ID="oDownload" STYLE="behavior:url(#default#download)" /> 
+<input type=file name='myfile'>
+<input type=button value="打开" onclick="oDownload.startDownload(myfile.value,onDownloadDone)"> 
+</body>
+</html>

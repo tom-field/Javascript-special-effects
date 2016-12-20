@@ -1,0 +1,62 @@
+<!--
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>滚动页面的滚动条</title>
+
+<script language="javascript">
+function myscroll(){
+main.document.body.scrollTop=document.body.scrollTop;}
+</script>
+</head>
+
+<body onscroll="myscroll();event.cancelBubble=true;">
+<p>拉动下滚动条看看吧</p>
+
+<p>陈小稳 ccxw1983@yahoo.com.cn http://hi.baidu.com/chenxiaowen   </p>
+
+<iframe src="main.htm" height=579 width=594 id="main" name="main" scrolling=no></iframe>
+</body>
+
+</html>
+-->
+<html>
+<body>
+<div id="divContainer" style="overflow-y:auto; overflow-x:hidden; height:500px;border:0px solid red;">
+    <div id="divContent" style="height:750px;border:0px solid black;">
+
+    国际在线消息（记者钟正杰）：美国海军一艘燃料补给舰16日在阿拉伯联合酋长国迪拜酋长国附近海域向一艘渔船开火，导致船上1人死亡，3人重伤。<br>
+
+　　阿联酋外交部负责政治事务的官员塔里克·艾哈迈德·海旦当天表示，美国海军补给舰是在迪拜西南部阿里山港附近海域向渔船开火的，死伤者均为印度籍，阿联酋政府正在对事件进行调查。<br>
+
+　　这艘燃料补给舰隶属总部位于巴林的美军第五舰队。该舰队新闻发言人16日表示，燃料补给舰在阿里山港附近海域发现该渔船快速向其移动，在多次警告无效后，使用重机枪向其开火。<br>
+
+　　阿里山港位于迪拜西南部，是世界上最大的人造港口，也是中东地区最大港口，与伊朗隔海相望。美国军舰经常在此停靠，以便海员上岸休整。<br>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+window.onload = function(){ 
+    var nScrollHight = document.getElementById("divContent").offsetHeight; //滚动距离总长(注意不是滚动条的长度)
+    var nScrollTop = 0;   //滚动到的当前位置
+    var nDivHight = document.getElementById("divContainer").offsetHeight; //divContainer的高度
+    
+    document.getElementById("divContainer").onscroll =function(){   
+        nScrollTop = this.scrollTop;//0~250;
+        nScrollHight = this.scrollHeight;//750,1000;
+        if(nScrollTop + nDivHight >= nScrollHight)
+        {
+            document.getElementById("divContent").style.height=1000;
+            alert("Scroll to Bottom, ScrollTop is:" + nScrollTop);
+        }
+    }   
+}
+</script> 
+</body>
+</html>
+
+

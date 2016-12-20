@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>15.20  判断表单内容是否发生变化</title>
+</head>
+<body>
+    <form>
+    <input name="txt1" value="10"><br />
+    <input name="txt2" value="20"><br />
+    <input type="checkbox" value="5" />
+    <input type="button" id="btnSave" value="保存" />
+    </form>
+<script type="text/javascript">
+function IsModified()
+{
+    var result = false;
+    var colInput = document.getElementsByTagName("input");
+    for (var i=0; i<colInput.length; i++) 
+    {
+        if (colInput[i].value != colInput[i].defaultValue)
+        {
+            result = true;                            
+            colInput[i].style.backgroundColor = "#ff9000"; 
+        }
+    }
+    return result;
+}
+document.getElementById("btnSave").onclick = function () 
+{
+    if (IsModified())
+    {
+        return window.confirm("表单已经修改，是否继续保存？");
+    }
+}
+</script>
+ </body>
+</html>

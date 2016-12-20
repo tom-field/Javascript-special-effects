@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+				<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+				<title>Untitled Document</title>
+				<script language="JavaScript">
+					function assignArray(text,delay) 
+					{
+						this.text=text
+						this.delay=delay
+					}
+					function createArray() 
+					{
+						//修改下面的渐变颜色代码
+						fadecolor=new Array("#000000","#333333","#666666","#999999","#CCCCCC","#FFFFFF")//显示的颜色
+						msg=new Array()
+						msg[0]=new assignArray("中国共产党万岁",1000)//修改显示的文字
+						msg[1]=new assignArray("为人民服务",1000)//修改显示的文字
+						msg[2]=new assignArray("感恩的心",1000)//修改显示的文字
+						msg[3]=new assignArray("难忘今宵",1000)//修改显示的文字
+						setTimeout("typeIt()", 1000)
+					}
+					var msgNo=0
+					var character=1
+					var colorNo=0
+					var fixColor=1
+					var colorCheck=0
+					function typeIt() 
+					{
+						var insertHTML=""
+						if(msgNo <= msg.length-1) 
+						{
+							if(character <= msg[msgNo].text.length || colorCheck < msg[msgNo].text.length) 
+							{
+								colorCheck=0
+								for(var charCheck=0; charCheck<character; charCheck++,colorNo--,fixColor--)
+								{
+									if(fixColor>5)colorNo=5
+									if(colorNo==5)colorCheck+=1
+									insertHTML += '<SPAN style="font-family:Arial Black; font-size:50pt; color:'+fadecolor[colorNo]+'">' + msg			[msgNo].text.substring(charCheck, charCheck+1) + '</SPAN>'
+								}
+								if(document.layers) 
+								{
+									document.typeWriter.document.write(insertHTML)
+									document.typeWriter.document.close()
+								} 
+								else if (document.all) 
+								{
+									document.all.typeWriter.innerHTML = insertHTML
+								}
+								setTimeout("typeIt()", 50)
+								character++
+								colorNo=character-1
+								fixColor=character
+							}
+							else 
+							{
+								character=1
+								colorNo=character-1
+								fixColor=character
+								setTimeout("typeIt()", msg[msgNo].delay)
+								msgNo++
+							}
+						}
+					}
+				</script>
+		</head>
+		<body bgcolor="#000000" onLoad="createArray()" text="#ffffff">
+				<div ID="typeWriter" style="position:absolute; left:200; top:10; width:700"></div>
+		</body>
+</html>

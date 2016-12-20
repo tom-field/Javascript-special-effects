@@ -1,0 +1,42 @@
+<html>
+   <head>
+      <title>10.8  会变色的文字效果</title>
+   </head>
+   <body>
+<script language=javascript>            
+<!-- 
+function initArray() {
+ this.length = initArray.arguments.length;
+ for (var i = 0; i < this.length; i++) {
+  this[i] = initArray.arguments[i];
+    }
+}
+var ctext = "北京欢迎您！";
+var speed = 1000;
+var x = 0;
+var color = new initArray(
+ "red", 
+ "blue", 
+ "green",
+ "black",
+ "yellow",
+ "pink");
+if (navigator.appVersion.indexOf("MSIE") != -1)
+{
+ document.write('<div id="c"><center>'+ctext+'</center></div>');
+}
+function chcolor()
+{ 
+  if (navigator.appVersion.indexOf("MSIE") != -1)
+  {
+  document.all.c.style.color = color[x];
+  }
+ (x < color.length-1) ? x++ : x = 0;
+}
+setInterval("chcolor()",1000);
+-->
+</script>
+
+
+   </body>
+</html>

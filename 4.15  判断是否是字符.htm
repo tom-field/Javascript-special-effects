@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>判断是否是字符</title>
+<script language="javascript">
+function count(str)
+{ 
+if(isNaN(parseInt(str,10)))
+{ 
+alert("该字符串由字符组成!");
+return false;
+}
+else
+{
+alert("该字符串中没有字符!");
+return true;
+}
+}
+</script>
+</head>
+<body>
+<form>
+判断是否是字符：<input type=text name=MESSAGE onblur=count(this.value)>
+</form>
+</body>
+</html>

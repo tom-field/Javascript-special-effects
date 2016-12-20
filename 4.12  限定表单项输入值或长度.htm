@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>限定表单项输入值或长度</title>
+<script language="javascript">
+function count(str)
+{ 
+if (str.length<5)
+{ 
+alert("输入文字长度应大于5!");
+return false;
+}
+return true;
+}
+
+function CO(vl)
+{ 
+if (vl > 100)
+{ 
+alert("输入数值不能大于100!");
+return false;
+}
+return true;
+}
+</script>
+</head>
+<body>
+<form>
+限定长度：<input type=text name=MESSAGE onblur=count(this.value)><br>
+限定数值：<input type=text name=COT onblur=CO(this.value)>
+</form>
+</body>
+</html>

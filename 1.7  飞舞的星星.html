@@ -1,0 +1,62 @@
+<html>
+<head>
+</head>
+<body>
+<style type="text/css">
+#sDiv0, #sDiv1, #sDiv2, #sDiv3, #sDiv4, #sDiv5, #sDiv6, #sDiv7, #sDiv8, #sDiv9
+{
+position:absolute; height:1; width:1; font-family:arial black; font-size:9px; color:#FFFFAA; z-index:10;
+}
+</style>
+<body bgcolor="#000000">
+<SCRIPT LANGUAGE="JavaScript1.2">
+var ns=(document.layers);
+var ie=(document.all);
+var w3=(document.getElementById && self.innerWidth && (window.pageXOffset>-1));
+var allDivs      = new Array(10);
+var documentWidth,documentHeight;
+function initAll(){
+if(!ns && !ie && !w3)        return;
+for(dNum=0; dNum<10; ++dNum){
+if(ie)                allDivs[dNum]=eval('document.all.sDiv'+dNum+'.style');
+else if(ns)        allDivs[dNum]=eval('document.layers["sDiv'+dNum+'"]');
+else if(w3)        allDivs[dNum]=eval('document.getElementById("sDiv'+dNum+'").style');
+moveTo(dNum,0,0);
+}
+}
+function moveTo(I,tempx,tempy){
+if (ie){
+documentWidth  =document.body.offsetWidth+document.body.scrollLeft-20;
+randomy=Math.floor(Math.random()*document.body.offsetHeight)+document.body.scrollTop-20;
+}
+else if (ns){
+documentWidth=window.innerWidth+window.pageXOffset-20;
+randomy=Math.floor(Math.random()*window.innerHeight)+window.pageYOffset-20;
+}
+else if (w3){
+documentWidth=self.innerWidth+window.pageXOffset-20;
+randomy=Math.floor(Math.random()*self.innerHeight)+window.pageYOffset-20;
+}
+if(tempx>-50){
+tempx-=45;
+allDivs[I].left=tempx;
+allDivs[I].top =tempy;
+setTimeout("moveTo("+I+","+tempx+","+tempy+")",40)
+}
+else
+setTimeout("moveTo("+I+",documentWidth-10,randomy)",2000/I+40);
+}
+window.onload=initAll
+</script>
+<div id="sDiv0">*</div>
+<div id="sDiv1">*</div>
+<div id="sDiv2">*</div>
+<div id="sDiv3">*</div>
+<div id="sDiv4">*</div>
+<div id="sDiv5">*</div>
+<div id="sDiv6">*</div>
+<div id="sDiv7">*</div>
+<div id="sDiv8">*</div>
+<div id="sDiv9">*</div>
+</body>
+</html>

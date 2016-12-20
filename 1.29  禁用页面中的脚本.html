@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>冻结你的窗口，使窗口无法再响应</title>
+</head>
+<body>
+<input   type= "button "   onmouseover= "run(this) "   onclick= "alert( '我也爱你呀！ ') "   value= "点我:) ">   
+  <script   > 
+  
+  function   run(obj) 
+  { 
+obj.style.position= "absolute ";   
+obj.style.left   =   window.screen.availWidth   /2   +       parseInt(200   *   Math.random())-100   
+obj.style.top   =window.screen.availHeight   /2   +   parseInt(200   *   Math.random())-100   
+} 
+  
+  function   kill(obj) 
+  {   
+var   a=document.all 
+for   (var   k   in   a) 
+    if(a[k].tagName== "INPUT "||a[k].tagName== "SPAN ") 
+    { 
+        a[k].disabled=true; 
+        a[k].onclick=function(){return   false;} 
+    }
+}
+  </script> </body>
+</html>
+

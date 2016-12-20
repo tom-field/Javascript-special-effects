@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>14.17 商品折扣计算器</title>
+<script type="text/javascript">
+var arr = new Array("","",""); 
+function price(myPrice){ 
+	arr[0] = myPrice;
+	count();
+}
+function Tcount(myCount){
+
+	arr[1] = myCount;
+	count(); 
+}
+function off(myOff){
+	arr[2] = myOff; 
+	count();   
+}
+function count(){
+
+	myResult.value =arr[0]*arr[1]*arr[2];
+}
+</script>
+</head>
+<body>
+商品单价：<input type="text" name="PriceObj" onkeyup="price(this.value)"><br><br>
+商品数量：<input type="text" name="CountObj" onkeyup="Tcount(this.value)"><br><br>
+商品折扣：<input type="text" name="OffObj" onkeyup="off(this.value)"><br><br><br>
+商品总价=商品单价*商品数量*商品折扣<br><br>
+商品总价：<input type="text" name="myResult"><br><br>
+</body>
+</html>

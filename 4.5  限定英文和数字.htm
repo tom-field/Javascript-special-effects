@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>限定英文和数字</title>
+<script language=javascript>
+function onlyEng()
+{
+if(!((event.keyCode>=65&&event.keyCode<=90)||(event.keyCode>=48&&event.keyCode<=57)||(event.keyCode>=96&&event.keyCode<=105)))
+{
+alert("请输入英文和数字！");
+event.returnValue=false;
+}
+}
+</script>
+</head>
+<body>
+<form>
+<input onkeydown="onlyEng();">
+</form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>判断用户名是否为数字、字母、下划线</title>
+<script language=javascript>
+function onlyEng()
+{
+if(!((event.keyCode>=65&&event.keyCode<=90)||(event.keyCode>=48&&event.keyCode<=57)||(event.keyCode>=97&&event.keyCode<=122)||(event.keyCode==97)))
+{
+alert("请输入字母、数字或者下划线！");
+b.a.value='';
+b.a.focus();
+event.returnValue=false;
+}
+}
+</script>
+</head>
+<body>
+<form id='b'>
+<input id='a' onkeydown="onlyEng();">
+</form>
+</body>
+</html>

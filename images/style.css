@@ -1,0 +1,11 @@
+/*download by http://www.codefans.net*/
+* { padding: 0; margin: 0; }
+
+body { background: #42509a; }
+ul { width: 800px; height: 500px; border: 1px solid #333; background: #05090e; overflow: hidden; position: relative; margin: 50px auto 0; }
+li { position: absolute; list-style: none; }
+#pic1 { top: 210px; left: 550px; width: 216px; height: 432px; background: url(1.png) no-repeat; }
+#pic2 { top: 290px; left: 430px; width: 229px; height: 297px; background: url(2.png) no-repeat; }
+#pic3 { top: 215px; left: 220px; width: 325px; height: 426px; background: url(3.png) no-repeat; }
+#pic4 { top: 210px; left: 80px; width: 272px; height: 443px; background: url(4.png) no-repeat; }
+#pic5 { top: -40px; left: -50px; width: 1422px; height: 1000px; background: url(bg.png) no-repeat; }

@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>13.9  计算用户浏览网页的时间</title>
+<script language="Javascript">
+    pageOpenTime = new Date();
+    function goodbye() 
+    {
+        pageCloseTime = new Date();
+        minutes = (pageCloseTime.getMinutes() - pageOpenTime.getMinutes());
+        seconds = (pageCloseTime.getSeconds() - pageOpenTime.getSeconds());
+        time = (seconds + (minutes * 60));
+        alert('总共停留了' + time + '秒,一路走好!');
+    } 
+</script>
+</head>
+<body  onunload="goodbye()">
+<div>
+钓鱼岛是钓鱼岛列岛的主岛，是中国固有领土，位于中国东海，距温州市约356千米、福州市约385千米、基隆市约190千米，面积4.3838平方公里，周围海域面积约为17万平方公里。1972年美国将其“行政管辖权”连同琉球一起“交给”日本，历史上琉球并不属于日本。中日钓鱼岛争议由此产生。1970年代开始，华人组织民间团体曾多次展开宣示主权的“保钓运动”。2012年9月10日起，中国有关部门对钓鱼岛及其附属岛屿开展常态化监视监测；9月11日，央视首次播钓鱼岛天气预报。2012年9月17日，央视报道：中国学者发现1895年日政府就知道钓鱼岛是中国的。
+</div>
+</body>
+
+</html>

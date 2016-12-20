@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>9.4   图片滚动酷炫效果</title>
+<style>TABLE { BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px}
+BODY { PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; BACKGROUND: #fff; PADDING-BOTTOM: 5px; COLOR: #333; PADDING-TOP: 5px; FONT-FAMILY: ""}
+TD { FONT-SIZE: 12px}
+.f12 { FONT-SIZE: 12px}
+A { TEXT-DECORATION: underline}
+A:link { COLOR: #0051b4}
+A:visited { COLOR: #333}
+A:hover { COLOR: #f00}
+A:active { COLOR: #f00}
+.F14lists { LINE-HEIGHT: 23px}
+.F14lists UL { PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px}
+.F14lists LI { PADDING-LEFT: 2px; FONT-SIZE: 14px; VERTICAL-ALIGN: bottom}
+.F14lists LI SPAN { FONT-SIZE: 9px; COLOR: #533826}
+.FixTitle A:link { COLOR: #0736aa; TEXT-DECORATION: none}
+.FixTitle A:visited { COLOR: #0736aa; TEXT-DECORATION: none}
+.FixTitle A:hover { TEXT-DECORATION: underline}
+.FixTitle { BORDER-RIGHT: #a2d1ff 1px solid; BORDER-TOP: #a2d1ff 1px solid; BACKGROUND: url(http://www.codefans.net/jscss/demoimg/200908/olyready_bg_cl_002.gif) 0px -101px; OVERFLOW: hidden; BORDER-LEFT: #a2d1ff 1px solid; LINE-HEIGHT: 24px; BORDER-BOTTOM: #a2d1ff 1px solid; HEIGHT: 24px}
+.FixTitle H3 { PADDING-LEFT: 30px; FONT-SIZE: 14px; BACKGROUND: url(http://www.codefans.net/jscss/demoimg/200908/olyready_bg_cl_001.gif) 2px -197px; FLOAT: left; COLOR: #0736aa}
+.FixTitle SPAN { PADDING-RIGHT: 5px; FLOAT: right}
+.RForm { PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px}
+.RForm DT { LINE-HEIGHT: 23px}
+.RformB { PADDING-LEFT: 10px}
+.blk_29 { BORDER-RIGHT: #a1d2fd 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #a1d2fd 0px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 10px; OVERFLOW: hidden; BORDER-LEFT: #a1d2fd 1px solid; PADDING-TOP: 10px; BORDER-BOTTOM: #a1d2fd 1px solid; ZOOM: 1; POSITION: relative}
+.blk_29 .LeftBotton { BACKGROUND: url(http://www.codefans.net/jscss/demoimg/200908/ca_hz_002.gif) no-repeat 0px 0px; LEFT: 5px; FLOAT: left; WIDTH: 11px; CURSOR: pointer; POSITION: absolute; TOP: 10px; HEIGHT: 114px}
+.blk_29 .RightBotton { RIGHT: 5px; BACKGROUND: url(http://www.codefans.net/jscss/demoimg/200908/ca_hz_002.gif) no-repeat -11px 0px; FLOAT: right; WIDTH: 11px; CURSOR: pointer; POSITION: absolute; TOP: 10px; HEIGHT: 114px}
+.blk_29 .Cont { MARGIN: 0px auto; OVERFLOW: hidden; WIDTH: 888px; PADDING-TOP: 5px}
+.blk_29 .box { FLOAT: left; WIDTH: 152px; TEXT-ALIGN: center}
+.blk_29 .box IMG { BORDER-RIGHT: #add2fc 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #add2fc 1px solid; DISPLAY: block; PADDING-LEFT: 3px; BACKGROUND: #fff; PADDING-BOTTOM: 3px; MARGIN: 0px auto; BORDER-LEFT: #add2fc 1px solid; PADDING-TOP: 3px; BORDER-BOTTOM: #add2fc 1px solid}
+.blk_29 .box A:hover IMG { BORDER-RIGHT: #5385cc 1px solid; BORDER-TOP: #5385cc 1px solid; BORDER-LEFT: #5385cc 1px solid; BORDER-BOTTOM: #5385cc 1px solid}
+.blk_29 .box P { MARGIN: 6px auto 0px; WIDTH: 97px; LINE-HEIGHT: 20px}
+.rollphotos { MARGIN-TOP: 10px;WIDTH: 950px}
+.partC { MARGIN-TOP: 10px; OVERFLOW: auto; WIDTH: 950px}
+.partC .PC_left { OVERFLOW: auto; WIDTH: 470px}
+.partC .PC_right { OVERFLOW: auto; WIDTH: 470px}
+.partC .PC_left { FLOAT: left}
+.partC .PC_right { FLOAT: right}
+.PT_mix { BORDER-RIGHT: #a2d1ff 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #a2d1ff 0px solid; PADDING-LEFT: 0px; BACKGROUND: #f3fbfe; PADDING-BOTTOM: 10px; OVERFLOW: auto; BORDER-LEFT: #a2d1ff 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #a2d1ff 1px solid}
+.PhoTxt { MARGIN-TOP: 10px; DISPLAY: inline; FLOAT: left; MARGIN-LEFT: 10px; OVERFLOW: auto; WIDTH: 220px}
+.PhoTxt IMG { BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 3px; BACKGROUND: #fff; FLOAT: left; PADDING-BOTTOM: 3px; BORDER-LEFT: #ccc 1px solid; MARGIN-RIGHT: 5px; PADDING-TOP: 3px; BORDER-BOTTOM: #ccc 1px solid}
+.PhoTxt H1 { FONT-WEIGHT: bold; FONT-SIZE: 12px; LINE-HEIGHT: 23px}
+.PhoTxt P { COLOR: #545454; LINE-HEIGHT: 20px}
+</style>
+
+<SCRIPT type="text/javascript">
+var sina={$:function(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval('document.all.'+objName)}},isIE:navigator.appVersion.indexOf("MSIE")!=-1?true:false,addEvent:function(l,i,I){if(l.attachEvent){l.attachEvent("on"+i,I)}else{l.addEventListener(i,I,false)}},delEvent:function(l,i,I){if(l.detachEvent){l.detachEvent("on"+i,I)}else{l.removeEventListener(i,I,false)}},readCookie:function(O){var o="",l=O+"=";if(document.cookie.length>0){var i=document.cookie.indexOf(l);if(i!=-1){i+=l.length;var I=document.cookie.indexOf(";",i);if(I==-1)I=document.cookie.length;o=unescape(document.cookie.substring(i,I))}};return o},writeCookie:function(i,l,o,c){var O="",I="";if(o!=null){O=new Date((new Date).getTime()+o*3600000);O="; expires="+O.toGMTString()};if(c!=null){I=";domain="+c};document.cookie=i+"="+escape(l)+O+I},readStyle:function(I,l){if(I.style[l]){return I.style[l]}else if(I.currentStyle){return I.currentStyle[l]}else if(document.defaultView&&document.defaultView.getComputedStyle){var i=document.defaultView.getComputedStyle(I,null);return i.getPropertyValue(l)}else{return null}}};
+
+function ScrollPic(scrollContId,arrLeftId,arrRightId,dotListId){this.scrollContId=scrollContId;this.arrLeftId=arrLeftId;this.arrRightId=arrRightId;this.dotListId=dotListId;this.dotClassName="dotItem";this.dotOnClassName="dotItemOn";this.dotObjArr=[];this.pageWidth=0;this.frameWidth=0;this.speed=10;this.space=10;this.pageIndex=0;this.autoPlay=true;this.autoPlayTime=5;var _autoTimeObj,_scrollTimeObj,_state="ready";this.stripDiv=document.createElement("DIV");this.listDiv01=document.createElement("DIV");this.listDiv02=document.createElement("DIV");if(!ScrollPic.childs){ScrollPic.childs=[]};this.ID=ScrollPic.childs.length;ScrollPic.childs.push(this);this.initialize=function(){if(!this.scrollContId){throw new Error("必须指定scrollContId.");return};this.scrollContDiv=sina.$(this.scrollContId);if(!this.scrollContDiv){throw new Error("scrollContId不是正确的对象.(scrollContId = \""+this.scrollContId+"\")");return};this.scrollContDiv.style.width=this.frameWidth+"px";this.scrollContDiv.style.overflow="hidden";this.listDiv01.innerHTML=this.listDiv02.innerHTML=this.scrollContDiv.innerHTML;this.scrollContDiv.innerHTML="";this.scrollContDiv.appendChild(this.stripDiv);this.stripDiv.appendChild(this.listDiv01);this.stripDiv.appendChild(this.listDiv02);this.stripDiv.style.overflow="hidden";this.stripDiv.style.zoom="1";this.stripDiv.style.width="32766px";this.listDiv01.style.cssFloat="left";this.listDiv02.style.cssFloat="left";sina.addEvent(this.scrollContDiv,"mouseover",Function("ScrollPic.childs["+this.ID+"].stop()"));sina.addEvent(this.scrollContDiv,"mouseout",Function("ScrollPic.childs["+this.ID+"].play()"));if(this.arrLeftId){this.arrLeftObj=sina.$(this.arrLeftId);if(this.arrLeftObj){sina.addEvent(this.arrLeftObj,"mousedown",Function("ScrollPic.childs["+this.ID+"].rightMouseDown()"));sina.addEvent(this.arrLeftObj,"mouseup",Function("ScrollPic.childs["+this.ID+"].rightEnd()"));sina.addEvent(this.arrLeftObj,"mouseout",Function("ScrollPic.childs["+this.ID+"].rightEnd()"))}};if(this.arrRightId){this.arrRightObj=sina.$(this.arrRightId);if(this.arrRightObj){sina.addEvent(this.arrRightObj,"mousedown",Function("ScrollPic.childs["+this.ID+"].leftMouseDown()"));sina.addEvent(this.arrRightObj,"mouseup",Function("ScrollPic.childs["+this.ID+"].leftEnd()"));sina.addEvent(this.arrRightObj,"mouseout",Function("ScrollPic.childs["+this.ID+"].leftEnd()"))}};if(this.dotListId){this.dotListObj=sina.$(this.dotListId);if(this.dotListObj){var pages=Math.round(this.listDiv01.offsetWidth/this.frameWidth+0.4),i,tempObj;for(i=0;i<pages;i++){tempObj=document.createElement("span");this.dotListObj.appendChild(tempObj);this.dotObjArr.push(tempObj);if(i==this.pageIndex){tempObj.className=this.dotClassName}else{tempObj.className=this.dotOnClassName};tempObj.title="第"+(i+1)+"页";sina.addEvent(tempObj,"click",Function("ScrollPic.childs["+this.ID+"].pageTo("+i+")"))}}};if(this.autoPlay){this.play()}};this.leftMouseDown=function(){if(_state!="ready"){return};_state="floating";_scrollTimeObj=setInterval("ScrollPic.childs["+this.ID+"].moveLeft()",this.speed)};this.rightMouseDown=function(){if(_state!="ready"){return};_state="floating";_scrollTimeObj=setInterval("ScrollPic.childs["+this.ID+"].moveRight()",this.speed)};this.moveLeft=function(){if(this.scrollContDiv.scrollLeft+this.space>=this.listDiv01.scrollWidth){this.scrollContDiv.scrollLeft=this.scrollContDiv.scrollLeft+this.space-this.listDiv01.scrollWidth}else{this.scrollContDiv.scrollLeft+=this.space};this.accountPageIndex()};this.moveRight=function(){if(this.scrollContDiv.scrollLeft-this.space<=0){this.scrollContDiv.scrollLeft=this.listDiv01.scrollWidth+this.scrollContDiv.scrollLeft-this.space}else{this.scrollContDiv.scrollLeft-=this.space};this.accountPageIndex()};this.leftEnd=function(){if(_state!="floating"){return};_state="stoping";clearInterval(_scrollTimeObj);var fill=this.pageWidth-this.scrollContDiv.scrollLeft%this.pageWidth;this.move(fill)};this.rightEnd=function(){if(_state!="floating"){return};_state="stoping";clearInterval(_scrollTimeObj);var fill=-this.scrollContDiv.scrollLeft%this.pageWidth;this.move(fill)};this.move=function(num,quick){var thisMove=num/5;if(!quick){if(thisMove>this.space){thisMove=this.space};if(thisMove<-this.space){thisMove=-this.space}};if(Math.abs(thisMove)<1&&thisMove!=0){thisMove=thisMove>=0?1:-1}else{thisMove=Math.round(thisMove)};var temp=this.scrollContDiv.scrollLeft+thisMove;if(thisMove>0){if(this.scrollContDiv.scrollLeft+thisMove>=this.listDiv01.scrollWidth){this.scrollContDiv.scrollLeft=this.scrollContDiv.scrollLeft+thisMove-this.listDiv01.scrollWidth}else{this.scrollContDiv.scrollLeft+=thisMove}}else{if(this.scrollContDiv.scrollLeft-thisMove<=0){this.scrollContDiv.scrollLeft=this.listDiv01.scrollWidth+this.scrollContDiv.scrollLeft-thisMove}else{this.scrollContDiv.scrollLeft+=thisMove}};num-=thisMove;if(Math.abs(num)==0){_state="ready";if(this.autoPlay){this.play()};this.accountPageIndex();return}else{this.accountPageIndex();setTimeout("ScrollPic.childs["+this.ID+"].move("+num+","+quick+")",this.speed)}};this.next=function(){if(_state!="ready"){return};_state="stoping";this.move(this.pageWidth,true)};this.play=function(){if(!this.autoPlay){return};clearInterval(_autoTimeObj);_autoTimeObj=setInterval("ScrollPic.childs["+this.ID+"].next()",this.autoPlayTime*1000)};this.stop=function(){clearInterval(_autoTimeObj)};this.pageTo=function(num){if(_state!="ready"){return};_state="stoping";var fill=num*this.frameWidth-this.scrollContDiv.scrollLeft;this.move(fill,true)};this.accountPageIndex=function(){this.pageIndex=Math.round(this.scrollContDiv.scrollLeft/this.frameWidth);if(this.pageIndex>Math.round(this.listDiv01.offsetWidth/this.frameWidth+0.4)-1){this.pageIndex=0};var i;for(i=0;i<this.dotObjArr.length;i++){if(i==this.pageIndex){this.dotObjArr[i].className=this.dotClassName}else{this.dotObjArr[i].className=this.dotOnClassName}}}};
+</SCRIPT>
+</head>
+<body>
+<div align="center">
+<!--滚动图片 start-->
+
+<DIV class=rollphotos>
+<DIV class=FixTitle>
+<H3>曼妙植物</H3><SPAN><A href="/" target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=blk_29>
+<DIV class=LeftBotton id=LeftArr></DIV>
+<DIV class=Cont id=ISL_Cont_1><!-- 图片列表 begin -->
+<DIV class=box><A class=imgBorder href="/" target=_blank><IMG height=77 src="51501s.jpg" width=124 
+border=0></A> 
+<P><A href="/" 
+target=_blank>璀璨</A></P></DIV>
+<DIV class=box><A class=imgBorder href="/" target=_blank><IMG height=77 src="51502s.jpg" width=124 
+border=0></A> 
+<P><A href="/" 
+target=_blank>光芒</A></P></DIV>
+<DIV class=box><A class=imgBorder href="/" target=_blank><IMG height=77 src="51503s.jpg" width=124 
+border=0></A> 
+<P><A href="/" 
+target=_blank>妖艳</A></P></DIV>
+<DIV class=box><A class=imgBorder href="/" target=_blank><IMG height=77 src="51504s.jpg" width=124 
+border=0></A> 
+<P><A href="/" 
+target=_blank>妩媚</A></P></DIV>
+<DIV class=box><A class=imgBorder href="/" target=_blank><IMG height=77 src="51505s.jpg" width=124 
+border=0></A> 
+<P><A href="/" 
+target=_blank>亮丽</A></P></DIV>
+<DIV class=box><A class=imgBorder href="/" target=_blank><IMG height=77 src="51506s.jpg" width=124 
+border=0></A> 
+<P><A href="/" 
+target=_blank>清新</A></P></DIV>
+<!-- 图片列表 end --></DIV>
+<DIV class=RightBotton id=RightArr></DIV></DIV>
+<SCRIPT language=javascript type=text/javascript>
+   <!--//--><![CDATA[//><!--
+   var scrollPic_02 = new ScrollPic();
+   scrollPic_02.scrollContId   = "ISL_Cont_1";
+   //左箭头ID
+   scrollPic_02.arrLeftId      = "LeftArr";
+   //右箭头ID
+   scrollPic_02.arrRightId     = "RightArr";
+   //显示框宽度 
+   scrollPic_02.frameWidth     = 908;
+   //翻页宽度
+   scrollPic_02.pageWidth      = 152; 
+   //移动速度(毫秒，越小越快)
+   scrollPic_02.speed          = 10;
+   //每次移动像素(单位px，越大越快) 
+   scrollPic_02.space          = 10; 
+   //自动播放
+   scrollPic_02.autoPlay       = true; 
+   //自动播放间隔时间(秒)
+   scrollPic_02.autoPlayTime   = 3; 
+   //初始化
+   scrollPic_02.initialize();
+   //--><!]]>
+</SCRIPT>
+</DIV>
+<!--滚动图片 end-->
+</div>
+</body>
+</html>

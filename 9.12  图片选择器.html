@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>9.12  图片选择器</title>
+<style type="text/css">
+body,td{
+font-size:9pt;
+}
+input{
+font-size:9pt;
+background-color:#eeeeff;
+color:#000000;
+border:1px solid #0000ff;
+}
+</style>
+
+</head>
+
+<body><center>
+<form name="myform" method="post" action="">请选择图片：
+<div id="imgBox"></div>
+        <input name="myhead" type="text" id="myface" size="10" value="">
+</form></center>
+
+<script language="JavaScript">
+var imgWidth=64;
+var imgHeight=64;
+var selectedNo=7;
+var selecteSize=2;
+var imgSrc="数字序号.gif";
+var myHTML='<SPAN onmouseover="isin=true" onmouseout="isin=false">';
+myHTML+='<table width="1" onclick="showlist(this)" title="选择提示框" border="0" cellspacing="0" cellpadding="0"><tr><td><img name="imgselected" border=1 src="'+imgSrc.replace("数字序号",selectedNo)+'" WIDTH='+(imgWidth)+' HEIGHT='+imgHeight+'></td><td valign=top><img src="menu.gif"></td></tr></table>';
+myHTML+='<DIV onscroll="scrollud()" id="imgBox" \n';
+myHTML+='style="position:absolute;left=-800;top=0;background-color:#FFFFFF;border: 1px solid #000000;overflow-x:hidden;overflow-y:scroll; width:'+(imgWidth+20)+'px; height: '+imgHeight*selecteSize+'px">';
+for(i=0;i<10;i++){
+  myHTML+="<img listID="+i+" src='"+imgSrc.replace("数字序号",i)+"' alt='"+imgSrc.replace("数字序号",i)+"' width="+imgWidth+" height="+imgHeight+" onclick='selectme(this)' onload='if(init)init()'><BR>";
+}
+myHTML+= "</DIV></SPAN>";
+imgBox.outerHTML=myHTML;
+function showlist(obj){
+  if(imgBox.style.pixelLeft!=-800){imgBox.style.pixelLeft=-800; return;}
+  
+  var mytop=obj.offsetTop; 
+  var myleft=obj.offsetLeft; 
+  while(obj=obj.offsetParent){ 
+    myleft+=obj.offsetLeft; 
+    mytop+=obj.offsetTop; 
+  }
+  imgBox.style.left=myleft;
+  imgBox.style.top=mytop+imgHeight+2;
+
+}
+var isin=false;
+function selectme(obj){
+  if(!isin||obj){imgBox.style.pixelLeft=-800;}
+  if(obj){
+    myform.myhead.value=imgSrc.replace("数字序号",obj.listID);
+    document.images["imgselected"].src=imgSrc.replace("数字序号",obj.listID);
+  }
+}
+var mytime=setTimeout("",0);
+var pre_X=0;
+function scrollud(){
+  var current_X=imgBox.scrollTop;
+  if(current_X>pre_X && imgBox.scrollTop< Math.ceil(imgBox.scrollTop/imgHeight)*imgHeight){
+    clearTimeout(mytime);
+    mytime=setTimeout("imgBox.scrollTop=Math.round(imgBox.scrollTop+1);",1);
+  }
+  else if(current_X<pre_X && imgBox.scrollTop> Math.floor(imgBox.scrollTop/imgHeight)*imgHeight){
+    clearTimeout(mytime);
+    mytime=setTimeout("imgBox.scrollTop=Math.round(imgBox.scrollTop-1);",1);
+  }
+  pre_X=current_X;
+}
+
+function init(){
+  imgBox.scrollTop=selectedNo*imgHeight;
+  myform.myhead.value=imgSrc.replace("数字序号",selectedNo);
+}
+
+myActivation="selectme(null)";
+if(document.body.onclick)
+{
+eval(document.body.onclick.toString().replace('anonymous()','bodyclick()'));
+document.body.onclick=new Function("bodyclick();"+myActivation);
+}
+else document.body.onclick=new Function(myActivation);
+
+	var _rsCI="cn-pconline";
+	var _rsCG="0";
+	var _rsDT=0;
+	var _rsDU=0; 
+	var _rsDO=0; 
+	var _rsX6=0;  
+	var _rsSI=escape(window.location);
+	var _rsLP=location.protocol.indexOf('https')>-1?'https:':'http:';
+	var _rsRP=escape(document.referrer);
+
+	if (parseInt(navigator.appVersion)>=4)
+	{
+		var _rsRD=(new Date()).getTime();
+		var _rsSE=1;	
+		var _rsSV="";
+		var _rsSM=0.01;
+		_rsCL='<scr'+'ipt language="JavaScript" type="text/javascript" src="'+'v51.js"><\/scr'+'ipt>';
+	}
+	else
+	{
+		_rsCL='<img src="'+_rsND+'cgi-bin/m?ci='+_rsCI+'&cg='+_rsCG+'&si='+_rsSI+'&rp='+_rsRP+'">';
+	}
+	document.write(_rsCL);
+</script>
+<noscript>
+</noscript>
+</BODY>
+</html>

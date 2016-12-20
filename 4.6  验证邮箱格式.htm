@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>验证邮箱格式</title>
+<script language="javascript" type="text/javascript" >   
+function emailCheck(obj, labelName) {   
+    var objName = eval("document.all."+obj);   
+    var pattern = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;   
+    if (!pattern.test(objName.value)) {   
+        alert("请输入正确的邮箱地址。");   
+        objName.focus();   
+        return false;   
+    }   
+    return true;   
+}   
+</script>   
+
+   </head>
+   <body>
+邮箱地址：<input type="text" id="email" name="email" maxlength="30" onblur="return emailCheck('email', 'email')" style="text-align: left; width:300px;" />
+   </body>
+</html>

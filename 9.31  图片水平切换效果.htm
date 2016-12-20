@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" " http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<style>
+    *{ margin:0; padding:0}
+#lbCaption {
+display:block;
+font-size:12px;
+font-weight:100;
+}
+#img_container{ text-align:left; position:relative;  margin:0 auto;border:1px solid #000; overflow:hidden;width:124px;  height:77px;}
+#imgbox{position:absolute; width:2000px;left:0px;top:0}
+#imgbox img{ float:left; border:0; margin:0; width:124px; height:77px; }
+</style>
+<div id="img_container">
+<div id="imgbox" style="left:0"></div>
+</div>
+<div style="text-align:center"><a href="javascript:void(0)" id="pre" >&#9668;</a> <span 
+id="currentnum">1</span>/<span id="allnum"></span>&nbsp;<a id="next" 
+href="javascript:void(0)">&#9658;</a> 
+</div>  
+<script type="text/javascript">  
+$=function(obj){return document.getElementById(obj);}
+//图片显示的宽度。对应样式中的宽度也要修改为一致。
+var imgWidth=120;
+//图片地址
+var imgsrc= new Array();
+imgsrc[0]="51501s.jpg";
+imgsrc[1]="51502s.jpg";
+imgsrc[2]="51503s.jpg";
+imgsrc[3]="51504s.jpg";
+//点开后大图地址
+var bigimgurl= new Array();
+bigimgurl[0]="51501.jpg";
+bigimgurl[1]="51502.jpg";
+bigimgurl[2]="51503.jpg";
+bigimgurl[3]="51504.jpg";
+//图片文字简介
+var title= new Array();
+title[0]="文字介绍111111111";
+title[1]="文字介绍2";
+title[2]="图片文字介绍3";
+title[3]="图片文字介绍444444";
+title[4]="图片文字介绍5555555555";
+var arraylen=imgsrc.length;
+for (i=0; i<arraylen;i++){
+var obox=$("imgbox");
+var oimg=document.createElement("img");
+    oimg.setAttribute("src",imgsrc[i]);
+var oa=document.createElement("a");
+    oa.setAttribute("href",bigimgurl[i]);
+    oa.setAttribute("title",title[i]);
+    oa.setAttribute("rel","lytebox[vacation]");
+    oa.appendChild(oimg);
+    obox.appendChild(oa);
+}
+$("allnum").innerHTML=imgsrc.length;
+$("next").onclick=function(){
+var Oleft=parseInt($("imgbox").style.left);
+if(Oleft<=-(imgsrc.length-1)*imgWidth){Oleft=imgWidth};
+$("imgbox").style.left= Oleft-imgWidth + "px";
+$("currentnum").innerHTML=-parseInt($("imgbox").style.left)/imgWidth+1;
+     }
+      $("pre").onclick=function(){
+          var Oleft=parseInt($("imgbox").style.left);
+if(Oleft>=0){Oleft=-(imgsrc.length)*imgWidth};
+     $("imgbox").style.left= Oleft+imgWidth + "px";
+     $("currentnum").innerHTML=-parseInt($("imgbox").style.left)/imgWidth+1;
+     }
+   </script> 

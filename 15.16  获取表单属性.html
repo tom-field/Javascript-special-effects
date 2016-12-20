@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>15.16 获取表单属性</title>
+<script language="JavaScript">
+function setAction(){
+  var objForm = document.myForm;
+  objForm.action = "2.html";
+  alert(objForm.action);
+}
+function setMethod(){
+  var objForm = document.forms[0];
+  objForm.method = "get";
+  alert(objForm.method);
+}
+function showName(objForm){
+  alert(objForm.name);
+}
+</script>
+</head>
+<body>
+<h2>获取表单属性</h2>
+<hr>
+<form name="myForm" action="1.html" method="post">
+用户名称 : <input type="text" name="myUserName"><br>
+用户密码 : <input type="password" name="myPassword"><br><br>
+<input type="button" name="B1" onclick="setAction()" value="表单Action属性">
+<input type="button" name="B2" onclick="setMethod()" value="表单Method属性">
+<input type="button" name="B3" onclick="showName(this.form)" value="表单名称">
+</form>
+</body>
+</html>

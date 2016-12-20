@@ -1,0 +1,93 @@
+<html> 
+	<head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312"> 
+		<title>
+			QQ导航菜单
+		</title> 
+		<style type="text/css"> 
+			.titleStyle
+			{ 
+				background-color:#111166;color:#ffffff;border-top:1px solid #FFFFFF;font-size:9pt;cursor:hand; 
+			} 
+			.contentStyle
+			{ 
+				background-color:#eeffee;color:blue;font-size:9pt; 
+			} 
+			a
+			{ 
+				color:blue; 
+			} 
+			body
+			{ 
+				font-size:9pt; 
+			} 
+		</style> 
+	</head> 
+	<body> 
+		<script language="JavaScript"> 
+			<!-- 
+			//菜单顶边距
+			var layerTop=40;  
+			//菜单左边距 
+			var layerLeft=50; 
+			//菜单总宽
+			var layerWidth=160;  
+			//标题栏高度
+			var titleHeight=30;  
+			//内容区高度
+			var contentHeight=300;  
+			//移动步数，数值越大移动越慢
+			var stepNo=10;  
+
+			var itemNo=0;runtimes=0; 
+			document.write('<span id=itemsLayer style="position:absolute;overflow:hidden;border:1px solid #008800;left:'+layerLeft+';top:'+layerTop+';width:'+layerWidth+';">'); 
+
+			function addItem(itemTitle,itemContent)
+			{ 
+				itemHTML='<div id=item'+itemNo+' itemIndex='+itemNo+' style="position:relative;left:0;top:'+(-contentHeight*itemNo)+';width:'+layerWidth+';"><table width=100% cellspacing="0" cellpadding="0">'+ 
+				'<tr><td height='+titleHeight+' onclick=changeItem('+itemNo+') class="titleStyle" align=center>'+itemTitle+'</td></tr>'+ 
+				'<tr><td height='+contentHeight+' class="contentStyle">'+itemContent+'</td></tr></table></div>'; 
+				document.write(itemHTML); 
+				itemNo++; 
+			} 
+			//添加菜单标题和内容，可任意多项，注意格式： 
+			addItem('即时通讯工具','<center>欢迎使用！'); 
+			addItem('总裁办公室','<center>李峰 <BR><BR>冯昊<BR><BR>薛胜桥<BR><BR>冯天宇</center>'); 
+			addItem('人力资源部','<center>刘语佳 <BR><BR>崔志刚<BR><BR>王成军<BR><BR>李洋</center>'); 
+			addItem('财务部','<center>杨良<BR><BR>沈炜<BR><BR>闫刚<BR><BR>曾晶<BR><BR>辛小松</center>'); 
+			addItem('工业设备部','<center>薛林<BR><BR>孟苏</center>'); 
+			addItem('科技设计部','<center>刘成军<BR><BR>高峰<BR><BR>刘涵宁<BR><BR>何宁</center>'); 
+
+			document.write('</span>') 
+			document.all.itemsLayer.style.height=itemNo*titleHeight+contentHeight; 
+
+			toItemIndex=itemNo-1;onItemIndex=itemNo-1; 
+
+			function changeItem(clickItemIndex)
+			{ 
+				toItemIndex=clickItemIndex; 
+				if(toItemIndex-onItemIndex>0) moveUp(); else moveDown(); 
+				runtimes++; 
+				if(runtimes>=stepNo){ 
+				onItemIndex=toItemIndex; 
+				runtimes=0;} 
+				else 
+				setTimeout("changeItem(toItemIndex)",10); 
+			} 
+
+			function moveUp()
+			{ 
+				for(i=onItemIndex+1;i<=toItemIndex;i++) 
+				eval('document.all.item'+i+'.style.top=parseInt(document.all.item'+i+'.style.top)-contentHeight/stepNo;'); 
+			} 
+
+			function moveDown()
+			{ 
+				for(i=onItemIndex;i>toItemIndex;i--) 
+				eval('document.all.item'+i+'.style.top=parseInt(document.all.item'+i+'.style.top)+contentHeight/stepNo;'); 
+			} 
+			changeItem(0); 
+			//--> 
+		</script> 
+	</body> 
+</html> 

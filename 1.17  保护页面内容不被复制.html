@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Javascript实例</title>
+<!--禁止复制-->
+<SCRIPT LANGUAGE=javascript>
+function click() {
+alert('禁止你的左键复制！') }
+function click1() {
+if (event.button==2) {alert('禁止右键点击~！') }}
+function CtrlKeyDown(){
+if (event.ctrlKey) {alert('不当的拷贝将损害您的系统！') }}
+document.onkeydown=CtrlKeyDown;
+document.onselectstart=click;
+document.onmousedown=click1;
+</SCRIPT>
+</head>
+<body  bgcolor="#FF3333">
+<script language="JavaScript" type="text/javascript">  
+click();
+</script> 
+
+<table>
+<tr>
+<td>
+请不要随便复制内容哦！
+</td>
+</tr>
+</table>
+</body>
+</html>
+

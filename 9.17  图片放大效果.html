@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<style type="text/css"> 
+body{padding:0px;margin:0px;background:#000000;} 
+#small_pic{ 
+margin:10px 0 0 10px;width:375px;height:275px;cursor:crosshair; 
+} 
+#zoom{ 
+border:1px solid red;width:120px;height:120px;background:#FFFFFF;position:absolute;top:20px;left:20px; 
+opacity:0.5;filter:alpha(opacity=50); 
+display:none; 
+} 
+#big_pic{ 
+width:300px;height:300px;border:1px solid red;position:absolute;top:10px;left:200px;overflow:hidden;display:none; 
+} 
+</style> 
+<script type="text/javascript"> 
+window.onload = function(){ 
+var small_pic = document.getElementById('small_pic'); 
+var big_pic = document.getElementById('big_pic'); 
+var zoomer = document.getElementById('zoom'); 
+var pic2 =document.getElementById('pic2'); 
+//ÒÆ¶¯¸úËæ 
+  
+small_pic.onmousemove = mouseMove; 
+function mouseMove(ev){ 
+    ev = ev || window.event; 
+    var l = ev.clientX-small_pic.offsetLeft-zoomer.offsetWidth/2; 
+    var h = ev.clientY-small_pic.offsetTop-zoomer.offsetHeight/2; 
+    if(l<0){l=0;} 
+    else if(l>small_pic.offsetWidth-zoomer.offsetWidth){l=small_pic.offsetWidth-zoomer.offsetWidth+1;} 
+    if(h<0){h=0;} 
+    else if(h>small_pic.offsetHeight-zoomer.offsetHeight){h=small_pic.offsetHeight-zoomer.offsetHeight+1;} 
+  
+    document.getElementById("zoom").style.left = l+small_pic.offsetLeft+"px"; 
+    document.getElementById("zoom").style.top = h+small_pic.offsetTop+"px"; 
+      
+    var percent = big_pic.clientWidth/zoomer.clientWidth; 
+    pic2.style.left = big_pic.style.left-percent*l+'px'; 
+    pic2.style.top = big_pic.style.top-percent*h+'px'; 
+}  
+  
+small_pic.onmouseover = function(){ 
+    zoomer.style.display = 'block'; 
+    big_pic.style.display = 'block'; 
+    mouseMove(); 
+}; 
+small_pic.onmouseout = function(){ 
+    zoomer.style.display ='none'; 
+    big_pic.style.display='none'; 
+}; 
+}; 
+</script> 
+</head> 
+<body> 
+<div id="small_pic"> 
+<img id="pic1" src="51505s.jpg" style="width:124px;height:77px;border:1px solid #aaaaaa;"> 
+<span id="zoom"> 
+</span> 
+</div> 
+<div id="big_pic"> 
+<img id="pic2" src="51505.jpg" style="width:665px;height:414px;position:absolute;"> 
+</div> 
+</body> 
+</html>

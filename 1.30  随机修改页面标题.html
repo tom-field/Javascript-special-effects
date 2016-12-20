@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<script language="JavaScript"> 
+var tx = new Array ( 
+"您好呀，欢迎您的光临^_^", 
+"知道吗？我就是标题栏", 
+"呵呵，现在我也～会闪啦", 
+"看啊，我闪～我闪……", 
+"快快把你的眉眼抛过来呀！嘻嘻……"); 
+//设置好你的页面标题栏中要闪烁的5句文本(具体内容自己据需而定吧你) 
+var txcount=5; 
+//数字"5"对应于上边设定的文本数 
+var i=1; 
+var wo=0; 
+var ud=1; 
+//定义i、wo、ud三者的初值 
+function animatetitle() 
+{ 
+window.document.title=tx[wo].substr(0, i)+"_"; 
+if (ud==0) i--; 
+if (ud==1) i++; 
+if (i==-1) {ud=1;i=0;wo++;wo=wo%txcount;} 
+if (i==tx[wo].length+10) {ud=0;i=tx[wo].length;} 
+// if (window.document.title.length < 20 ) window.document.title=window.document.title+"-"; 
+// if (window.document.title.length == 20 ) window.document.title=window.document.title+"]"; 
+// if (window.document.title.length == 21 ) setTimeout("window.document.title='Animierte Seitentitel '; ",1000); 
+
+parent.window.document.title=tx[wo].substr(0, i)+"_"; 
+setTimeout("animatetitle()",100); //数字"100"指每一字符闪烁速度为100毫秒，其改大(小)就闪的慢(快)，可自行设置数值 
+} 
+//以上几行是对标题栏(title)的function为animatetitle的控制过程 
+animatetitle(); 
+//标题栏(title)中运行animatetitle 
+</script>
+</head>  
+<body onunload="animatetitle()">
+</body>
+</html>
+

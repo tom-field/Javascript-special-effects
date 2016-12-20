@@ -1,0 +1,10 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>限定汉字</title>
+</head>
+<body>
+<form>
+这里只能输入汉字：<input onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"> 
+</form>
+</body>
+</html>

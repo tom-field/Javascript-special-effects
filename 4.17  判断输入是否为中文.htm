@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>判断输入是否为中文</title>
+<script language="javascript">
+function isNotChinese(){
+    str=document.getElementsByName("uname")[0].value;
+    var reg   =   /[^\u4E00-\u9FA5]/g; 
+    if (reg.test(str)){ 
+    alert('该栏只能输入中文，请改正！'); 
+    return   false; 
+    } 
+    return   true; 
+    }
+</script>
+</head>
+<body>
+<form>
+判断输入是否为中文：<input type=text name=uname onblur=isNotChinese()>
+</form>
+</body>
+</html>

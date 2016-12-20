@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.19 查询全球时间</title>
+</head>
+<body bgcolor="#ff0000" OnLoad="getTime(timezone, 0)">
+<script language="JavaScript">
+var timerRunning = false;               
+var timezone = "格林尼治时间";
+var adjust = 0;
+function getTime(tzone, diff) 
+{
+    if (timerRunning) {
+    clearTimeout(updatetime);
+    timerRunning = false; 
+    }
+    gmtOffset=eval(diff+adjust); 
+    timezone = tzone;
+    checkDateTime();
+}
+function checkDateTime () {
+var today = new Date(); 
+var year = today.getYear() + 00;
+var month = today.getMonth()+1; 
+var date = today.getDate();
+var day = today.getDay(); 
+var hour = today.getHours();
+var minute = today.getMinutes();
+var second = today.getSeconds();
+
+var lastSat = date - (day+1);
+while (lastSat < 32) lastSat+=7;
+if (lastSat > 31) lastSat+=-7;
+var firstSat = date - (day+1);
+while (firstSat > 0) firstSat+=-7;
+if (firstSat < 1) firstSat+=7;
+if ((((month == 4) && (date >= firstSat)) || month > 4) && 
+(month < 11 || ((month == 10) && day <= lastSat))) adjust += 60;
+yourOffset = (new Date()).getTimezoneOffset(); 
+yourOffset = yourOffset + adjust;
+
+if ((((month == 4) && (date > 20)) || month > 4) && (month < 11 || ((month == 10) &&
+day < 30))) adjust -= 60;
+
+ourDifference = eval(gmtOffset - yourOffset);
+var half = eval(ourDifference % 60);
+ourDifference = Math.round(ourDifference / 60);
+hour = eval(hour - ourDifference);
+var m = new Array("",
+"1","2","3",
+"4","5","6",
+"7","8","9",
+"10","11","12"); 
+var leap = eval(year % 4);
+
+if ((half == -30) || (half == 30)) minute += 30;
+if (minute > 59) minute -= 60, hour++;
+if (minute < 0) minute += 60, hour--;
+if (hour > 23) hour -= 24, date += 1;
+if (((month == 4) || (month == 6) || 
+(month == 9) || (month == 11)) && (date==31)) date = 1, month ++;
+if (((month == 2) && (date > 28)) && (leap != 0)) date = 1, month ++;
+if ((month == 2) && (date > 29)) date = 1, month++;                  
+if (hour < 0) hour += 24, date --;                                  
+if ((date == 32) && (month == 12)) month = m[1], date = 1, year++;
+if (date == 32) date = 1, month++;                                
+if ((date < 1) && (month == 1)) month= m[12], date = 31, year--; 
+if (date < 1) date = 31, month --; 
+if (((month == 4) || (month == 6) ||
+(month== 9) || (month == 11)) && (date == 31)) date = 30;
+if ((month == 2) && (date > 28)) date = 29;
+if (((month == 2) && (date > 28)) && (leap != 0)) date=28;
+for (i=1; i<13; i++) {
+if (month == i) {
+    month = m[i]; 
+    break;
+   }
+}
+
+var dateTime = hour;
+dateTime = ((dateTime < 10) ? "0":"") + dateTime;
+dateTime = " " + dateTime;
+dateTime += ((minute < 10) ? ":0" : ":") + minute;
+dateTime += ((second < 10) ? ":0" : ":") + second;
+dateTime += (hour >= 12) ? "下午, " : "上午, "; 
+dateTime += year + "年" + month + "月" + date + "日" ;
+
+document.clock.zonetime.value = dateTime;
+document.clock.zonename.value = timezone;
+updatetime=setTimeout("checkDateTime()", 1000);
+timerRunning = true;
+}
+</script>
+                  <br>
+                  <form name=clock>
+                    <input type=text name=zonetime size=28>
+                    <br>
+                    <br>
+                    <b>当前选择的地区</b><br>
+                    <input type=text name=zonename size=21>
+                    <br>
+                    <br>
+                    <table border=1 cellpadding=5>
+                      <tr> 
+                        <td align=center> 
+                          <input type=button value="太平洋" onClick="getTime(this.value, +480)" name="button">
+                        </td>
+                        <td align=center> 
+                          <input type=button value="中心" onClick="getTime(this.value, +420)" name="button">
+                        </td>
+                        <td align=center> 
+                          <input type=button value="东方" onClick="getTime(this.value, +300)" name="button">
+                        </td>
+                      </tr>
+                      <tr> 
+                        <td align=center> 
+                          <input type=button value="夏威夷" onClick="getTime(this.value, +600)" name="button">
+                        </td>
+                        <td align=center> 
+                          <input type=button value="墨西哥" onClick="getTime(this.value, +360)" name="button">
+                        </td>
+                        <td align=center> 
+                          <input type=button value="新德里" onClick="getTime(this.value, -330)" name="button">
+                        </td>
+                      </tr>
+                      <tr> 
+                        <td align=center> 
+                          <input type=button value="北京" onClick="getTime(this.value, -420)" name="button">
+                        </td>
+                        <td align=center> 
+                          <input type=button value="东京" onClick="getTime(this.value, -540)" name="button">
+                        </td>
+                        <td align=center> 
+                          <input type=button value="伦敦" onClick="getTime(this.value, +0)" name="button">
+                        </td>
+                      </tr>
+                    </table>
+                    </form>
+</body>
+</html>

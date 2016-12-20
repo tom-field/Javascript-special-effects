@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html> 
+<head> 
+<title>time.html</title> 
+</head> 
+
+<body  bgcolor="#FF3333">
+<form name="form1">
+<div align="center" align="middle">
+<center>离2015年还有:<br>
+<input type="textarea" name="left" size="35" style="text-align: center">
+</center>
+</div>
+</form>
+<script LANGUAGE="javascript">
+startclock()
+var timerID = null;
+var timerRunning = false;
+function showtime() {
+Today = new Date();
+var NowHour = Today.getHours();
+var NowMinute = Today.getMinutes();
+var NowMonth = Today.getMonth();
+var NowDate = Today.getDate();
+var NowYear = Today.getYear();
+var NowSecond = Today.getSeconds();
+if (NowYear <2000)
+NowYear=1900+NowYear;
+Today = null;
+Hourleft = 23 - NowHour
+Minuteleft = 59 - NowMinute
+Secondleft = 59 - NowSecond
+Yearleft = 2014 - NowYear
+Monthleft = 12 - NowMonth - 1
+Dateleft = 31 - NowDate
+if (Secondleft<0)
+{
+Secondleft=60+Secondleft;
+Minuteleft=Minuteleft-1;
+}
+if (Minuteleft<0)
+{
+Minuteleft=60+Minuteleft;
+Hourleft=Hourleft-1;
+}
+if (Hourleft<0)
+{
+Hourleft=24+Hourleft;
+Dateleft=Dateleft-1;
+}
+if (Dateleft<0)
+{
+Dateleft=31+Dateleft;
+Monthleft=Monthleft-1;
+}
+if (Monthleft<0)
+{
+Monthleft=12+Monthleft;
+Yearleft=Yearleft-1;
+}
+Temp=Yearleft+'年, '+Monthleft+'月, '+Dateleft+'天, '+Hourleft+'小时, '+Minuteleft+'分, '+Secondleft+'秒'
+document.form1.left.value=Temp;
+timerID = setTimeout("showtime()",1000);
+timerRunning = true;
+}
+var timerID = null;
+var timerRunning = false;
+function stopclock () {
+if(timerRunning)
+clearTimeout(timerID);
+timerRunning = false;
+}
+function startclock () {
+stopclock();
+showtime();
+}
+// document.getElementById(" ") 得到的是一个对象，用 alert 显示得到的是“ object ”，而不是具体的值，它有 value 和 length 等属性，加上 .value 得到的才 是具体的值！-->
+</script>
+
+</body> 
+</html> 

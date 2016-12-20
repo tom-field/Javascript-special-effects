@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>2.8  禁止按钮连击</title>
+<script>
+function doubleCheck()
+{ 
+    alert("程序正在处理中，请稍候！");
+    //判断页面是否执行完毕
+    if (window.document.readyState != null &&  window.document.readyState != 'complete') 
+    { 
+        alert("程序正在处理中，请稍候！"); 
+        //未执行完毕，返回false
+        return false; 
+    } 
+    else 
+    { 
+        //执行完毕，返回true
+        return true;  
+    } 
+} 
+</script>
+</head>
+<body>
+<input type=text name="txt1" value="请点击按钮进行测试!">
+<input type=button value="测试" onClick="doubleCheck()">
+</body>
+</html>

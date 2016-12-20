@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>9.68  图片两种特殊边框效果</title>
+<style type="text/css">
+div {width:160;}
+</style>
+<script language="JavaScript">
+var intflag = 0;
+function showImage(){
+  myDiv1.filters[0].Apply();
+  if (intflag == 0){ 
+     myImage.src = "snow.gif";
+     intflag = 1; }
+  else{ myImage.src = "views.gif";	
+        intflag = 0;}
+  myDiv1.filters[0].Play();
+}
+</script>
+</head>
+<body>
+<table border=1>
+  <tr>
+  <td onclick="showImage()">
+  <div id="myDiv1" style="filter:progid:DXImageTransform.Microsoft.ZigZag(Duration=1);">
+  <img id="myImage" src="51504s.jpg" width="160" height="120"></div>
+  </td>
+  <td>
+  <img style="filter:progid:DXImageTransform.Microsoft.DropShadow();" src="51504s.jpg" width="160" height="120">
+  </td>
+  <td>
+  <img style="filter:progid:DXImageTransform.Microsoft.Shadow();" src="51504s.jpg" width="160" height="120">
+  </td>
+  </tr>
+</table>
+</body>
+</html>

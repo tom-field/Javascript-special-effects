@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>跟随鼠标漂移的文字</title>
+<SCRIPT language=JavaScript1.2>
+var msg='中国功夫：凌波微步';
+var msgColor='000000'
+var dismissafter=0
+var amount=5,ypos=0,xpos=0,Ay=0,Ax=0,By=0,Bx=0,Cy=0,Cx=0,Dy=0,Dx=0,Ey=0,Ex=0;
+if (document.layers){   //netscape下
+    for (i = 0; i < amount; i++)
+    {document.write('<layer name=ns'+i+' top=0 left=0><font face="宋体" size=2 color='+msgColor+'>'+msg+'</font></layer>')}
+    window.captureEvents(Event.MOUSEMOVE);
+    function nsmouse(evnt)    //通过鼠标事件，获取鼠标的坐标
+    {xpos = evnt.pageX;ypos = evnt.pageY;mouseFollow()}
+}
+else if (document.all){ //ie下-输出层
+    document.write("<div id='outer' style='position:absolute;top:0px;left:0px'>");
+    document.write("<div id='inner' style='position:relative'>");
+    for (i = 0; i < amount; i++)
+    {document.write('<div id="text"'+i+' style="position:absolute;top:0px;left:0px;font-family:Courier New;font-size:16px;color:'+msgColor+'">'+msg+'</div>')}
+    document.write("</div>");
+    document.write("</div>");
+    function iemouse()  //通过鼠标事件，获取鼠标的坐标
+    {ypos = document.body.scrollTop + event.y;xpos = document.body.scrollLeft + event.x;mouseFollow()}
+}
+function mouseFollow(){
+    if (document.layers){//netscape下-设置层的位置
+    document.layers["ns0"].top=ay;document.layers["ns0"].left=ax;
+    document.layers["ns1"].top=by;document.layers["ns1"].left=bx;
+    document.layers["ns2"].top=cy;document.layers["ns2"].left=cx;
+    document.layers["ns3"].top=Dy;document.layers["ns3"].left=Dx;
+    document.layers["ns4"].top=Ey;document.layers["ns4"].left=Ex;
+    }
+    else if (document.all){//ie下，设置层的位置
+    outer.all.inner.all[0].style.pixelTop=ay;outer.all.inner.all[0].style.pixelLeft=ax;
+    outer.all.inner.all[1].style.pixelTop=by;outer.all.inner.all[1].style.pixelLeft=bx;
+    outer.all.inner.all[2].style.pixelTop=cy;outer.all.inner.all[2].style.pixelLeft=cx;
+    outer.all.inner.all[3].style.pixelTop=Dy;outer.all.inner.all[3].style.pixelLeft=Dx;
+    outer.all.inner.all[4].style.pixelTop=Ey;outer.all.inner.all[4].style.pixelLeft=Ex;
+}
+}
+function move(){
+    if (dismissafter!=0)
+    setTimeout("hideMove()",dismissafter*1000)
+    if (document.layers){window.onMouseMove = nsmouse}
+    else if (document.all){window.document.onmousemove = iemouse}  //绑定鼠标事件
+    ey = Math.round(Ey+=((ypos+20)-Ey)*2/2);ex = Math.round(Ex+=((xpos+20)-Ex)*2/2);
+    dy = Math.round(Dy+=(ey - Dy)*2/4);dx = Math.round(Dx+=(ex - Dx)*2/4);
+    cy = Math.round(Cy+=(dy - Cy)*2/6);cx = Math.round(Cx+=(dx - Cx)*2/6);
+    by = Math.round(By+=(cy - By)*2/8);bx = Math.round(Bx+=(cx - Bx)*2/8);
+    ay = Math.round(Ay+= (by - Ay)*2/10);ax = Math.round(Ax+= (bx - Ax)*2/10);
+    mouseFollow();
+    jumpstart=setTimeout('move()',10);                          //定时执行捕获操作
+}
+function hideMove(){
+    if (document.all){   //ie浏览器的情况下
+        for (i2=0;i2<amount;i2++){
+            outer.all.inner.all[i2].style.visibility="hidden" //设置为隐藏
+            clearTimeout(jumpstart)                           //清除定时器
+            }
+    }
+    else if (document.layers){   //netscape浏览器的情况下
+        for (i2=0;i2<amount;i2++){
+            temp="ns"+i2
+            document.layers[temp].visibility="hide"
+            clearTimeout(jumpstart)
+            }
+    }
+}
+window.onload=move;   //窗体一加载便触发飘移方法
+</SCRIPT>
+</head>
+<body>
+</body>
+</html>

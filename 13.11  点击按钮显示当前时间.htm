@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.11 点击按钮显示当前日期</title>
+<script language="javascript">
+function getMyDate(tmpDate)
+{  
+    var date1,date2;
+    date1 =tmpDate.getMonth()+1+"";
+    if(date1.length<2)
+        date1="0"+date1;
+    date2 =tmpDate.getDate()+"";
+     if(date2.length<2)
+         date2="0"+date2;
+   return tmpDate.getYear()+"-"+date1+"-"+date2;
+}
+</script>
+</head>
+<body>
+    <input id="Button1" type="button" value="当前日期" onclick="alert(getMyDate(new Date()))" />
+</body>
+</html>

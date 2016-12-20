@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <title>
+            13.3  考试倒计时
+        </title>
+    </head>    
+    <body>
+        <input type="hidden" id="cz" value="1" />
+        考试倒计时:
+        <span class="red">
+            <input name="h" type="hidden" class="inp" readonly="true" id="h" value="0"
+            size="4" />
+            <input name="m" type="hidden" class="inp" readonly="true" id="m" value="0"
+            size="4" />
+            <input name="s" type="text" class="inp" readonly="true" id="s" value="60"
+            size="4" />
+            秒
+        </span>
+        <script language="javascript">
+            var cz = document.getElementById("cz");
+            function show_date_time() {
+                var h = document.getElementById("h");
+                var m = document.getElementById("m");
+                var s = document.getElementById("s");
+                if (cz.value == 1) {
+                    window.setTimeout("show_date_time()", 1000);
+                } else {
+                    return;
+                }
+                s.value = s.value - 1;
+                if (s.value <= 0) {
+                    if (m.value >= 1) {
+                        m.value = m.value - 1;
+                        s.value = 59;
+                    } else {
+                        s.value = 0;
+                    }
+                }
+                if (m.value <= 0) {
+                    if (h.value >= 1) {
+                        h.value = h.value - 1;
+                        m.value = 59;
+                    } else {
+                        m.value = 0;
+                    }
+                }
+                if (h.value <= 0) {
+                    h.value = 0;
+                }
+                var isTime = 0;
+                if (h.value <= 0 && m.value <= 0 && s.value <= 0) {
+                    isTime++;
+                }
+                if (isTime == 1) {
+                    cz.value = -1;
+                    isTime++;
+                    alert('您的答题时间到了，系统自动交卷'); //cz.value=-1;													}				
+				}}			
+				show_date_time();		
+        </script>
+    </body>
+</html>

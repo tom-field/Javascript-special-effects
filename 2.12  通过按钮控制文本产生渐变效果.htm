@@ -1,0 +1,194 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>标题页</title>
+<SCRIPT LANGUAGE="JavaScript">
+	var x=9;
+	var change="on"
+	//如果浏览器是netscape
+	if (navigator.appName == "Netscape") 
+	{  
+	    //显示层所需参数
+	    visShow="'show'";
+	    //隐藏层所需参数
+	    visHide="'hide'";
+	    //设置样式
+	    docStyle="document.";
+	    styleDoc="";
+	}
+	else 
+	{
+	    visHide="'hidden'";
+	    visShow="'visible'";
+	    docStyle="";
+	    styleDoc=".style";
+	}
+	//隐藏第一个div
+	function hide1() 
+	{
+	    eval(docStyle+ 'object1' + styleDoc + '.visibility=' + visHide);
+	}
+	//隐藏第二个div,后面以此类推
+	function hide2() 
+	{
+	    eval(docStyle+ 'object2' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide3() 
+	{
+	    eval(docStyle+ 'object3' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide4() 
+	{
+	    eval(docStyle+ 'object4' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide5() 
+	{
+	    eval(docStyle+ 'object5' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide6() 
+	{
+	    eval(docStyle+ 'object6' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide7() 
+	{
+	    eval(docStyle+ 'object7' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide8() 
+	{
+	    eval(docStyle+ 'object8' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide9() 
+	{
+	    eval(docStyle+ 'object9' + styleDoc + '.visibility=' + visHide);
+	}
+	function hide10() 
+	{
+	    eval(docStyle+ 'object10' + styleDoc + '.visibility=' + visHide);
+	}
+	//显示第一个div
+	function show1() 
+	{
+	    eval(docStyle+ 'object1' + styleDoc + '.visibility=' + visShow);
+	    hide2(),hide3();
+	}
+	//显示第二个div,后面以此类推
+	function show2() 
+	{
+	    eval(docStyle+ 'object2' + styleDoc + '.visibility=' + visShow);
+	    hide1(),hide3();
+	}
+	function show3() 
+	{
+	    eval(docStyle+ 'object3' + styleDoc + '.visibility=' + visShow);
+	    hide2(),hide4();
+	}
+	function show4() 
+	{
+	    eval(docStyle+ 'object4' + styleDoc + '.visibility=' + visShow);
+	    hide3(),hide5();
+	}
+	function show5() 
+	{
+	    eval(docStyle+ 'object5' + styleDoc + '.visibility=' + visShow);
+	    hide4(),hide6();
+	}
+	function show6() 
+	{
+	    eval(docStyle+ 'object6' + styleDoc + '.visibility=' + visShow);
+	    hide5(),hide7();
+	}
+	function show7() 
+	{
+	    eval(docStyle+ 'object7' + styleDoc + '.visibility=' + visShow);
+	    hide6(),hide8();
+	}
+	function show8() 
+	{
+	    eval(docStyle+ 'object8' + styleDoc + '.visibility=' + visShow);
+	    hide7(),hide9();
+	}
+	function show9() 
+	{
+	    eval(docStyle+ 'object9' + styleDoc + '.visibility=' + visShow);
+	    hide8(),hide10();
+	}
+	function show10() 
+	{
+	    eval(docStyle+ 'object10' + styleDoc + '.visibility=' + visShow);
+	    hide9();
+	}
+	function change1() 
+	{
+		x+=1;
+		//逐个显示div
+		eval("show" + x + "()");                          
+		if (x<10) 
+		    setTimeout("change1()", 75);            
+		else if (change=="on") 
+		    change2();                            
+	}
+	function change2() 
+	{
+		x-=1;                                             
+		eval("show" + x + "()");
+		if (x>1) 
+		    setTimeout("change2()", 75);                  
+		else 
+		    change1();                                   
+	}
+	//启动渐变效果
+	function changeOn() 
+	{                              
+	    x=9;
+	    change="on";
+	    change1();
+	}
+	//停止渐变效果
+	function changeOff() 
+	{                            
+	    change="off";
+	}
+</SCRIPT>
+</head>
+<body>
+<div id="vis" style="position:absolute; visibility:show; left:10px; top:10px; z-index:1">
+<table cellpadding=2 border=1><tr>
+<td><center><b>修改颜色</b></center></font></a></td>
+<td><a href="javascript:changeOn()">
+<font color="#000000"><center>启动渐变效果</center></font></a></td>
+<td><a href="javascript:changeOff()">
+<font color="#000000"><center>停止渐变效果</center></font></a></td>
+</tr></table></div>
+
+<div id="object1" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#F9F9F9">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object2" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#ECECEC">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object3" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#D5D5D5">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object4" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#C0C0C0">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object5" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#b0b0b0">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object6" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#939393">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object7" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#808080">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object8" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#6b6b6b">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object9" style="position:absolute; visibility:hide; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#424242">请注意我的颜色！</font></b></center></td></table>
+</div>
+<div id="object10" style="position:absolute; visibility:show; left:10px; top:50px; z-index:1">
+<table border=1 bgcolor=#FF3333 width=175 height=50><td><center><b><font color="#000000">请注意我的颜色！</font></b></center></td></table>
+</div><P>
+</FONT></CENTER>
+</body>
+</html>

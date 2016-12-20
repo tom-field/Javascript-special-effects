@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>7.19  腾讯网站的图片切换效果</title>
+<script type="text/javascript" src="jquery-min.js"></script>
+<script type="text/javascript" src="jQueryTimer.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("div[id*='listbox']").hover(
+		function(){$(this).animate({"margin-top":"-10px"},200)},
+		function(){$(this).animate({"margin-top":"0px"},200);}
+	);
+	var tmp=$("div[id*='listbox']").eq(0).children("img").attr("src");
+	//鼠标点击过程
+	$("div[id*='listbox']").click(function(){
+		  if(parseInt($(this).css("z-index"))<=3){
+			  var curZindex = parseInt($(this).css("z-index"));
+			  //通过z-index差计算该层需要经过几次轮换效果置顶，
+			  var  fntimes = 4-curZindex;
+			  //对于当前处于第一位的图片点击无效果.
+			  $(document).everyTime(300,function(){
+				  $("div[id*='listbox']").each(function(){
+					  if(parseInt($(this).css("z-index"))==4){$(this).css("z-index","1");}
+					  else{$(this).css("z-index",""+(parseInt($(this).css("z-index"))+1)+"");}
+					  $(this).css("margin-top","0px");
+					  $(this).animate({"margin-left":((4-parseInt($(this).css("z-index")))*29)+"px"},300);
+				  });
+			  },fntimes);
+		  }
+	  });
+setInterval(function(){
+	$("div[id*='listbox']").each(function(){
+				if(parseInt($(this).css("z-index"))==4){$(this).css("z-index","1");}
+				else{$(this).css("z-index",""+(parseInt($(this).css("z-index"))+1)+"");}
+				$(this).animate({"margin-left":((4-parseInt($(this).css("z-index")))*29)+"px"},300);
+			});
+},3000);
+})
+</script>
+<style>
+	body{ margin:0; padding:0; font-size:12px;}
+	.showbox{ height:416px; width:678px; margin:100px auto 0;}
+	.showbox #listbox0{height:416px; width:665px; z-index:4; float:left;cursor:pointer; display:inline; margin-left:0px; position:absolute; margin-top:0px;}
+	.showbox #listbox1{height:416px; width:665px; z-index:3; float:left;cursor:pointer; display:inline; margin-left:29px; position:absolute;margin-top:0px;}
+	.showbox #listbox2{height:416px; width:665px; z-index:2; float:left;cursor:pointer; display:inline; margin-left:58px; position:absolute;margin-top:0px;}
+	.showbox #listbox3{height:416px; width:665px; z-index:1; float:left;cursor:pointer; display:inline; margin-left:87px; position:absolute;margin-top:0px;}
+</style>
+
+</head>
+
+<body>
+<div class="showbox">
+	<div id="listbox0"><img src="51501.jpg" height="416" width="665" border="0" /></div>
+    <div id="listbox1"><img src="51502.jpg" height="416" width="665" border="0" /></div>
+    <div id="listbox2"><img src="51503.jpg" height="416" width="665" border="0" /></div>
+    <div id="listbox3"><img src="51504.jpg" height="416" width="665" border="0" /></div>
+</div>
+</body>
+</html>

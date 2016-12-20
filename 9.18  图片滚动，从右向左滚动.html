@@ -1,0 +1,57 @@
+<html>
+   <head>
+      <title>9.18  图片滚动，从右向左滚动</title>
+   </head>
+   <body>
+<div id=demo style=overflow:hidden;height:180;width:600;color:#ffffff> 
+<table align=left cellpadding=0 cellspace=0 border=0> 
+<tr> 
+<td id=demo1 valign=top> 
+<table border=0 cellpadding=0 cellspacing=0> 
+<tr> 
+<td> 
+<TABLE cellSpacing=0 cellPadding=5 border=0> 
+<TBODY> 
+<TR align=middle> 
+<TD> 
+<img src=51501s.jpg> 
+</TD> 
+<TD> 
+<img src=51502s.jpg> 
+</TD> 
+<TD> 
+<img src=51503s.jpg> 
+</TD> 
+<TD> 
+<img src=51504s.jpg> 
+</TD> 
+<TD> 
+<img src=51505s.jpg> 
+</TD> 
+</TR></TBODY> 
+</TABLE> 
+</td></tr> 
+</table> 
+</td><td id=demo2 valign=top></td> 
+</tr> 
+</table> 
+</div> 
+<script> 
+var speed=50
+demo2.innerHTML=demo1.innerHTML 
+function Marquee(){ 
+if(demo2.offsetWidth-demo.scrollLeft<=0) 
+demo.scrollLeft-=demo1.offsetWidth 
+else{ 
+demo.scrollLeft++ 
+} 
+} 
+
+var MyMar=setInterval(Marquee,speed) 
+demo.onmouseover=function() {clearInterval(MyMar)} 
+demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
+</script>
+
+   </body>
+</html>
+

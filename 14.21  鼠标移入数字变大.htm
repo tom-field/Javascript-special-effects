@@ -1,0 +1,62 @@
+ <html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>14.21 鼠标移入数字变大</title>
+ <style type="text/css">
+  ul#menu{
+   list-style-type: none;
+   margin: 50px;
+   width:200px;
+   float: left;
+   display: inline;
+   clear: both;
+  }
+  ul#menu li{
+   float: left;
+   display: inline;
+   width:20px;
+   height: 20px;
+   margin: 2px;
+  }
+  ul#menu li a {
+   text-decoration: none;
+   display: block;
+   width:20px;
+   height:20px;
+   border:1px red solid;
+   background-color: White;
+   line-height: 20px;
+   font-size: 12px;
+   text-align: center;
+  }
+  ul#menu li a:hover{
+  position: absolute;
+  width:40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 32px;
+  z-index:100;
+  margin: -10px 0 0 -10px;
+  }
+  ul#menu li:hover + li a{
+  position: absolute;
+  width:30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 24px;
+  z-index:99;
+  margin: -5px 0 0 -5px;
+  }
+ </style>
+</head>
+<body>
+<ul id="menu">
+ <li><a href="#" title="big"><span>1</span></a></li>
+ <li><a href="#" title="big"><span>2</span></a></li>
+ <li><a href="#" title="big"><span>3</span></a></li>
+ <li><a href="#" title="big"><span>4</span></a></li>
+ <li><a href="#" title="big"><span>5</span></a></li>
+ <li><a href="#" title="big"><span>6</span></a></li>
+ <li><a href="#" title="big"><span>7</span></a></li>
+</ul>
+</body>
+</html>

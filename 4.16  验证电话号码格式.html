@@ -1,0 +1,31 @@
+<HTML>
+ <HEAD>
+  <TITLE>验证电话号码格式</TITLE>
+   <script language=javascript>
+    function phonecheck(s){ 
+    var str=s;
+    var reg=/(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)/; 
+    if (reg.test(str)==false)
+    {
+    alert("您的输入电话号码不对，请重新输入，格式参考：010-65432100");
+    return false;
+    }
+    else
+    {
+    alert("输入的电话号码符合要求！");
+    return false;
+    }
+    }
+            </script>
+      </HEAD>   
+      <body> 
+   <form id="form1" name="form1" method="post" action="?" onSubmit="return phonecheck(document.all.iphone.value)">
+    <label>
+    <input name="iphone" type="text" id="telephone" />
+    </label>
+     <label>
+    <input type="submit" name="Submit" value="提交" />
+    </label>
+            </form>
+      </body> 
+</HTML> 

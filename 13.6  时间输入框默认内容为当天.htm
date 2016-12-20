@@ -1,0 +1,12 @@
+<html> 
+<head> 
+<title>13.6  时间输入框默认内容为当天</title> 
+</head> 
+<body> 
+<INPUT TYPE="text" id="myDate"> 
+<SCRIPT LANGUAGE="JavaScript"> 
+var now = new Date();
+myDate.value=now.getYear() + "-"+ (now.getMonth()+1)+"-"+now.getDate();
+</SCRIPT> 
+</body> 
+</html> 

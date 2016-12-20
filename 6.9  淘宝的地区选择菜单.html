@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>6.9  淘宝的地区选择菜单</title>
+<style type="text/css">
+*{ padding:0; margin:0; list-style-type:none;}
+body{font-family: "宋体";font-size: 12px;}
+#t_con{ width:60px; line-height:20px; color:#00F; cursor:pointer; margin:20px auto 0 auto; border:1px #09C dashed; text-align:center;}
+#t_area{ width:268px; overflow:hidden; border:2px #09C solid; background-color:#F1F9FC; margin:10px auto; padding-bottom:10px;display:none; }
+#t_area ul{ margin:10px 0;}
+#t_area li{ width:60px; height:18px; float:left; display:inline; text-align:center; line-height:18px; margin:4px auto auto 5px; }
+#t_area li a{ color:#00F; text-decoration:none;}
+#t_area li a:hover,a:active{ color:#fff; text-decoration:underline;}
+</style>
+<script type="text/javascript">
+function showarea(){
+	var con = document.getElementById("t_area");
+	var arealist = con.getElementsByTagName("li");
+	var g = document.getElementById("t_con")
+	con.style.display = "block";
+	for (var i=0;i<arealist.length;i++){
+	arealist[i].onmouseover = function(){this.style.backgroundColor = "#9CC2DA"}
+	arealist[i].onmouseout = function(){this.style.backgroundColor = "#F1F9FC"}
+	arealist[i].onclick = function(){
+			g.innerHTML = this.innerHTML ;
+			con.style.display = "none";
+			}
+		}
+	}
+function offarea(){
+	var con = document.getElementById("t_area");
+	con.style.display = "none";
+	}
+var timer;
+</script>
+</head>
+<body>
+<div id="t_con" onmouseover="showarea();clearTimeout(timer)" onmouseout="timer=setTimeout('offarea()',200);">北京</div>
+<div id="t_area" onmouseover="showarea()" onmouseout="offarea();clearTimeout(timer)">
+    <ul>
+        <li><a href="#">全部</a></li>
+        <li><a href="#">北京</a></li>
+        <li><a href="#">天津</a></li>
+        <li><a href="#">河北</a></li>
+        <li><a href="#">四川</a></li>        
+        <li><a href="#">黑龙江</a></li>
+        <li><a href="#">上海</a></li>
+        <li><a href="#">浙江</a></li>
+        <li><a href="#">江苏</a></li>
+        <li><a href="#">湖南</a></li>
+        <li><a href="#">湖北</a></li>
+        <li><a href="#">江西</a></li>
+        <li><a href="#">安徽</a></li>
+        <li><a href="#">辽宁</a></li>
+        <li><a href="#">吉林</a></li>
+        <li><a href="#">广东</a></li>
+        <li><a href="#">广西</a></li>
+        <li><a href="#">新疆</a></li>
+        <li><a href="#">西藏</a></li>
+        <li><a href="#">山西</a></li>
+        <li><a href="#">陕西</a></li>
+        <li><a href="#">云南</a></li>
+        <li><a href="#">宁夏</a></li>
+        <li><a href="#">青海</a></li>
+        <li><a href="#">内蒙古</a></li>
+        <li><a href="#">山东</a></li>
+        <li><a href="#">河南</a></li>
+    </ul>
+</div>
+</body>
+</html>

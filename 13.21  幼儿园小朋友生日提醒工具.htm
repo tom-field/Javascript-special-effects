@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.21 幼儿园小朋友生日提醒工具</title>
+<SCRIPT LANGUAGE="JavaScript">
+  function birthday(year,month,date,person) 
+  {
+    this.year=year
+    this.month=month
+    this.date=date
+    this.person=person
+  }
+  function personList()
+  {  }
+  pList=new personList()
+  pList[0]= new birthday(99,9,30,"刘沐阳")
+  pList[1]= new birthday(99,9,27,"李嘉怡")
+  pList[2]= new birthday(99,12,1,"马一涵")
+  pList[3]= new birthday(99,4,27,"鄂佳欣")
+  pList[4]= new birthday(99,6,2,"刘玉瑶")
+  pList[5]= new birthday(99,9,23,"吕萌萌")
+  var now=new Date()
+  today=new Date(now.getYear(),now.getMonth(),now.getDate())
+  function daysFromToday(sdate) {
+    return Math.round((sdate.getTime()-today.getTime())/(24*60*60*1000)-30)
+  }
+  function writeNextBirthday(list) 
+  {
+    var daysToClosest=366
+    var closest
+    for (var i in list)
+    {
+      thisDate=new Date(today.getYear(),list[i].month,list[i].date)
+      if (daysFromToday(thisDate)<0)
+        thisDate.setYear(today.getYear()+1)
+      if (daysFromToday(thisDate)<daysToClosest) {
+        daysToClosest=daysFromToday(thisDate) 
+        closest=i
+      }
+    }
+    if (daysToClosest==0)
+      document.write("<B>今天 "+list[closest].person+" 已经 "+(today.getYear()-list[closest].year)+" 岁了！</B><P>")
+    else if (daysToClosest==1)
+      document.write("明天 "+list[closest].person+" 即将 "+(today.getYear()-list[closest].year)+" 岁了！<P>")
+    else
+      document.write("最近一个过生日的是"+list[closest].person+"，距离她的生日还有"+daysToClosest+"天。<P>")
+
+  }
+</SCRIPT>
+</head>
+<body>
+<SCRIPT LANGUAGE="JavaScript">
+  writeNextBirthday(pList)
+</SCRIPT>
+</body>
+</html>

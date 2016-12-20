@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>跟随鼠标的小点点</title>
+</head>
+<body>
+想必你也看到了鼠标周围五颜六色的小点点吧。
+<script language="javascript">
+function Div_Layer(divleft,divtop,divfnx,divfny,mydiv,divbilder,divloop,divto,divcnt,divstep) 
+{ 
+ if ((document.layers)||(document.all))
+ {
+  with (Math) {yynextx= eval(divfnx)}                      
+  with (Math) {yynexty= eval(divfny)}
+  divcnt=(divloop && divcnt>=divstep*divbilder)?0:divcnt+divstep;
+  //netscape下设置横坐标和纵坐标
+  if (document.layers){
+    eval(mydiv+".top="+(yynexty+divtop))                 
+    eval(mydiv+".left="+(yynextx+divleft))
+  }
+  if (document.all){
+    eval("mydiv=mydiv.replace(/.layers/gi, '.all')");
+    //设置div的横坐标
+    eval(mydiv+".style.pixelTop="+(yynexty+divtop));
+    //设置div的纵坐标     
+    eval(mydiv+".style.pixelLeft="+(yynextx+divleft));   
+  }
+  argStr='Div_Layer('+divleft+','+divtop+',"'+divfnx+'","'+divfny+'","'+mydiv+'",'+divbilder+','+divloop+','+divto+','+divcnt+','+divstep+')';
+  if (divcnt<=divstep*divbilder)
+  {
+  //设置定时器-实现星星的闪烁效果 
+  eval(mydiv+".divto=setTimeout(argStr,divto)");           
+  }
+ }
+}
+//设置鼠标移动的事件
+function YY_Mousetrace(evnt)                             
+{
+//Netscape浏览器的情况 
+ if (yyns4)                                              
+  {if (evnt.pageX) {yy_ml=evnt.pageX;  yy_mt=evnt.pageY;}  }
+ else{
+//横坐标位置
+   yy_ml=(event.clientX + document.body.scrollLeft); 
+//纵坐标位置    
+   yy_mt=(event.clientY + document.body.scrollTop);      
+ }
+//转换为数值型变量
+ if (yy_tracescript)eval(yy_tracescript)                 
+}
+</script>
+<div id="tooltip2"
+   style="position:absolute;visibility:hidden;clip:rect(0 150 50 0);width:150px;background-color:lightyellow"> 
+  <layer name="nstip" width="1000px" bgcolor="lightyellow"> </layer>
+</div>
+      <div id="yyd0"
+style="position:absolute; left:10px; top:50px; width:3px; height:3px; z-index:1; background-color: #19636c; layer-background-color: #19636c; border: 1px none #000000; clip: rect(0 3 3 0)"></div>
+      <div
+id="yyd1"
+style="position:absolute; left:20px; top:50px; width:3px; height:3px; z-index:1; background-color: #708574; layer-background-color: #708574; border: 1px none #000000; clip: rect(0 3 3 0)"></div>
+      <div
+id="yyd2"
+style="position:absolute; left:30px; top:50px; width:3px; height:3px; z-index:1; background-color: #379bbf; layer-background-color: #379bbf; border: 1px none #000000; clip: rect(0 3 3 0)"></div>
+      <div
+id="yyd3"
+style="position:absolute; left:40px; top:50px; width:3px; height:3px; z-index:1; background-color: #25184c; layer-background-color: #25184c; border: 1px none #000000; clip: rect(0 3 3 0)"></div>
+      <div
+id="yyd4"
+style="position:absolute; left:50px; top:50px; width:3px; height:3px; z-index:1; background-color: #31bd3c; layer-background-color: #31bd3c; border: 1px none #000000; clip: rect(0 3 3 0)"></div>
+      <div
+id="yyd5"
+style="position:absolute; left:60px; top:50px; width:3px; height:3px; z-index:1; background-color: #c11efd; layer-background-color: #c11efd; border: 1px none #000000; clip: rect(0 3 3 0)"></div>
+<script language="javascript">
+    var yyns4=window.Event?true:false; var yy_mt = 0; var yy_ml = 0;//点的坐标
+    document.onmousemove = YY_Mousetrace;                           //绑定鼠标移动的事件
+    yy_tracescript = '';
+    Div_Layer(0,0,'yy_ml+cos((15*sin(divcnt/39.83007847812662))+0)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','yy_mt+sin((15*sin(divcnt/34.224861639800686))+0)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','document.layers[\'yyd0\']',2000,true,80,0,1);
+    Div_Layer(0,0,'yy_ml+cos((15*sin(divcnt/27.66510707209673))+30)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','yy_mt+sin((15*sin(divcnt/9.240632767417667))+30)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','document.layers[\'yyd1\']',2000,true,80,0,1);
+    Div_Layer(0,0,'yy_ml+cos((15*sin(divcnt/16.45318944579641))+60)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','yy_mt+sin((15*sin(divcnt/16.0564452288292))+60)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','document.layers[\'yyd2\']',2000,true,80,0,1);
+    Div_Layer(0,0,'yy_ml+cos((15*sin(divcnt/6.95348954836835))+90)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','yy_mt+sin((15*sin(divcnt/44.13697049887155))+90)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','document.layers[\'yyd3\']',2000,true,80,0,1);
+    Div_Layer(0,0,'yy_ml+cos((15*sin(divcnt/33.90077294583733))+120)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','yy_mt+sin((15*sin(divcnt/2.2378828869411587))+120)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','document.layers[\'yyd4\']',2000,true,80,0,1);
+    Div_Layer(0,0,'yy_ml+cos((15*sin(divcnt/37.858312521039835))+150)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','yy_mt+sin((15*sin(divcnt/18.083839795990098))+150)*150*(sin(10+divcnt/20)+0.2)*cos(divcnt/20)','document.layers[\'yyd5\']',2000,true,80,0,1);
+    </script>
+</body>
+</html>

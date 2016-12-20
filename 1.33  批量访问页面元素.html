@@ -1,0 +1,10 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<script type="text/javascript">function test(){ var testUL = document.getElementById("testUL"); var listItems = testUL.getElementsByTagName("LI"); for (var i=0; i<listItems.length; i++) {  listItems[i].onmouseover=function() {   this.className = "important";  }  listItems[i].onmouseout=function() {   this.className = "";  } }}</script>
+</head>  
+<body>
+<ul id="testUL">  <li>HTML写内容</li>  <li>CSS控制外观</li>  <li>JavaScript控制行为</li></ul><button onclick="test(); return false;" value="批量访问元素"> 给所有的li元素添加鼠标事件</button>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>  
+<head>  
+<title>9.75  图片受控放大缩小</title>  
+<script type="text/javascript">  
+var PhotoSize = {  
+zoom: 0, // 缩放率  
+count: 0, // 缩放次数  
+cpu: 0, // 当前缩放倍数值  
+elem: "", // 图片节点  
+photoWidth: 0, // 图片初始宽度记录  
+photoHeight: 0, // 图片初始高度记录  
+init: function(){  
+this.elem = document.getElementById("focusphoto");  
+this.photoWidth = this.elem.scrollWidth;  
+this.photoHeight = this.elem.scrollHeight;  
+this.zoom = 1.2; // 设置基本参数  
+this.count = 0;  
+this.cpu = 1;  
+},  
+action: function(x){  
+if(x === 0){  
+this.cpu = 1;  
+this.count = 0;  
+}else{  
+this.count += x; // 添加记录  
+this.cpu = Math.pow(this.zoom, this.count); // 任意次幂运算  
+};  
+this.elem.style.width = this.photoWidth * this.cpu +"px";  
+this.elem.style.height = this.photoHeight * this.cpu +"px";  
+}  
+};  
+// 启动放大缩小效果,用onload方式加载，防止第一次点击获取不到图片的宽高  
+window.onload = function(){PhotoSize.init()};  
+</script>  
+</head>  
+<body>  
+<input type="button" value="放大" onclick="PhotoSize.action(1);" /> <input type="button" value="缩小" onclick="PhotoSize.action(-1);" /> <input type="button" value="还原大小" onclick="PhotoSize.action(0);" /> <input type="button" value="查看当前倍数" onclick="alert(PhotoSize.cpu);" /><br />  
+<img id="focusphoto" src="51506.jpg" />  
+</body>  
+</html> 

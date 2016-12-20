@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>仿FLASH的图片轮换效果</title>
+<style type="text/css">
+body { background: #666; } ul { padding: 0; margin: 0; } li { list-style: none; } img { border: 0; }
+.play { width: 400px; height: 210px; margin: 50px auto 0; background: #999; font: 12px Arial; }
+.big_pic { width: 400px; height: 100px; overflow: hidden; border-bottom: 1px solid #ccc; background: #222; position: relative; }
+.big_pic li { width: 400px; height: 320px; overflow: hidden; position: absolute; top: 0; left: 0; z-index: 0; background: url(/jscss/demoimg/loading.gif) no-repeat center center; }
+.mark_left { width: 200px; height: 320px; position: absolute; left: 0; top: 0; background: red; filter: alpha(opacity:0); opacity: 0; z-index:3000; }
+.mark_right { width: 200px; height: 320px; position: absolute; left: 200px; top: 0; background: green; filter: alpha(opacity:0); opacity: 0; z-index:3000; }
+.big_pic .prev { width: 60px; height: 60px; background: url(/jscss/demoimg201010/btn.gif) no-repeat; position: absolute; top: 130px; left: 10px; z-index: 3001; display: none; cursor: pointer; }
+.big_pic .next { width: 60px; height: 60px; background: url(/jscss/demoimg201010/btn.gif) no-repeat 0 -60px; position: absolute; top: 130px; right: 10px; z-index: 3001; display: none;cursor: pointer; }
+.big_pic .text { position: absolute; left: 10px; top: 302px; z-index: 3000; color: #ccc; }
+.big_pic .length { position: absolute; right: 10px; bottom: 4px; z-index: 3000; color: #ccc; }
+.big_pic .bg { width: 400px; height: 25px; background: #000; filter: alpha(opacity=60); opacity: 0.6; position: absolute; z-index: 2999; bottom: 0; left: 0; }
+.small_pic { width: 380px; height: 94px; position: relative; top: 7px; left: 10px; overflow: hidden; }
+.small_pic ul { height: 94px; position: absolute; top: 0; left: 0; }
+.small_pic li { width: 120px; height: 94px; float: left; padding-right: 10px; background: url(/jscss/demoimg/loading.gif) no-repeat center center; cursor: pointer; filter: alpha(opacity=60); opacity: 0.6; }
+.small_pic img { width: 120px; height: 94px; }
+</style>
+<script type="text/javascript">
+var g_aImgInfo=
+[
+ {info: "华丽", href: 'http://www.baidu.com/'},
+ {info: "妩媚", href: 'http://www.baidu.com/'},
+ {info: "曼妙", href: 'http://www.baidu.com/'},
+ {info: "亮丽", href: 'http://www.baidu.com/'},
+ {info: "妩媚", href: 'http://www.sohu.com/'},
+ {info: "绚彩", href: 'http://www.163.com/'}
+];
+var oDiv=null;
+var oUlContent=null;
+var oUlBtn=null;
+var aLiImg=null;
+var aLiBtn=null;
+var oBtnPrev=null;
+var oBtnNext=null;
+var oTxtInfo=null;
+var oTxtLength=null;
+var oMarkPrev=null;
+var oMarkNext=null;
+var g_aTimerImg=[];
+var g_aTimerBtn=[];
+var g_oTimerUl=null;
+var g_oTimerAutoPlay=null;
+var g_aLiBtnAlpha=[];
+var g_iNowImg=0;
+var g_iZIndexBase=2;
+window.onload=function ()
+{
+ var i=0;
+ 
+ //获取各类元素
+ oDiv=document.getElementById('playimages');
+ oUlContent=oDiv.getElementsByTagName('ul')[0];
+ oUlBtn=oDiv.getElementsByTagName('ul')[1];
+ 
+ oBtnPrev=oDiv.getElementsByTagName('div')[0];
+ oBtnNext=oDiv.getElementsByTagName('div')[1];
+ 
+ oTxtInfo=oDiv.getElementsByTagName('div')[2];
+ oTxtLength=oDiv.getElementsByTagName('div')[3];
+ 
+ oMarkPrev=oDiv.getElementsByTagName('a')[0];
+ oMarkNext=oDiv.getElementsByTagName('a')[1];
+ 
+ aLiImg=oUlContent.getElementsByTagName('li');
+ aLiBtn=oUlBtn.getElementsByTagName('li');
+ 
+ //为元素添加属性
+ oTxtInfo.innerHTML=g_aImgInfo[0].info;
+ oTxtLength.innerHTML='1/'+aLiImg.length;
+ 
+ oMarkPrev.href=g_aImgInfo[0].href;
+ oMarkNext.href=g_aImgInfo[0].href;
+ 
+ oBtnPrev.miaovOpacity=0;
+ oBtnNext.miaovOpacity=0;
+ 
+ oBtnPrev.miaovTime=0;
+ oBtnNext.miaovTime=0;
+ 
+ oUlBtn.style.width=aLiBtn[0].offsetWidth*aLiBtn.length+'px';
+ 
+ //为元素添加事件
+ function showPrev()
+ {
+  showBtn(oBtnPrev);
+  hideBtn(oBtnNext);
+  
+  stopAutoPlay();
+ }
+ 
+ function showNext()
+ {
+  hideBtn(oBtnPrev);
+  showBtn(oBtnNext);
+  
+  stopAutoPlay();
+ }
+ 
+ function hideAll()
+ {
+  hideBtn(oBtnPrev);
+  hideBtn(oBtnNext);
+  
+  startAutoPlay();
+ }
+ 
+ oMarkPrev.onmouseover =showPrev;
+ oBtnPrev.onmouseover =showPrev;
+ oMarkNext.onmouseover =showNext;
+ oBtnNext.onmouseover =showNext;
+ 
+ oBtnPrev.onmouseout  =hideAll;
+ oBtnNext.onmouseout  =hideAll;
+ oMarkPrev.onmouseout =hideAll;
+ oMarkNext.onmouseout =hideAll;
+ 
+ oBtnPrev.onmousedown =gotoPrev;
+ oBtnNext.onmousedown =gotoNext;
+ 
+ oUlBtn.onmouseover  =stopAutoPlay;
+ oUlBtn.onmouseout  =startAutoPlay;
+ 
+ for(i=0;i<aLiBtn.length;i++)
+ {
+  aLiBtn[i].miaovIndex=i;
+  aLiBtn[i].onmouseover=function ()
+  {
+   if(g_iNowImg!=this.miaovIndex)
+   {
+    showLiBtn(this.miaovIndex);
+   }
+  };
+  aLiBtn[i].onmouseout=function ()
+  {
+   if(g_iNowImg!=this.miaovIndex)
+   {
+    hideLiBtn(this.miaovIndex);
+   }
+  };
+  aLiBtn[i].onmousedown=function ()
+  {
+   gotoImg(this.miaovIndex);
+  };
+  g_aTimerBtn[i]=null;
+  g_aLiBtnAlpha[i]=60;
+ }
+ 
+ g_aLiBtnAlpha[0]=100;
+ 
+ startAutoPlay();
+};
+function showBtn(oBtn)
+{
+ if(oBtn.miaovTimer)
+ {
+  clearInterval(oBtn.miaovTimer);
+ }
+ 
+ oBtn.miaovTimer=setInterval
+ (
+  function ()
+  {
+   if(oBtn.miaovOpacity<100)
+   {
+    oBtn.miaovOpacity+=10;
+    
+    oBtn.style.display='block';
+    oBtn.style.filter="alpha(opacity:"+oBtn.miaovOpacity+")";
+    oBtn.style.opacity=oBtn.miaovOpacity/100;
+   }
+   else
+   {
+    oBtn.style.filter="";
+    oBtn.style.opacity="";
+    
+    clearInterval(oBtn.miaovTimer);
+    oBtn.miaovTimer=0;
+   }
+  }, 30
+ );
+}
+function hideBtn(oBtn)
+{
+ if(oBtn.miaovTimer)
+ {
+  clearInterval(oBtn.miaovTimer);
+ }
+ 
+ oBtn.miaovTimer=setInterval
+ (
+  function ()
+  {
+   if(oBtn.miaovOpacity>0)
+   {
+    oBtn.miaovOpacity-=10;
+    
+    oBtn.style.filter="alpha(opacity:"+oBtn.miaovOpacity+")";
+    oBtn.style.opacity=oBtn.miaovOpacity/100;
+   }
+   else
+   {
+    oBtn.style.display='none';
+    oBtn.style.filter="";
+    oBtn.style.opacity="";
+    
+    clearInterval(oBtn.miaovTimer);
+    oBtn.miaovTimer=0;
+   }
+  }, 30
+ );
+}
+function gotoImg(index)
+{
+ if(index==g_iNowImg)
+ {
+  return;
+ }
+ 
+ aLiImg[index].style.height='0px';
+ aLiImg[index].style.display='block';
+ aLiImg[index].style.zIndex=g_iZIndexBase++;
+ 
+ if(g_aTimerImg[index])
+ {
+  clearInterval(g_aTimerImg[index]);
+ }
+ g_aTimerImg[index]=setInterval("slideDown("+index+")", 30);
+ 
+ for(i=0;i<aLiBtn.length;i++)
+ {
+  if(i==index)
+  {
+   showLiBtn(i);
+  }
+  else
+  {
+   hideLiBtn(i);
+  }
+ }
+ 
+ moveUlBtn(index);
+ 
+ oTxtInfo.innerHTML=g_aImgInfo[index].info;
+ oTxtLength.innerHTML=(index+1)+'/'+aLiImg.length;
+ 
+ oMarkPrev.href=g_aImgInfo[index].href;
+ oMarkNext.href=g_aImgInfo[index].href;
+ 
+ g_iNowImg=index;
+}
+function slideDown(index)
+{
+ var h=aLiImg[index].offsetHeight+10;
+ 
+ if(h>=oUlContent.offsetHeight)
+ {
+  h=oUlContent.offsetHeight;
+  
+  clearInterval(g_aTimerImg[index]);
+  g_aTimerImg[index]=null;
+ }
+ 
+ aLiImg[index].style.height=h+'px';
+}
+function gotoNext()
+{
+ gotoImg((g_iNowImg+1)%aLiImg.length);
+}
+function gotoPrev()
+{
+ gotoImg((g_iNowImg-1+aLiImg.length)%aLiImg.length);
+}
+function showLiBtn(index)
+{
+ if(g_aTimerBtn[index])
+ {
+  clearInterval(g_aTimerBtn[index]);
+ }
+ g_aTimerBtn[index]=setInterval("showLiBtnInner("+index+")", 30);
+}
+function showLiBtnInner(index)
+{
+ var alpha=g_aLiBtnAlpha[index]+10;
+ 
+ if(alpha>=100)
+ {
+  aLiBtn[index].style.filter='';
+  aLiBtn[index].style.opacity='1';
+  
+  clearInterval(g_aTimerBtn[index]);
+  g_aTimerBtn[index]=null;
+ }
+ else
+ {
+  aLiBtn[index].style.filter='alpha(opacity:'+alpha+')';
+  aLiBtn[index].style.opacity=alpha/100;
+ }
+ 
+ g_aLiBtnAlpha[index]=alpha;
+}
+function hideLiBtn(index)
+{
+ if(g_aTimerBtn[index])
+ {
+  clearInterval(g_aTimerBtn[index]);
+ }
+ g_aTimerBtn[index]=setInterval("hideLiBtnInner("+index+")", 30);
+}
+function hideLiBtnInner(index)
+{
+ var alpha=g_aLiBtnAlpha[index]-10;
+ 
+ if(alpha<=60)
+ {
+  alpha=60;
+  
+  clearInterval(g_aTimerBtn[index]);
+  g_aTimerBtn[index]=null;
+ }
+ aLiBtn[index].style.filter='alpha(opacity:'+alpha+')';
+ aLiBtn[index].style.opacity=alpha/100;
+ 
+ g_aLiBtnAlpha[index]=alpha;
+}
+function moveUlBtn(index)
+{
+ var iTarget=0;
+ 
+ if(index==0)
+ {
+  index=1;
+ }
+ else if(index==aLiBtn.length-1)
+ {
+  index=aLiBtn.length-2;
+ }
+ 
+ iTarget=-(index-1)*aLiBtn[0].offsetWidth;
+ 
+ if(g_oTimerUl)
+ {
+  clearInterval(g_oTimerUl);
+ }
+ 
+ g_oTimerUl=setInterval("moveUlBtnInner("+iTarget+")", 30);
+}
+function moveUlBtnInner(iTarget)
+{
+ var iSpeed=(iTarget-oUlBtn.offsetLeft)/7;
+ 
+ if(iSpeed>0)
+ {
+  iSpeed=Math.ceil(iSpeed);
+ }
+ else
+ {
+  iSpeed=Math.floor(iSpeed);
+ }
+ 
+ if(oUlBtn.offsetLeft==iTarget)
+ {
+  clearInterval(g_oTimerUl);
+  g_oTimerUl=null;
+ }
+ else
+ {
+  oUlBtn.style.left=oUlBtn.offsetLeft+iSpeed+'px';
+ }
+}
+function startAutoPlay()
+{
+ if(g_oTimerAutoPlay)
+ {
+  clearInterval(g_oTimerAutoPlay);
+ }
+ 
+ g_oTimerAutoPlay=setInterval(gotoNext, 3000);
+}
+function stopAutoPlay()
+{
+ if(g_oTimerAutoPlay)
+ {
+  clearInterval(g_oTimerAutoPlay);
+  g_oTimerAutoPlay=null;
+ }
+}
+</script>
+</head>
+ 
+<body>
+<div id="playimages" class="play">
+    <ul class="big_pic">
+ 
+  <div class="prev"></div>
+  <div class="next"></div>
+ 
+  <div class="text">加载图片说明……</div>
+  <div class="length">计算图片数量……</div>
+  
+  <a class="mark_left" href="javascript:;"></a>
+  <a class="mark_right" href="javascript:;"></a>
+  <div class="bg"></div>
+  
+        <li style="z-index:1;"><img src="51501s.jpg" /></li>
+        <li><img src="51502s.jpg" /></li>
+        <li><img src="51503s.jpg" /></li>
+        <li><img src="51504s.jpg" /></li>
+        <li><img src="51505s.jpg" /></li>
+        <li><img src="51506s.jpg" /></li>
+    </ul>
+    <div class="small_pic">
+        <ul style="width:390px;">
+            <li style="filter: 100; opacity: 1;"><img src="51501s.jpg" /></li>
+        <li><img src="51502s.jpg" /></li>
+        <li><img src="51503s.jpg" /></li>
+        <li><img src="51504s.jpg" /></li>
+        <li><img src="51505s.jpg" /></li>
+        <li><img src="51506s.jpg" /></li>
+        </ul>
+    </div>
+</div>
+ 
+</body>
+</html>

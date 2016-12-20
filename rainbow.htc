@@ -1,0 +1,70 @@
+<PUBLIC:COMPONENT URN="rainbow" name="darainbow()"/>
+<PUBLIC:ATTACH  EVENT = "oncontentready" ONEVENT ="beginIt()"/>
+
+<SCRIPT language="JAVASCRIPT">
+var Kill_ID=null;
+var internalValue;
+var originalValue;
+function putValue(){
+  element.innerHTML=internalValue;
+  encapsulate();
+  startSwirl();
+}
+function eventHandler(){
+  clearInterval(Kill_ID);
+  internalValue=element.value;
+  element.detachEvent("onpropertychange",eventHandler); 
+  if(event.propertyName=="value"){
+    element.innerHTML=internalValue;
+    putValue();
+  } else startSwirl();    
+  element.attachEvent("onpropertychange",eventHandler);    
+}
+function swirl(){
+  var I; 
+  I=ran(internalValue.length-1,0);
+  element.children(I).style.color=randomColor();
+}  
+function startSwirl(){
+  if (element.swirlInterval == null)
+    element.swirlInterval=50;
+  if ((internalValue!=null) && (element.swirlInterval!=0))
+    Kill_ID=setInterval(swirl,element.swirlInterval);
+}
+function encapsulate(){
+  var I;
+  var tempStr=""; 
+  for (I=0; I < internalValue.length; I++){
+      tempStr += "<SPAN style=\"color:"+randomColor()+"\">" + internalValue.substr(I,1) + "</SPAN>";
+    }
+  innerHTML=tempStr;
+}
+function ran(upperbound, lowerbound){
+  return(parseInt((upperbound - lowerbound + 1) * Math.random() + lowerbound));
+}
+function randomColor(){
+  var R=ran(255,0);
+  var G=ran(255,0);
+  var B=ran(255,0);
+  R=R.toString(16);
+  G=G.toString(16);
+  B=B.toString(16);
+  if (R.length==1)  R="0"+R;
+  if (G.length==1)  G="0"+G;
+  if (B.length==1)  B="0"+B;
+  return("#"+R+G+B);
+}
+function beginIt(){
+  internalValue=element.value;
+  originalValue=element.innerHTML;
+  if (internalValue==null)
+    internalValue=element.innerHTML;
+  putValue();
+  element.attachEvent("onpropertychange",eventHandler);
+}
+function clearIt(){
+  clearInterval(Kill_ID);
+  element.detachEvent("onpropertychange",eventHandler);
+  element.innerHTML=originalValue;  
+}
+</script>

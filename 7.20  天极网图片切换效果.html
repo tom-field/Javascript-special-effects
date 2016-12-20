@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<title>7.20  天极网的卡通图片切换</title> 
+<style type="text/css"> 
+body,html{ 
+margin:0px; 
+height:100%; 
+overflow:hidden;} 
+div#adBox{ 
+width:120px; 
+height:70px; 
+border:6px #999999 solid; 
+position:absolute; 
+overflow:hidden; 
+top:50%; 
+left:50%; 
+margin:-133px 0px 0px -103px;} 
+div#adBox .imgBox{ 
+height:100px; 
+width:200px; 
+background:#888888; 
+padding:1px 1px 0px 1px;} 
+div#adBox #control{ 
+width:201px; 
+height:12px; 
+background:#CCCCCC; 
+overflow:hidden; 
+border-left:1px #666666 solid;} 
+div#adBox #control div{ 
+width:12px; 
+height:12px; 
+font-size:9px; 
+font-family:Arial, Helvetica, sans-serif; 
+line-height:13px; 
+text-indent:1px; 
+text-align:center; 
+float:right; 
+margin-left:1px; 
+cursor:pointer; 
+background:#666666;} 
+div#adBox #info{ 
+height:30px; 
+overflow:hidden; 
+background:#999999; 
+border-top:1px #666666 solid; 
+font-size:12px; 
+color:#333333; 
+line-height:30px;} 
+div#adBox #info a{ 
+color:#333333; 
+text-decoration:none;} 
+div#adBox #info a:hover{ 
+color:#003366; 
+text-decoration:underline;} 
+</style> 
+<script type="text/javascript"> 
+var obj=document.getElementById; 
+var currentAd=0; 
+var adTimer; 
+var baseurl="";//图片目录 
+var maxinfo=18;//标题长度 
+var adDelay=3000;//切换时间 
+var controlItemId="controlitem";//根据自己的页面为跟踪条取ID前缀 
+var mapcolor="#003366";//Ad跟踪条颜色，建议与信息栏的a:hover一样 
+var imglink=new Array(); 
+imglink[0]=new Array("51501s.jpg","#","","") 
+imglink[1]=new Array("51502s.jpg","#","","") 
+imglink[2]=new Array("51503s.jpg","#","","") 
+imglink[3]=new Array("51504s.jpg","#","","") 
+imglink[4]=new Array("51505s.jpg","#","","") 
+imglink[5]=new Array("51506s.jpg","#","","") 
+for(i=0;i<imglink.length;i++){ 
+if(imglink[i][2].length<maxinfo)imglink[i][3]=imglink[i][2]; 
+else imglink[i][3]=imglink[i][2].substring(0,maxinfo-3)+"...";} 
+</script> 
+</head> 
+<body> 
+<div id="adBox"> 
+<div class="imgBox"><img src="" style="filter: progid:DXImageTransform.Microsoft.GradientWipe(GradientSize=0.25,wipestyle=1,motion=forward);" id="show" alt="" /></div> 
+<div id="control"></div> 
+<div id="info"></div> 
+</div> 
+<script type="text/javascript"> 
+for(i=0;i<imglink.length;i++){ 
+var itemBox=document.createElement(); 
+itemBox.innerHTML="<div id=\'"+controlItemId+i+"\'>"+(i+1)+"</div>"; 
+control.appendChild(itemBox);} 
+var controlItem=obj("control").getElementsByTagName("div"); 
+function changeImg(){ 
+obj("show").filters[0].apply(); 
+obj("show").src=baseurl+imglink[currentAd][0]; 
+obj("show").filters[0].play(); 
+obj("info").innerHTML="<a href=\'"+imglink[currentAd][1]+"\' title=\'"+imglink[currentAd][2]+"\'>"+imglink[currentAd][3]+"</a>"; 
+for(i=0;i<controlItem.length;i++){ 
+controlItem[i].style.backgroundColor=(i==currentAd)?mapcolor:"#666666";} 
+currentAd++; 
+currentAd=(currentAd==imglink.length)?0:currentAd; 
+adTimer=setTimeout("changeImg()",adDelay);} 
+changeImg(); 
+for(i=0;i<controlItem.length;i++){ 
+controlItem[i].onclick=function(){ 
+clearTimeout(adTimer); 
+currentAd=parseInt(this.id.substring(this.id.length-1,this.id.length)); 
+changeImg();}; 
+} 
+obj("info").onmouseover=function(){clearTimeout(adTimer)}; 
+obj("info").onmouseout=function(){adTimer=setTimeout("changeImg()",adDelay)}; 
+</script> 
+</body> 
+</html>

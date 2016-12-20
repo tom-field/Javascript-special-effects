@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>验证表单项不为空</title>
+<SCRIPT LANGUAGE=Javascript>
+function isNull(str)
+{ 
+        var patrn = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/; 
+        if(str=="") 
+        {
+        alert("请输入内容！");
+        return false; 
+
+        }
+else
+return false; 
+} 
+</SCRIPT>
+<body>
+<input type=text onblur=isNull(this.value)>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<title>
+10.9  旋转效果的文字
+</title>
+</HEAD>
+<script language="JavaScript">
+Text1="欢迎您的光临"; //这是用于旋转的文字，可以改你所需要的，但最好不要太长。
+Balises="";
+Fsize=30; //文字大小变化的参照值，改变这个数值，旋转文字的相对大小交改变。
+Tleft=300; //文字旋转中心距页面左边界的距离，可修改它，以使旋转中心在指定位置。
+Top=140; //文字旋转中心距页面顶部边界的距离，可修改它，以使旋转中心在指定位置。
+H=170; //文字旋转半径。
+v=70; //文字旋转偏离水平面的控制参数，该数值越大，偏转的角度越大。
+maxv=v*2;
+j=0; //给计数变量赋初值。
+Decal=0.5;
+Tl=Text1.length;
+for (x=0;x<Tl;x++){ //动态编写HTML代码，这是本程序的巧妙之处。这里给每一个文字分配一个层。
+Balises+="<DIV Id=L" + x + " STYLE='width:5;font-family: Arail;font-weight:bold;position:absolute;top:140;left:170;z-index:0'>" + Text1.charAt(x) + "</DIV>"
+}
+document.write (Balises);
+Time=setInterval("Around()",100); //启用循环定时器
+Alpha=5;
+IA=0.08; //调整速度，此值越大，速度越快。
+function Around(){ //修改各个文字所在图层的位置、层序号、文字的大小和颜色。
+Alpha -=IA;
+if (j<(maxv+1)) {v--; j++}else
+if (j<(2*maxv+1)) {v++;j++} else{v--;j=1}
+for (x=0;x<Tl;x++){
+Alpha1=Alpha+Decal*x;
+Cosine=Math.cos(Alpha1);
+Ob=document.all("L"+x);
+Ob.style.posLeft=Tleft+H*Math.sin(Alpha1);
+Ob.style.posTop=Top+v*Math.sin(Alpha1);
+Ob.style.zIndex=20*Cosine;
+Ob.style.lineHeight=1;
+Ob.style.fontSize=Fsize+25*Cosine;
+Ob.style.color="rgb(0,"+ (137+Cosine*80) + ",0)";
+}
+}
+</script>
+</HTML> 

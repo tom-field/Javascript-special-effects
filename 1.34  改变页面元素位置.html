@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<style>
+#testDiv { 
+ position:relative;
+ top:0px; left:0px;
+ border:1px solid #000;
+ }
+ </style>
+<script type="text/javascript">function test(){ var testDiv = document.getElementById("testDiv"); testDiv.style.top = "50px"; testDiv.style.left = "50px";}</script> 
+</head>  
+<body>
+<div id="testDiv"><p>我是测试div，点击下面的按钮就可以改变我的位置。</p><p>  <button onclick="test(); return false;" value="改变位置" >改变测试div的位置</button></p></div>
+
+</body>
+</html>

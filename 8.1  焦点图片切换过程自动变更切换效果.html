@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>8.1  焦点图片切换过程自动变更切换效果</TITLE>
+<style>
+ .30pt{color:#ce288c;font-size:30pt}
+</style>
+<SCRIPT language=JavaScript>
+// 属性设置
+var E_strIFaderTransType     = 'reveal'; // 'reveal' | 'blend'
+var Filter_number    = 23;       // 滤镜种数
+var change_time = 1.000;    // 滤镜转换过程为3.0秒延迟
+var wait_time    = 3000;     // 两种滤镜之间为5秒延迟
+
+var obj_Timer;
+var count_temp = 0; //记录当前是第几幅图片
+var Img_arry = new Array(); //图片数组
+var E_ie4 = document.all?true:false;
+var E_nn4 = document.layers?true:false;
+
+function Filt_set() //设置滤镜
+{
+ if(!E_ie4 && !E_nn4) return;
+ if(E_ie4) {
+  var theImg = document.all['idImgFading'];
+  if(theImg == null) return;
+  with(document.all['idImgFading']) {
+   style.filter = (E_strIFaderTransType == 'reveal')?'revealTrans':'blendTrans';
+   style.filter.duration = change_time;
+   style.filter.transition = Filter_number;
+  }
+ }
+ obj_Timer = window.setInterval('use_Filter()',wait_time);
+}
+
+function use_Filter() //滤镜的启动
+{
+ if(E_ie4) {
+  with(document.all['idImgFading']) {
+   if(E_strIFaderTransType == 'reveal') {
+    filters(0).transition = Filter_number;
+   }
+   if(count_temp == (Img_arry.length - 1)) {
+    count_temp = -1;
+   }
+   count_temp++;
+   title = Img_arry[count_temp].sAlt;
+ 
+   filters(0).apply();
+   src = Img_arry[count_temp].sImgUrl;
+   filters(0).play();
+  }
+ }
+ else if(E_nn4) {
+  if(count_temp == (Img_arry.length - 1)) {
+   count_temp = -1;
+  }
+  count_temp++;
+  document.images['idImgFading'].src = Img_arry[count_temp].sImgUrl;
+ }
+}
+
+function obj_ClearTime() {
+ window.clearInterval(obj_Timer);
+}
+window.onunload = obj_ClearTime;//取消计时器，释放系统资源
+
+function Img_obj(sImgUrl,command,sAlt,sTarget)
+{
+ this.sImgUrl = (sImgUrl == null)?'':sImgUrl;
+ this.command = (command == null || command == '')?'http://www.china.com':command;
+ this.sAlt = (sAlt == null)?'':sAlt;
+ this.sTarget = (sTarget == null || sTarget == '')?'_self':sTarget;
+}
+</SCRIPT>
+
+<SCRIPT language=JavaScript>
+// 定义图像来源
+Img_arry[0] = new Img_obj('51501.jpg','#','\n','_self');
+Img_arry[1] = new Img_obj('51502.jpg','#','\n','_self');
+Img_arry[2] = new Img_obj('51503.jpg','#','\n','_self');
+</SCRIPT>
+</HEAD>
+<BODY >
+<center>
+<A href="#">
+<IMG hspace=0 src="51504.jpg" width=400 height=300 border=0 name=idImgFading>
+</A>
+</center>
+<SCRIPT language=JavaScript>Filt_set();</SCRIPT>
+</BODY>
+</HTML>

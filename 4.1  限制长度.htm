@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>限定长度</title>
+<script>
+//限定长度
+function test() 
+{
+if(document.a.b.value.length>60)
+{
+alert("不能超过60个字符！");
+document.a.b.focus();
+return false;
+}
+}
+</script>
+<body>
+<form name=a onsubmit="return test()">
+<textarea name="b" cols="40" wrap="VIRTUAL" rows="6"></textarea>
+<input type="submit" name="Submit" value="提交">
+</form>
+</body>
+</html>
+

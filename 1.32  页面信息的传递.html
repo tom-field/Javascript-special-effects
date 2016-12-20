@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+
+
+<title>网页特效|Linkweb.cn/Js|---冻结你的窗口，使窗口无法再响应</title>
+</head>
+
+
+
+<body>
+
+
+
+<script>
+　　/* 
+　　*函数功能:从href获得参数 
+　　*sArgName:arg1, arg2 
+　　*return: the value of arg. d, re 
+　　*/ 
+　　function GetArgsFromHref(sHref, sArgName) 
+　　{ 
+　　var args = sHref.split("?"); 
+　　var retval = ""; 
+　　if(args[0] == sHref) /*参数为空*/ 
+　　{ 
+　　return retval; /*无需做任何处理*/ 
+　　} 
+　　var str = args[1]; 
+　　args = str.split("&"); 
+　　for(var i = 0; i < args.length; i ++) 
+　　{ 
+　　str = args[i]; 
+　　var arg = str.split("="); 
+　　if(arg.length <= 1) continue; 
+　　if(arg[0] == sArgName) retval = arg[1]; 
+　　} 
+　　return retval; 
+　　} 
+</script>
+<FORM>
+<INPUT TYPE="BUTTON" VALUE="想试试就点这里" onClick="freeze()">
+</FORM>
+
+
+
+
+</body>
+
+
+
+</html>
+
+贴子来源飞诺网(http://bbs.firnow.com) 详细出处参考：http://bbs.diybl.com/dview28t6223.html

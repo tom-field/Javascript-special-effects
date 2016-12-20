@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>比较两个表单项的值是否相同</title>
+</head>
+<body>
+<FORM METHOD=POST ACTION="">
+<input type="text" id="input1">
+<input type="text" id="input2">
+<input type="button" value="提交" onclick="check()">
+</FORM>
+<script>
+function check()
+{ 
+with(document.all){
+if(input1.value!=input2.value)
+{
+alert("您两次输入的内容不同！请重新输入。");
+input1.value = "";
+input2.value = "";
+}
+else document.forms[0].submit();
+}
+}
+</script>
+</body>
+</html>

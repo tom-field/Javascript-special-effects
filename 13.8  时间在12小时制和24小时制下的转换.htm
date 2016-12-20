@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.8  当前时间在12小时制和24小时制下的转换</title>
+<SCRIPT LANGUAGE="JavaScript">
+function timeType() {
+    if (document.form.showTimeType[0].checked) { 
+    return true;
+}
+return false;
+}
+function showTheHours(theHour) {
+    if (timeType() || (theHour > 0 && theHour < 13)) {
+    return (theHour);
+    }
+    if (theHour == 0) {                            
+        return (12);
+    }
+    return (theHour-12);                          
+}
+function showZeroFilled(inValue) {
+    if (inValue > 9) {                           
+    return "" + inValue;
+    }
+    return "0" + inValue;
+    }
+    function showAmPm() {                        
+    if (timeType()) {
+    return ("");
+    }
+    if (now.getHours() < 12) {  
+    return (" 上午");
+    }
+    return (" 下午");
+}
+function showTheTime() {  
+    now = new Date        
+    document.form.showTime.value = showTheHours(now.getHours()) + ":" + showZeroFilled(now.getMinutes()) + ":" + showZeroFilled(now.getSeconds()) + showAmPm()
+    setTimeout("showTheTime()",1000) 
+}
+</script>
+</head>
+<BODY onLoad="showTheTime()">
+<center><form name=form>
+<input type=text name=showTime size=11><p>
+<input type=radio name=showTimeType checked>24小时<br>
+<input type=radio name=showTimeType>12小时<br>
+</form></center></body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+ <head>
+  <title>鼠标点击小图无刷新放大图片</title>
+  <style>
+  body{font-size:11px; font-family:Verdana, Arial, Helvetica, sans-serif;}
+  a{color:#000; text-decoration:none;}
+  .img{border:0px;}
+  .black_overlay{
+   display: none;
+   position: absolute;
+   top: 0%;
+   left: 0%;
+   width: 100%;
+   height: 100%;
+   background-color: black;
+   z-index:1001;
+   -moz-opacity: 0.8;
+   opacity:.80;
+   filter: alpha(opacity=80);
+  }
+  .white_content {
+   display: none;
+   position: absolute;
+   top: 15%;
+   left: 25%;
+   width: 535px;
+   height: 420px;
+   border: 16px solid #FFF;
+   border-bottom:none;
+   background-color: white;
+   z-index:1002;
+   overflow: auto;
+  }
+ </style>
+ </head>
+<body>
+ <p><a href = "#" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="5201.jpg" width="100" height="100" border="0"/></a></p>
+  <div id="light" class="white_content"><img src="5202.jpg"/> <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">关闭</a></div>
+  <div id="fade" class="black_overlay"></div>
+</body>
+</html>

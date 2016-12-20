@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>img ready demo</title>
+<script src="imgReady.js"></script>
+<style>
+/*demo style*/
+body { font:12px 'Microsoft Yahei', Tahoma, Arial; _font-family:Tahoma, Arial; }
+a { color:#0259C4; }
+a:hover { color:#900; }
+.tips { color:#CCC; }
+h1 { font-family:'Constantia';}
+#path { width:36em; padding:5px; border:2px solid #0259C4; background:#FAFAFA;-webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; }
+#path:focus { background:#FFFFF7; outline:0; }
+#submit { padding:5px 10px; border:2px solid #0259C4; background:#0259C4; color:#FFF; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; cursor:pointer; }
+#submit.disabled { background:#D7D7D7; color:#ABABAB; border-color:#ABABAB; cursor:default; }
+</style>
+<script>
+window.onload = function () {
+	
+	var $ = function (id) {
+		return document.getElementById(id);
+	};
+	
+	var Timer = function (){
+		this.startTime = (new Date()).getTime();
+	};
+	Timer.prototype.stop = function(){
+		return (new Date()).getTime() - this.startTime;
+	};
+	
+	var imgUrl,
+		checkboxFn,
+		path		= $('path'),
+		submit		= $('submit'),
+		checkbox	= $('checkbox'),
+		clsCache	= $('clsCache'),
+		status		= $('status'),
+		statusReady	= $('statusReady'),
+		statusLoad	= $('statusLoad'),
+		imgWrap		= $('imgWrap');
+	
+	submit.disabled = false;	
+	submit.onclick = function () {
+		var that = this,
+			time = new Timer();
+		
+		imgUrl = path.value;
+		status.style.display = 'block';
+		statusLoad.innerHTML = statusReady.innerHTML = 'Loading...';
+		
+		// 参数: 图片地址, 尺寸就绪事件, 完全加载事件, 加载错误事件
+		imgReady(imgUrl, function () {
+			statusReady.innerHTML = '耗时 ' + (time.stop() / 1000) +' 秒. 宽度: ' + this.width + '; 高度: ' + this.height;
+			checkboxFn();
+		}, function () {
+			statusLoad.innerHTML = '耗时 ' + (time.stop() / 1000) +' 秒. 宽度: ' + this.width + '; 高度: ' + this.height;
+		}, function () {
+			statusLoad.innerHTML = statusReady.innerHTML = '耗时 ' + (time.stop() / 1000) +' 秒. 加载错误！';
+		});
+	};
+	
+	clsCache.onclick = function () {
+		var value = path.value;
+		path.value = (value.split('?')[1] ? value.split('?')[0] : value) + '?' + new Date().getTime();
+		status.style.display = 'none';
+		imgWrap.innerHTML = '';
+		return false;
+	};
+	
+	checkbox.onclick = checkbox.onchange = checkboxFn = function () {
+		imgWrap.innerHTML = imgUrl && checkbox.checked ? '<img src="' + imgUrl + '" />' : '';
+	};
+	checkbox.checked = false;
+
+	$('down').onclick = function () {
+		window.open(this.getAttribute('data-href') || this.href);	
+		return false;
+	}
+};
+
+</script>
+</head>
+
+<body>
+<div style="height:40px; line-height:40px;"><input type="text" id="path" value="" /> <input type="button" id="submit" value="加载" /> <label><input id="checkbox" type="checkbox">显示图片</label> 
+<a id="clsCache" href="#" style="color:#0259C4;">清空缓存</a></div>
+<div id="status" style="display:none">
+  <p><strong>通过文件头信息获取尺寸：</strong> <span id="statusReady"></span><p>
+	<p><strong>通过加载完毕后获取尺寸：</strong> <span id="statusLoad"></span></p>
+</div>
+
+<div id="imgWrap"></div>
+
+<div><script type="text/javascript">document.write('<scr'+'ipt src="" type="text/javascript" charset="gb2312"></sc'+'ript>')</div> 
+</body>
+</html>
+

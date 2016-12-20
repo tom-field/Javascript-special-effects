@@ -1,0 +1,39 @@
+<html>
+<title>13.4  网页阴影时钟</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<head>
+<script language=javaScript>
+<!--// 
+function clockon() {
+thistime= new Date()
+var hours=thistime.getHours()
+var minutes=thistime.getMinutes()
+var seconds=thistime.getSeconds()
+if (eval(hours) <10) {hours="0"+hours}
+if (eval(minutes) < 10) {minutes="0"+minutes}
+if (seconds < 10) {seconds="0"+seconds}
+thistime = hours+":"+minutes+":"+seconds
+
+if(document.all) {
+bgclocknoshade.innerHTML=thistime
+bgclockshade.innerHTML=thistime
+}
+
+if(document.layers) {
+document.bgclockshade.document.write('<div id="bgclockshade" style="position:absolute;visibility:visible;font-family:Verdana;color:FFAAAAA;font-size:120px;top:10px;left:152px">'+thistime+'</div>')
+document.bgclocknoshade.document.write('<div id="bgclocknoshade" style="position:absolute;visibility:visible;font-family:Verdana;color:DDDDDD;font-size:120px;top:10px;left:150px">'+thistime+'</div>')
+document.close()
+}
+var timer=setTimeout("clockon()",200)
+}
+
+//-->
+</script>
+</head>
+<body bgcolor="#ff0000" onLoad="clockon()">
+<div id="bgclockshade" style="position:absolute;visibility:visible;font-family:Arial;color:FF8888;font-size:120px;top:102px;left:152px"></div>
+<div id="bgclocknoshade" style="position:absolute;visibility:visible;font-family:Arial;color:DDDDDD;font-size:120px;top:100px;left:150px"></div>
+<div id="mainbody" style="position:absolute; visibility:visible">
+</div>
+</body>
+</html>

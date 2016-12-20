@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>15.19  判断控件类型</title>
+<script LANGUAGE="JavaScript">
+function test(frmObj)
+{
+   if(frmObj.tagName=="INPUT")
+      alert("你目前操作的控件是："+ frmObj.type) ;
+   else
+      alert("你目前操作的控件是："+ frmObj.tagName);
+}
+</script>
+</head>
+<body>
+<input type=text name="txt1" value="判断控件类型" onchange="test(this)">
+<input type=button value="按钮" onClick="test(this)">
+</body>
+</html>

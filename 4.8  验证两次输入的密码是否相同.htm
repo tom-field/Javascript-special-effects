@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>验证两次输入的密码是否相同</title>
+</head>
+<body>
+<FORM METHOD=POST ACTION="">
+<input type="password" id="input1">
+<input type="password" id="input2">
+<input type="button" value="提交" onclick="check()">
+</FORM>
+<script>
+function check()
+{ 
+with(document.all){
+if(input1.value!=input2.value)
+{
+alert("请重新输入密码，当前两次输入密码不同！")
+input1.value = "";
+input2.value = "";
+}
+else document.forms[0].submit();
+}
+}
+</script>
+</body>
+</html>

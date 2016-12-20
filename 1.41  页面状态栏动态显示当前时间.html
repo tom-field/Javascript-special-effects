@@ -1,0 +1,15 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>页面状态栏动态显示当前时间</title>
+<script>  
+function see(){  
+window.setTimeout("see()",1000);  
+today = new Date();  
+self.status = today.toString();  
+}  
+</script>  
+</head>
+<body onload=see()>  
+</body>
+</html>

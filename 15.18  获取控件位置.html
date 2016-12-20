@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>15.18  获取控件位置</title>
+    <script type="text/javascript">
+        function get_Text() 
+{
+			m = document.getElementById("mxh")
+var w=0,h=0;
+			while(m.offsetParent)
+			{
+				w += m.offsetLeft;
+				h += m.offsetTop;
+				m = m.offsetParent;
+			}
+			alert("该图片的位置是：（"+w+"，"+h+"）")
+        }
+    </script>
+</head>
+<body>
+<img src="51503.jpg" id="mxh" />
+<br/>
+<center>
+    <input type="button" value="获取控件位置" onclick="get_Text()"/>
+</center>
+</body>
+</html>

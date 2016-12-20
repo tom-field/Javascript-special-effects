@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<script type="text/javascript">
+ function opener(url){
+  location.href = url;
+ }
+ function newopen(){
+  window.open("biaodan.html","_self","height = 400px,width = 400px,meneubar = no");
+ }
+ function goback(){
+  history.back();
+ }
+ function gonum(num){
+  history.go(num);
+ }
+ function refresh()
+ {
+  history.go(-0)  //刷新
+ }
+ document.oncontextmenu = function(){
+  return false;
+ }
+ document.onmouseup = function(){
+ var cmenu = document.getElementByIdx_x_x("menudiv");
+ if(event.button == 2){
+  cmenu.style.left = event.x+"px";
+  cmenu.style.top = event.y+"px";
+  cmenu.style.display = "block";
+ }
+ else{
+  cmenu.style.display = "none";
+  }
+ 
+ }
+
+</script>
+<style type="text/css">
+ #menudiv{
+ width:150px;
+ height:auto;
+ background-color:#CCCCCC;
+ color:#000000;
+ cursor:pointer;
+ position:absolute;
+ display:none;
+ }
+ .menuIetm1{
+ background-color:#0033CC;
+ color:#FFFFFF;
+ }
+ .menuIetm2{
+ background-color:#CCCCCC;
+ color:#000000;
+ }
+</style>
+</head>
+
+<body>
+<input type="button" value="去百度" onclick="opener('http://www.baidu.com')" />
+<input type="button" value="在本页中打开一个新网页" onclick="newopen()" />
+<input type="button" value="返回上一页" onclick="goback()" />
+<input type="button" value="去倒数第二页" onclick="gonum(-2)" />
+<input type="button" value="洗刷刷" onclick="refresh()" />
+
+<div id="menudiv" class="menudiv">
+<div id="Ietm" onmousemove = "this.className='menuIetm1';" onmouseout="this.className='menuIetm2';">Open----------Ctrl+A</div>
+<div id="Ietm" onmousemove = "this.className='menuIetm1';" onmouseout="this.className='menuIetm2';">Close----------Ctrl+B</div>
+<div id="Ietm" onmousemove = "this.className='menuIetm1';" onmouseout="this.className='menuIetm2';">Save-----------Ctrl+G</div>
+<div id="Ietm" onmousemove = "this.className='menuIetm1';" onmouseout="this.className='menuIetm2';">Save as--------Ctrl+L</div>
+</div>
+</body>
+</html>

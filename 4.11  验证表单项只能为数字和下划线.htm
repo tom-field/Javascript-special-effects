@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>验证表单项只能为数字和下划线</title>
+</head>
+<body>
+<FORM METHOD=POST ACTION="">
+验证表单项只能为数字和下划线
+<br>
+<input type="text" id="TEL" >
+<input type="button" value="提交" onclick="CheckForm()">
+<script   language="javascript">
+function isNumber(String)
+{
+var   Letters   =   "1234567890-";
+var   i;
+var   c;
+if(String.charAt(   0   )=='-')
+return   false;
+if(   String.charAt(   String.length   -   1   )   ==   '-'   )
+return   false;
+for(   i   =   0;   i   <   String.length;   i   ++   )
+{
+c   =   String.charAt(   i   );
+if   (Letters.indexOf(   c   )   <   0)
+return   false;
+}
+return   true;
+}
+function CheckForm()
+{
+with(document.all){
+if(!   isNumber(TEL.value))   {
+alert("您的号码不符合要求，请重新录入！");
+TEL.value='';
+TEL.focus();
+return   false;
+}
+else
+{
+alert("您的号码符合要求，开始提交！");
+return   true;
+}
+}
+}
+</script>
+</FORM>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>跟随鼠标的汉字</title>
+<style type="text/css">
+.spanstyle {
+position:absolute;
+visibility:visible;
+top:-50px;
+font-size:20pt;
+color: #FF0000;
+font-weight:bold;}
+</style>
+<script language="javascript">
+var x,y;
+var step=30;
+var flag=0;
+var message="粘在鼠标上。";
+message=message.split("");   //将文本切割成数组
+var xpos=new Array();
+for (i=0;i<=message.length-1;i++) {xpos[i]=-50;}
+var ypos=new Array();
+for (i=0;i<=message.length-1;i++) {ypos[i]=-50;}
+function handlerMM(e)
+{
+//判断浏览器类型并获取鼠标的坐标
+x = (document.layers) ? e.pageX : document.body.scrollLeft+event.clientX;
+y = (document.layers) ? e.pageY : document.body.scrollTop+event.clientY;
+flag=1;
+}
+function makesnake() 
+{
+if (flag==1 && document.all)
+ {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+step;
+ypos[i]=ypos[i-1];       }
+xpos[0]=x+step; //文本的x坐标距离鼠标x坐标的距离
+ypos[0]=y;  //文本和鼠标的y坐标相同
+//设置包装文本的span控件的位置
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("span"+(i)+".style");
+thisspan.posLeft=xpos[i];
+thisspan.posTop=ypos[i] ;    }   }
+else if (flag==1 && document.layers) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+step;
+ypos[i]=ypos[i-1] ;      }
+xpos[0]=x+step;
+ypos[0]=y;
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.span"+i);
+thisspan.left=xpos[i];
+thisspan.top=ypos[i]};   }
+var timer=setTimeout("makesnake()",30);}
+//显示文本的重点
+for (i=0;i<=message.length-1;i++)
+ {
+document.write("<span id='span"+i+"'class='spanstyle'>");
+document.write(message[i]);
+document.write("</span>");
+}
+//针对navigater浏览器时的情况
+if (document.layers){
+document.captureEvents(Event.MOUSEMOVE);}
+document.onmousemove = handlerMM; //将方法绑定到鼠标的移动事件
+</script>
+</head>
+<body onLoad="makesnake()">
+</body>
+</html>

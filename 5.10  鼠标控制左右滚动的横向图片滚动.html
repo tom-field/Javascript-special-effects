@@ -1,0 +1,233 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>鼠标控制左右滚动的横向图片滚动代码</title>
+<style>
+.ny2010{ width:950px; height:177px; margin:0 auto; background:url(/jscss/demoimg/201009/scorllbg.jpg) 0 0 no-repeat;}
+.ny2010 a{ text-decoration:none; color:#333333; font-size:12px;}
+.ny2010 td img{ width:160px; height:130px; display:block; margin:0 5px 2px 0; padding:1px; border:1px solid #CCCCCC;}
+.ny2010 td p{ margin:0 5px; padding:0; line-height:19px; font-size:14px; font-weight:bold;}
+.ny2010 td p span{ display:block; font-size:12px; font-weight:normal; color:#AE091B;}
+td {
+	font-family: "宋体";
+	font-size: 12px;
+}
+body {
+	background-color: #F4F5F7;
+	margin: 0px;
+	padding: 0px;
+}
+</style>
+</head>
+
+<body>
+<script>
+  var dir=1;//每步移动像素，大＝快
+  var speed=10;//循环周期（毫秒）大＝慢
+  var MyMar=null;
+  function Marquee(){//正常移动
+   var demo = document.getElementById("demo");
+   var demo2 = document.getElementById("demo2");
+   if (dir>0  && (demo2.offsetWidth-demo.scrollLeft)<=0)
+   {
+    demo.scrollLeft=0;
+   }
+   if (dir<0 &&(demo.scrollLeft<=0))
+   {
+    demo.scrollLeft=demo2.offsetWidth;
+   }
+   demo.scrollLeft+=dir;
+  }
+  function onmouseoverMy() {
+   window.clearInterval(MyMar);
+  }//暂停移动
+  function onmouseoutMy() {
+   MyMar=setInterval(Marquee,speed);
+  }//继续移动
+  function r_left()
+  {
+   if (dir==-1)
+    dir=1;
+  }//换向左移
+  function r_right()
+  {
+   if (dir==1)
+    dir=-1;
+  }//换向右移
+ 
+  function IsIE()
+  {
+   var browser=navigator.appName
+   if ((browser=="Netscape"))
+   {
+    return false;
+   }
+   else if(browser=="Microsoft Internet Explorer")
+   {
+    return true;
+   }
+   else
+   {
+    return null;
+   }
+  }
+  
+  var _IsIE = IsIE();
+  var _MousePX = 0;
+  var _MousePY = 0;
+  var _DivLeft = 0;
+  var _DivRight = 0;
+  var _AllDivWidth = 0;
+  var _AllDivHeight = 0;
+  function MoveDiv(e){
+   var obj = document.getElementById("demo");
+     _MousePX = _IsIE ? (document.body.scrollLeft + event.clientX) : e.pageX;
+    _MousePY = _IsIE ? (document.body.scrollTop + event.clientY) : e.pageY;
+   //Opera Browser Can Support ''window.event'' and ''e.pageX''
+   var obj1 = null;
+   if(obj.getBoundingClientRect)
+   {
+    //IE
+    obj1 = document.getElementById("demo").getBoundingClientRect();
+    _DivLeft = obj1.left;
+    _DivRight = obj1.right;
+    _AllDivWidth = _DivRight - _DivLeft;
+   }
+   else if(document.getBoxObjectFor)
+   {
+    //FireFox
+    obj1 = document.getBoxObjectFor(obj); 
+    var borderwidth = (obj.style.borderLeftWidth != null && obj.style.borderLeftWidth != "") ? parseInt(obj.style.borderLeftWidth) : 0;
+    _DivLeft = parseInt(obj1.x) - parseInt(borderwidth);
+    _AllDivWidth = Cut_Px(obj.style.width);
+    _DivRight = _DivLeft + _AllDivWidth;
+   }
+   else
+   {
+    //Other Browser(Opera)
+    _DivLeft = obj.offsetLeft;
+    _AllDivWidth = Cut_Px(obj.style.width);
+    var parent = obj.offsetParent;
+    if(parent != obj)
+    {
+     while (parent) {  
+      _DivLeft += parent.offsetLeft; 
+      parent = parent.offsetParent;
+     }
+    }
+    _DivRight = _DivLeft + _AllDivWidth;
+   }
+ 
+   var pos1,pos2;
+   pos1 = parseInt(_AllDivWidth * 0.4) + _DivLeft;
+   pos2 = parseInt(_AllDivWidth * 0.6) + _DivLeft;
+ 
+   if(_MousePX > _DivLeft && _MousePX < _DivRight)
+   {
+    if(_MousePX > _DivLeft && _MousePX < pos1)//Move left
+    {
+     r_left();
+    }
+    else if(_MousePX < _DivRight && _MousePX > pos2)//Move right
+    {
+     r_right();
+    }
+	
+    if(_MousePX > pos1 && _MousePX < pos2)//Stop
+    {
+     onmouseoverMy();
+     MyMar=null;
+    }else if(_MousePX < pos1 || _MousePX > pos2)
+    {
+     if(MyMar==null)
+     {
+      MyMar=setInterval(Marquee,speed);
+     }
+    }
+   }
+  }
+ 
+  function Cut_Px(cswidth)
+  {
+   cswidth = cswidth.toLowerCase();
+   if(cswidth.indexOf("px") != -1)
+   {
+    cswidth.replace("px","");
+    cswidth = parseInt(cswidth);
+   }
+   return cswidth;
+  }
+ 
+  function MoveOutDiv()
+  {
+   if(MyMar == null)
+   {
+    MyMar=setInterval(Marquee,speed);
+   }
+  }
+
+ </script>
+<div class="ny2010">
+	<div id="demo" style="overflow:hidden; width:100%; color:#333333; height:180px; margin:5px 40px 0 0; display:inline; float:right;" onMouseMove="MoveDiv(event);" onMouseOut="MoveOutDiv();">
+    <div id="demo1" style="width:100%;">
+        <table width="100%" cellpadding=0 cellspacing=0>
+             <tbody>
+                 <tr valign=top>
+                    <td valign=top nowrap>
+
+                      <table  class="sideleft"  width="98%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                          <td>
+<table id="__01" width="100%" height="150" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="center">
+			<a href="jdxx.asp?jdID=845"  title="按钮1" target="_blank"><img src="5401.jpg" width="150" height="150" alt="" border="0" style="border:#b8b8b8 solid 1px;"></a></td>
+		</tr>
+	<tr>
+		<td height="25" align="center" background="images/cpzs_10.jpg">按钮1</td>
+	</tr>
+</table></td>
+                          
+                          <td>
+<table id="__01" width="100%" height="150" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="center">
+			<a href="jdxx.asp?jdID=844"  title="按钮2" target="_blank"><img src="5402.jpg" width="127" height="127" alt="" border="0" style="border:#b8b8b8 solid 1px;"></a></td>
+		</tr>
+	<tr>
+		<td height="25" align="center" background="images/cpzs_10.jpg">按钮2</td>
+	</tr>
+</table></td>
+                          
+                          <td>
+<table id="__01" width="100%" height="150" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="center">
+			<a href="jdxx.asp?jdID=839"  title="按钮3" target="_blank"><img src="5403.jpg" width="127" height="127" alt="" border="0" style="border:#b8b8b8 solid 1px;"></a></td>
+		</tr>
+	<tr>
+		<td height="25" align="center" background="images/cpzs_10.jpg">按钮3</td>
+	</tr>
+</table></td>
+                          
+                          <td></td>
+                        </tr>
+                      </table>
+      
+				   </td>
+					<td width="0">
+					<div id="demo2" style="width:100%;"></div>
+					</td>
+				 </tr>
+			 </tbody>
+	  </table>
+      </div>
+	  </div>
+</div>
+<script type="text/javascript">
+ document.getElementById("demo2").innerHTML = document.getElementById("demo1").innerHTML;
+ MyMar=setInterval(Marquee,speed);
+</script>
+</body>
+</html>

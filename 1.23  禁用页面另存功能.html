@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+使用"另存为"保存你网页的时候 可以看到效果.
+<noscript><iframe src="*.htm"></iframe></noscript>
+<!--"禁示另存为"开始--->
+<noscript>
+<iframe src="*.htm"></iframe>
+</noscript>
+<!--"禁示另存为"结束--->
+<script language="javascript">
+//设定脚本出错能继续运行
+function KillError()
+{
+return false;
+}
+window.onerror=KillError;
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+</head>  
+<body>
+
+</body>
+</html>
+
+<!--
+noscript 元素用来定义在脚本未被执行时的替代内容（文本）。
+
+此标签可被用于可识别 <script> 标签但无法支持其中的脚本的浏览器。
+
+
+window.onerror = function(sMessage,sUrl,sLine){};
+
+onerror函数的三个参数用于确定错误确切的信息，代表的意思依次为：错误信息；发生错误的文件；发生错误的行号。
+
+
+-->

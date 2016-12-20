@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>14.18 数字前方补零效果</title>
+</head>
+<body >
+<div align="center"> 
+<script language="javascript">
+function addZero(a,b,c)
+{
+	while(a<b) 
+	{
+		t=a+"";
+		while(t.length<c)t="0"+t; 
+		a++;
+		document.write(t+"<br>");
+	}
+}
+addZero(1,8,5);
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<html>    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            14.1 随机生成数字
+        </title>
+    </head>
+    <script language="javascript">
+        function randomChar() {
+            var x = "0123456789";
+            var tmp = "";
+            for (var i = 0; i < 10; i++) {
+                tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+            }
+            return tmp;
+        }
+        document.write(randomChar(100));
+        document.write(Math.floor(Math.random() * 2000 + 1));
+    </script>
+</html>

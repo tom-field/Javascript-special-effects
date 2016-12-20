@@ -1,0 +1,151 @@
+<html>
+<body onload="snow()" bgcolor="#FF3333">
+
+<form id="form1" runat="server">
+
+<script type="text/javascript">
+
+N=100;//雪花的个数
+
+Y=new Array();//雪花的纵坐标
+
+X=new Array();//雪花的横坐标
+
+S=new Array();//雪花的移动范围
+
+A=new Array();//雪花的纵坐标
+
+B=new Array();//雪花的纵坐标
+
+M=new Array();//雪花的大小
+
+V=(document.all)?0:1;//当前窗口的层数
+
+iH=window.document.body.clientHeight;//获得当前窗口的高度
+
+iW=window.document.body.clientWidth;//获得当前窗口的宽度
+
+for(i=0;i<N;i++)
+
+{
+
+Y[i]=Math.round(Math.random()*iH);//生成每个雪花的初始纵坐标
+
+X[i]=Math.round(Math.random()*iW);//生成每个雪花的初始横坐标
+
+S[i]=Math.round(Math.random()*5+2);
+
+A[i]=0;
+
+B[i]=Math.random()*0.01+0.1;
+
+M[i]=Math.round(Math.random()*1+1);
+
+}
+
+if(V)
+
+{
+
+for(i=0;i<N;i++)//N个雪花循环初始化
+
+{
+
+document.write("<layer name='sn"+i+"' left=0 top=0 bgcolor='#000000' cuip='0,0,"+M[i]+","+M[i]+"'></layer>");
+
+}
+
+}
+
+else
+
+{
+
+document.write('<div style="position:absolute;top:0px;left:0px">');
+
+document.write('<div style="position:relative">');
+
+for(i=0;i<N;i++)//N个雪花循环初始化
+
+{
+
+document.write('<div id="si" style="position:absolute;top:0;left:0;width:'+M[i]+';height:'+M[i]+';background:#FFFFCC;font-size:'+M[i]+'"></div>');
+
+//定义雪花为黑色
+
+}
+
+document.write('</div></div>');
+
+}
+
+function snow()
+
+{
+
+var H=window.document.body.clientHeight;//获得当前窗口的高度
+
+var W=window.document.body.clientWidth;//获得当前窗口的宽度
+
+var T=document.body.scrollTop;//获得当前窗口的纵坐标
+
+var L=document.body.scrollLeft;//获得当前窗口的横坐标
+
+for(i=0;i<N;i++)
+
+{
+
+sy=S[i]*Math.sin(90*Math.PI/180);//生成y方向的步长
+
+sx=S[i]*Math.cos(A[i]);//生成x方向的步长
+
+Y[i]+=sy;//更新纵坐标
+
+X[i]+=sx;//更新横坐标
+
+if(Y[i]>H)//如果雪花超出了屏幕
+
+{
+
+Y[i]=-10;//赋值给雪花纵坐标
+
+X[i]=Math.round(Math.random()*W);//重新赋值给雪花的纵坐标
+
+M[i]=Math.round(Math.random()*1+1);//定义雪花的大小
+
+S[i]=Math.round(Math.random()*5+2);//定义雪花的飘动的幅度
+
+}
+
+if(V)
+
+{
+
+//重新显示每个雪花
+
+document.all['sn'+i].left=X[i];document.layers['sn'+i].top=Y[i]+T
+
+}
+
+else
+
+{
+
+//重新显示每个雪花
+
+si[i].style.pixelLeft=X[i];si[i].style.pixelTop=Y[i]+T
+
+}
+
+A[i]+=B[i];
+
+}
+
+setTimeout('snow()',10);//每0.01秒更新一次画面
+
+}
+
+</script>
+</form>
+</body>
+</html>

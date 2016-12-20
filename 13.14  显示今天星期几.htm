@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.14  显示今天星期几</title>
+<script  LANGUAGE="JavaScript"> 
+    document.write("<center><font size=+1><b>")
+    today = new Date()                        
+    document.write("<center><small>今天")         
+    if (today.getDay() == 5) document.write("星期五")
+    if (today.getDay() == 6) document.write("星期六")
+    if (today.getDay() == 0) document.write("星期日")
+    if (today.getDay() == 1) document.write("星期一")
+    if (today.getDay() == 2) document.write("星期二")
+    if (today.getDay() == 3) document.write("星期三")
+    if (today.getDay() == 4) document.write("星期四") 
+    document.write("</small></center>")
+</script> 
+</head>
+<body>
+</body>
+</html>

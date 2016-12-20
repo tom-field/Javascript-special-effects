@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>限定数字</title>
+<script language=javascript>
+function onlyNum()
+{
+if(!((event.keyCode>=48&&event.keyCode<=57)||(event.keyCode>=96&&event.keyCode<=105)))
+{alert("请输入数字！");
+event.returnValue=false;
+}
+}
+</script>
+</head>
+<body>
+<form>
+<input onkeydown="onlyNum();">
+</form>
+</body>
+</html>

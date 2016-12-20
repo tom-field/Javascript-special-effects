@@ -1,0 +1,65 @@
+<html> 
+<head> 
+<title>16.10 判断验证码的正确性</title> 
+<script type="text/javascript"> 
+function login(){ 
+if(form1.username.value==""){ 
+alert("请输入用户名！"); 
+return false; 
+} 
+if(form1.password.value==""){ 
+alert("请输入密码！"); 
+return false; 
+} 
+if(form1.checkcode.value==""){ 
+alert("请输入验证码！"); 
+return false; 
+} 
+if(form1.checkcode.value!=document.getElementById("verifycode").innerHTML){ 
+alert("验证码不正确！"); 
+createcode(); 
+return false; 
+} 
+form1.submit(); 
+} 
+function createcode(){ 
+var code = ""; 
+var array = new Array(0,1,2,3,4,5,6,7,8,9); 
+for(var i=0;i<4;i++){ 
+var index = Math.floor(Math.random()*10); 
+code +=array[index]; 
+} 
+document.getElementById("verifycode").innerHTML=code; 
+} 
+</script> 
+
+</head> 
+<body onload="createcode();"> 
+<form action="" name="form1" method="post"> 
+
+<table border="1" cellpadding="0" cellspacing="0" align="center" width="35%"> 
+
+<tr align="center"><td colspan="2"><font style="font-family: sans-serif;font-size: 20" color="red">欢迎使用本系统</font></td></tr> 
+<tr align="center"> 
+<td align="center" class="td" width="30%"><font color="red">用户名</font></td> 
+<td align="left"><input type="text" name="username"></td> 
+</tr> 
+<tr align="center"> 
+<td align="center" class="td"><font color="red">密 码</font></td> 
+<td align="left"><input type="password" name="password"></td> 
+</tr> 
+<tr align="center"> 
+<td align="center" class="td"><font color="red">验证码</font></td> 
+<td align="left"><input type="text" name="checkcode"><label class="label" id="verifycode">8888</label></td> 
+</tr> 
+<tr align="center"> 
+<td colspan="2"><font style="color: red" id="errormessage"></font></td> 
+</tr> 
+<tr align="center"> 
+<td align="center" colspan="2"><input type="button" value="登录" class="button" onclick="login()"> 
+<input type="reset" value="重置" class="button" ></td> 
+</tr> 
+</table> 
+</form> 
+</body> 
+</html> 

@@ -1,0 +1,100 @@
+<!-- 完整的HTML代码如下 -->
+<!-->
+<html>
+<head>
+<title></title>
+<script language=javascript>
+function picsize(obj,MaxWidth){
+img=new Image();//新建一个Image对象，用这个对象的width就不会出现width为0的现象
+img.src=obj.src;
+if (img.width>MaxWidth)
+{
+return MaxWidth;
+}
+else
+{
+return img.width;
+}
+}
+</script>
+</head>
+<body>
+<SCRIPT>
+var online= new Array();
+if (!document.layers)
+document.write('<div id="divStayTopLeft" style="position:absolute">')
+</SCRIPT>
+<layer id="divStayTopLeft">
+<table border="0" width="110" cellspacing="0" cellpadding="0">
+<tr><td width="110"></td></tr>
+<script src="http://webpresence.qq.com/getonline?Type=1&42457460:5074615:"></script><!--设置两个QQ号码
+<tr><td valign=middle  background=http://www.sucai114.com/pic/20050408222911_kefu_middle.gif>-->
+<script>
+if (online[0]==0)
+document.write("  <img src=1.12.jpg border=0 align=middle><a class='qqb' target=blank href='http://wpa.qq.com/msgrd?V=1&Uin=12345&Site=在线咨询&Menu=no' title='客服不在线，请留言'>12345</a>");
+else
+document.write("  <img src=1.12.jpg border=0 align=middle><a class='qqa' target=blank href='http://wpa.qq.com/msgrd?V=1&Uin=12345&Site=在线咨询&Menu=no' title='在线即时交谈'>12345</a>");
+
+if (online[1]==0)
+document.write("  <img src=1.12.jpg border=0 align=middle><a class='qqb' target=blank href='http://wpa.qq.com/msgrd?V=1&Uin=23456&Site=在线咨询&Menu=no' title='客服不在线，请留言'>23456</a>");
+else
+document.write("  <img src=1.12.jpg border=0 align=middle><a class='qqa' target=blank href='http://wpa.qq.com/msgrd?V=1&Uin=23456Site=在线咨询&Menu=no' title='在线即时交谈'>23456</a>");
+
+</script >
+<!--
+</td></tr>
+
+<tr><td valign=middle  background=http://www.sucai114.com/pic/20050408222911_kefu_middle.gif>
+
+<script>
+</script >
+</td></tr>
+
+<tr><td width="110"></td></tr>
+--></table>
+<script type="text/javascript">
+//Enter "frombottom" or "fromtop"
+var verticalpos="frombottom"
+if (!document.layers)
+document.write('</div>')
+function JSFX_FloatTopDiv()
+{
+var startX =6,
+startY = 150;
+var ns = (navigator.appName.indexOf("Netscape") != -1);
+var d = document;
+function ml(id)
+{
+var el=d.getElementById?d.getElementById(id):d.all?d.all[id]:d.layers[id];
+if(d.layers)el.style=el;
+el.sP=function(x,y){this.style.left=x;this.style.top=y;};
+el.x = startX;
+if (verticalpos=="fromtop")
+el.y = startY;
+else{
+el.y = ns ? pageYOffset + innerHeight : document.body.scrollTop + document.body.clientHeight;
+el.y -= startY;
+}
+return el;
+}
+window.stayTopLeft=function()
+{
+if (verticalpos=="fromtop"){
+var pY = ns ? pageYOffset : document.body.scrollTop;
+ftlObj.y += (pY + startY - ftlObj.y)/8;
+}
+else{
+var pY = ns ? pageYOffset + innerHeight : document.body.scrollTop + document.body.clientHeight;
+ftlObj.y += (pY - startY - ftlObj.y)/8;
+}
+ftlObj.sP(ftlObj.x, ftlObj.y);
+setTimeout("stayTopLeft()", 10);
+}
+ftlObj = ml("divStayTopLeft");
+stayTopLeft();
+}
+JSFX_FloatTopDiv();
+</script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

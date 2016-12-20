@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>屏蔽浏览器右上角“最小化”“最大化”“关闭”键</title>
+</head>
+<body>
+<script language="javascript">
+//屏蔽浏览器右上角“最小化”“最大化”“关闭”键   
+function window.onbeforeunload()
+{
+  if(event.clientX>document.body.clientWidth&&event.clientY<0||event.altKey)
+  {
+    window.event.returnvalue = "";
+  }
+}
+</script>
+</body>
+</html>

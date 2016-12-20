@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>13.12 用中文显示当前日期</title>
+<script language="javascript">
+function number(index1)
+{
+var numberstring="一二三四五六七八九十";
+if(index1 ==0) {document.write("十")}
+if(index1 < 10){
+document.write(numberstring.substring(0+(index1-1),index1))}
+else if(index1 < 20 ){
+document.write("十"+numberstring.substring(0+(index1-11),(index1-10)))}
+else if(index1 < 30 ){
+document.write("二十"+numberstring.substring(0+(index1-21),(index1-20)))}
+else{
+document.write("三十"+numberstring.substring(0+(index1-31),(index1-30)))}
+}
+var today1 = new Date();
+var month = today1.getMonth()+1;
+var date = today1.getDate();
+var day = today1.getDay();
+document.write("<br><strong><small><center>")
+document.write("二零一二年");
+number(month);   
+document.write("月");
+number(date);   
+document.write("日</small><center>")
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>13.16 AM、PM时间标志</title>
+</head>
+<body>
+<script LANGUAGE="JavaScript">
+    myDate = new Date(); 
+    document.write('<font size="2" face="Arial"><B>' + (myDate.getMonth() + 1) +"/"+myDate.getDate()+ "/"+myDate.getYear() + '</B></font><BR>');
+    var Hours;
+    var Mins;
+    var Time;
+    Hours = myDate.getHours();
+    if (Hours >= 12) {
+    Time = " P.M.";
+    }
+    else {
+    Time = " A.M.";
+    }
+    if (Hours > 12) { 
+    Hours -= 12;
+    }
+    if (Hours == 0) {
+    Hours = 12;
+    }
+    Mins = myDate.getMinutes();
+    if (Mins < 10) {
+    Mins = "0" + Mins; 
+    }    
+    document.write('<font size="2" face="Arial"><B>' + Hours + ":" + Mins + Time + '</B></font>');
+</script>
+</body>
+</html>

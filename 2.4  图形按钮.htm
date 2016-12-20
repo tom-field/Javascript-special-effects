@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>标题页</title>
+</head>
+<body>
+<script language=JavaScript>
+ function goTo() 
+ {
+        
+        var myindex=document.myform.mailBox.selectedIndex //获取下拉框中的选择索引
+        location=document.myform.mailBox.options[myindex].value;//获取下拉框的选择值
+}
+</script>
+ <form name="myform">
+     <br />
+        <select name="mailBox" size=1>
+          <option selected>选项</option>
+          <option value="http://www.163.net">163电子邮局</option>
+          <option value="http://www.263.net">263电子邮局</option>
+        </select><br />
+<a href="javascript: goTo()" onMouseOver="self.status='';return true" onMouseOut="self.status='';return true">
+     <img src="按钮1.gif" border=0 align="middle" style="width: 73px; height: 40px" /></a> 
+ </form>
+</body>
+</html>

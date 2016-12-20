@@ -1,0 +1,78 @@
+<html>
+   <head>
+      <title>Enter the title of your HTML document here</title>
+   </head>
+   <body>
+<SCRIPT LANGUAGE="JavaScript">
+
+Image0 = new Image();
+Image0.src = "http://www.webdm.cn/images/20091205/wbb.gif";
+Amount = 20; 
+Ymouse = -50;
+Xmouse = -50;
+Ypos = new Array();
+Xpos = new Array();
+Speed = new Array();
+rate = new Array();
+grow = new Array();
+Step = new Array();
+Cstep = new Array();
+Size = new Array();
+
+
+function Mouse(evnt) {
+Ymouse=event.y-20;
+Xmouse=event.x;
+}
+document.onmousemove=Mouse;
+for (i = 0; i < Amount; i++) {
+Ypos[i] = Ymouse;
+Xpos[i] = Xmouse;
+Speed[i] = Math.random()*4+1;
+Cstep[i] = 0;
+Step[i] = Math.random()*0.1+0.05;
+grow[i] = 8;
+
+rate[i] = Math.random()*0.5+0.1;
+}
+{
+
+for (i = 0; i < Amount; i++) {
+document.write('<img id="si" src="'+Image0.src+'" style="position:absolute;top:0px;left:0px;filter:alpha(opacity=90)">');
+}
+
+
+}
+function MouseBubbles() {
+var hscrll = document.body.scrollTop;
+var wscrll = document.body.scrollLeft;
+for (i = 0; i < Amount; i++){
+sy = Speed[i] * Math.sin(270 * Math.PI / 180);
+sx = Speed[i] * Math.cos(Cstep[i] * 4);
+Ypos[i] += sy;
+Xpos[i] += sx; 
+if (Ypos[i] < -40) {
+Ypos[i] = Ymouse;
+Xpos[i] = Xmouse;
+Speed[i] = Math.random() * 6 + 4;
+grow[i] = 8;
+Size[i] = Math.random() * 15 +5;
+}
+{
+si[i].style.pixelLeft = Xpos[i] + wscrll;
+si[i].style.pixelTop = Ypos[i] + hscrll;
+si[i].style.width = grow[i];
+si[i].style.height = grow[i]; 
+} 
+grow[i] += rate[i]; 
+Cstep[i] += Step[i];
+if (grow[i] > 24) grow[i] = 25;
+}
+setTimeout('MouseBubbles()', 10);
+}
+MouseBubbles();
+
+</script>
+
+   </body>
+</html>

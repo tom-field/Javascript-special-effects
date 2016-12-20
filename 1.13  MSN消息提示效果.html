@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Javascript实例</title>
+</head>
+
+<body bgcolor="#FF3333">
+<h2>模仿MSN消息提示的效果，页面加载时，右下角有消息框弹出，跟MSN的消息框很相似</h2>
+
+<p>
+  <SCRIPT>
+var oPopup = window.createPopup();
+var popTop=50;
+function popmsg(msgstr){
+var winstr="<table style=\"border: 1 solid  #FFA6CA\"  width=\"241\" height=\"172\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"  background=\"http://www.smallrain.net/images/login_bg.gif\" >";
+winstr+="<tr><td height=\"30\"> </td></tr><tr><td align=\"center\"><table width=\"90%\" height=\"110\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
+winstr+="<tr><td valign=\"top\" style=\"font-size:12px; color: red; face: Tahoma\">"+msgstr+"</td></tr></table></td></tr></table>";
+oPopup.document.body.innerHTML = winstr;
+popshow();
+}
+function popshow(){
+window.status=popTop;
+if(popTop>1720){
+clearTimeout(mytime);
+oPopup.hide();
+return;
+}else if(popTop>1520&&popTop<1720){
+oPopup.show(screen.width-250,screen.height,241,1720-popTop);
+}else if(popTop>1500&&popTop<1520){
+oPopup.show(screen.width-250,screen.height+(popTop-1720),241,172);
+}else if(popTop<180){
+oPopup.show(screen.width-250,screen.height,241,popTop);
+}else if(popTop<220){
+oPopup.show(screen.width-250,screen.height-popTop,241,172);
+}
+popTop+=10;
+var mytime=setTimeout("popshow();",50);
+}
+popmsg("  Javascript实例欢迎你！");
+</SCRIPT>
+</p>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+   <head>
+      <title>9.3   图片滚动展示</title>
+   </head>
+   <body>
+<div id="demon" style="overflow: hidden; width: 810px; background-color: #FFFFFF;">
+       <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                <tr>
+                       <td id="demon1" valign="top">
+                              <table cellspacing="0" cellpadding="0" width="810" border="0">
+                                      <tr>
+                                            <td>
+                                                  <a href="" target="_blank">
+                                                        <img src="51501s.jpg" width="160" height="106" class="tu" border="0" />
+                                                  </a>
+                                             </td>
+                                             <td>
+                                                  <a href="" target="_blank">
+                                                          <img src="51502s.jpg" width="160" height="106" class="tu" border="0" />
+                                                   </a>
+                                               </td>
+                                                <td>
+                                                     <a href="" target="_blank">
+                                                            <img src="51503s.jpg" width="160" height="106" class="tu" border="0" />
+                                                     </a>
+                                                 </td>
+                                                 <td>
+                                                        <a href="" target="_blank">
+                                                            <img src="51504s.jpg" width="160" height="106" class="tu" border="0" />
+                                                        </a>
+                                                </td>
+                                                 <td>
+                                                        <a href="" target="_blank">
+                                                            <img src="51505s.jpg" width="160" height="106" class="tu" border="0" />
+                                                        </a>
+                                                 </td>
+                                        </tr>
+                                    </table>
+                            </td>
+
+　　　　　　　　　　<td id="demon2"></td>
+                </tr>
+    </table>
+ </div>
+        <script type="text/javascript">
+                //控制速度，数越多速度越慢
+                var speed1=10　　
+                demon2.innerHTML=demon1.innerHTML
+                function Marquee()
+                {
+                    if(demon.scrollLeft>=demon1.scrollWidth)
+                       { demon.scrollLeft=0 }
+                        else{
+                         demon.scrollLeft++
+                       }
+                }
+                var MyMar=setInterval(Marquee,speed1)
+                demon.onmouseover=function() {clearInterval(MyMar)}
+                demon.onmouseout=function() {MyMar=setInterval(Marquee,speed1)}
+            </script>
+
+
+   </body>
+</html>
